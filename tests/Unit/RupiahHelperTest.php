@@ -17,3 +17,13 @@ test('rupiah_singkat identik fRs prototipe', function (int $nilai, string $harap
     [12_000, 'Rp 12 Rb'],
     [500, 'Rp 500'],
 ]);
+
+test('parseRupiah menerima format bertitik/Rp dan menolak sampah', function (string|int $masukan, int $harapan) {
+    expect(parseRupiah($masukan))->toBe($harapan);
+})->with([
+    ['Rp 2.400.000.000', 2_400_000_000],
+    ['1.234.567,50', 1_234_567],
+    ['250000000', 250_000_000],
+    ['abc', 0],
+    [12, 12],
+]);

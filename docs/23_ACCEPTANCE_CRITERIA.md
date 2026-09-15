@@ -1,25 +1,8 @@
 # 23 — Kriteria Terima per Fitur
 
-Terarsip (selesai): F01, F02 → `docs/_archive/23-F0x.md`.
+Terarsip (selesai): F01, F02, F03, F04 → `docs/_archive/23-F0x.md`.
 
 Selesai = semua kriteria fitur di bawah **+** docs/24. Pola UI (states, breakpoint, komponen) → docs/26; setiap layar data wajib memenuhi "Kriteria UI umum" di akhir dokumen. Perintah → docs/11.
-
-## F03 — Struktur anggaran
-- Admin membuat Program/Kegiatan/Sub Kegiatan; kode duplikat pada tingkat & induk sama → 422; pagu ≤ 0 → 422.
-- Edit pagu < realisasi terkumpul → 422 "Pagu tidak boleh kurang dari realisasi Rp …".
-- Hapus Sub Kegiatan ber-realisasi → 422; tanpa realisasi → soft delete + audit.
-- Operator/Pimpinan: GET 200, POST/PUT/DELETE 403.
-- Tahun terkunci: semua tulis 423.
-```
-php artisan test tests/Feature/AnggaranTest.php → passed
-```
-
-## F04 — Target triwulan
-- Simpan 4 baris sekaligus; monoton naik & TW4 = pagu/100 % — pelanggaran 422 menyebut TW yang salah.
-- Operator bidang lain → 403; Admin semua bidang ✓.
-```
-php artisan test tests/Feature/TargetTriwulanTest.php → passed
-```
 
 ## F05 — Realisasi keuangan
 - Simpan transaksi valid → 302 + toast "Realisasi dicatat"; sisa & serapan di layar berkurang sesuai.

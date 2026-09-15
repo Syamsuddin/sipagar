@@ -1,5 +1,8 @@
 <?php
 
+use App\Http\Controllers\Anggaran\KegiatanController;
+use App\Http\Controllers\Anggaran\ProgramController;
+use App\Http\Controllers\Anggaran\SubKegiatanController;
 use App\Http\Controllers\Auth\KonfirmasiSandiController;
 use App\Http\Controllers\Auth\LoginController;
 use App\Http\Controllers\DashboardController;
@@ -9,6 +12,7 @@ use App\Http\Controllers\Master\SumberDanaController;
 use App\Http\Controllers\Master\TahunAnggaranController;
 use App\Http\Controllers\PenggunaController;
 use App\Http\Controllers\ProfilController;
+use App\Http\Controllers\TargetTriwulanController;
 use Illuminate\Support\Facades\Route;
 
 Route::redirect('/', '/login');
@@ -24,6 +28,28 @@ Route::middleware('auth')->group(function () {
     Route::post('/profil/sandi', [ProfilController::class, 'ubahSandi'])->name('profil.sandi');
 
     Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');
+
+    // Anggaran: dibaca semua peran; tulis Admin + tahun terbuka; ubah/hapus + konfirmasi sandi (docs/21, docs/26)
+    Route::get('/anggaran', [ProgramController::class, 'index'])->name('anggaran.index');
+    Route::middleware(['role:admin', 'tahun-terbuka'])->prefix('anggaran')->name('anggaran.')->group(function () {
+        Route::post('/program', [ProgramController::class, 'store'])->name('program.store');
+        Route::post('/kegiatan', [KegiatanController::class, 'store'])->name('kegiatan.store');
+        Route::post('/sub-kegiatan', [SubKegiatanController::class, 'store'])->name('sub-kegiatan.store');
+
+        Route::middleware('konfirmasi-sandi')->group(function () {
+            Route::put('/program/{program}', [ProgramController::class, 'update'])->name('program.update');
+            Route::delete('/program/{program}', [ProgramController::class, 'destroy'])->name('program.destroy');
+            Route::put('/kegiatan/{kegiatan}', [KegiatanController::class, 'update'])->name('kegiatan.update');
+            Route::delete('/kegiatan/{kegiatan}', [KegiatanController::class, 'destroy'])->name('kegiatan.destroy');
+            Route::put('/sub-kegiatan/{subKegiatan}', [SubKegiatanController::class, 'update'])->name('sub-kegiatan.update');
+            Route::delete('/sub-kegiatan/{subKegiatan}', [SubKegiatanController::class, 'destroy'])->name('sub-kegiatan.destroy');
+        });
+    });
+
+    // Target triwulan: Admin semua bidang, Operator bidangnya (Policy); tahun terbuka
+    Route::get('/target', [TargetTriwulanController::class, 'index'])->name('target.index');
+    Route::get('/target/{subKegiatan}', [TargetTriwulanController::class, 'show'])->name('target.show');
+    Route::put('/target/{subKegiatan}', [TargetTriwulanController::class, 'update'])->middleware('tahun-terbuka')->name('target.update');
 
     // Master & pengguna: hanya Admin (docs/21 route grup role:admin + Policy)
     Route::middleware('role:admin')->group(function () {

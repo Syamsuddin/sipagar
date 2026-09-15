@@ -192,5 +192,41 @@ Alpine.data('grafikDoughnut', (data) => ({
     destroy() { this.grafik?.destroy(); },
 }));
 
+// ---- Form anggaran (layar Anggaran): satu state utk modal Program/Kegiatan/Sub Kegiatan
+// detail: { jenis: 'program'|'kegiatan'|'sub', mode: 'tambah'|'ubah', id, induk, nilai: {...} }
+Alpine.data('anggaranForm', (awal = null) => ({
+    jenis: null, mode: 'tambah', id: null, induk: null,
+    nilai: { kode: '', nama: '', pagu: '', bidang_id: '', sumber_dana_id: '', pptk: '', urutan: 0 },
+    init() {
+        if (awal && awal.jenis) {
+            this.buka(awal);
+            this.$nextTick(() => this.$dispatch('buka-modal', 'form-' + awal.jenis));
+        }
+    },
+    buka(d) {
+        this.jenis = d.jenis; this.mode = d.mode; this.id = d.id ?? null; this.induk = d.induk ?? null;
+        this.nilai = Object.assign({ kode: '', nama: '', pagu: '', bidang_id: '', sumber_dana_id: '', pptk: '', urutan: 0 }, d.nilai || {});
+    },
+    bukaModal(d) {
+        this.buka(d);
+        this.$dispatch('buka-modal', 'form-' + d.jenis);
+    },
+    // ubah/hapus butuh konfirmasi sandi dulu (docs/26)
+    ubah(d) {
+        this.$dispatch('buka-konfirmasi', { id: 'anggaran', aksi: () => this.bukaModal(Object.assign({ mode: 'ubah' }, d)) });
+    },
+    hapus(formId) {
+        const form = document.getElementById(formId);
+        this.$dispatch('buka-konfirmasi', { id: 'anggaran', aksi: form });
+    },
+    action(base) {
+        return this.mode === 'ubah' ? base + '/' + this.id : base;
+    },
+    get judul() {
+        const n = { program: 'Program', kegiatan: 'Kegiatan', sub: 'Sub Kegiatan' }[this.jenis] || '';
+        return (this.mode === 'ubah' ? 'Ubah ' : 'Tambah ') + n;
+    },
+}));
+
 window.Alpine = Alpine;
 Alpine.start();

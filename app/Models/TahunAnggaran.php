@@ -8,6 +8,7 @@ use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 
 class TahunAnggaran extends Model
 {
@@ -30,6 +31,11 @@ class TahunAnggaran extends Model
     public function lockedBy(): BelongsTo
     {
         return $this->belongsTo(User::class, 'locked_by');
+    }
+
+    public function program(): HasMany
+    {
+        return $this->hasMany(Program::class)->orderBy('urutan')->orderBy('kode');
     }
 
     public function scopeAktif(Builder $query): Builder

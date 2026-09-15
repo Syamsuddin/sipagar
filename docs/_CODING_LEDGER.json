@@ -12,9 +12,9 @@
     {
       "mulai": "2026-09-15T08:20:32+08:00",
       "selesai": null,
-      "step": 12,
-      "detik": 2592,
-      "tok_est": 114613
+      "step": 18,
+      "detik": 3208,
+      "tok_est": 145460
     }
   ],
   "step_berjalan": null,
@@ -516,13 +516,212 @@
         "Branch main belum ada — pemilik membuat saat merge PR"
       ],
       "selesai": "2026-09-15T09:44:12+08:00"
+    },
+    {
+      "fitur": "S2-anggaran-target (F03,F04)",
+      "rute": "Fitur baru (vertical slice)",
+      "mulai": "2026-09-15T10:08:48+08:00",
+      "rencana": [
+        "database/migrations/2026_09_15_000008_create_program_table.php",
+        "database/migrations/2026_09_15_000009_create_kegiatan_table.php",
+        "database/migrations/2026_09_15_000010_create_sub_kegiatan_table.php",
+        "database/migrations/2026_09_15_000011_create_target_triwulan_table.php",
+        "database/migrations/2026_09_15_000012_create_realisasi_keuangan_table.php",
+        "database/factories/ProgramFactory.php",
+        "database/factories/KegiatanFactory.php",
+        "database/factories/SubKegiatanFactory.php",
+        "database/factories/RealisasiKeuanganFactory.php",
+        "app/Models/Program.php",
+        "app/Models/Kegiatan.php",
+        "app/Models/SubKegiatan.php",
+        "app/Models/TargetTriwulan.php",
+        "app/Models/RealisasiKeuangan.php",
+        "app/Models/Concerns/ScopedByBidang.php",
+        "app/Models/TahunAnggaran.php",
+        "app/Exceptions/TahunTerkunciException.php",
+        "app/Http/Middleware/EnsureTahunTerbuka.php",
+        "app/Services/AnggaranService.php",
+        "app/Services/TargetService.php",
+        "app/Services/SerapanCalculator.php",
+        "app/Policies/SubKegiatanPolicy.php",
+        "app/Policies/TargetTriwulanPolicy.php",
+        "app/Http/Controllers/Anggaran/ProgramController.php",
+        "app/Http/Controllers/Anggaran/KegiatanController.php",
+        "app/Http/Controllers/Anggaran/SubKegiatanController.php",
+        "app/Http/Controllers/TargetTriwulanController.php",
+        "app/Http/Requests/Anggaran/StoreProgramRequest.php",
+        "app/Http/Requests/Anggaran/UpdateProgramRequest.php",
+        "app/Http/Requests/Anggaran/StoreKegiatanRequest.php",
+        "app/Http/Requests/Anggaran/UpdateKegiatanRequest.php",
+        "app/Http/Requests/Anggaran/StoreSubKegiatanRequest.php",
+        "app/Http/Requests/Anggaran/UpdateSubKegiatanRequest.php",
+        "app/Http/Requests/Target/UpdateTargetTriwulanRequest.php",
+        "app/Support/helpers.php",
+        "routes/web.php",
+        "bootstrap/app.php",
+        "app/View/Components/Layout/App.php",
+        "resources/views/anggaran/index.blade.php",
+        "resources/views/target/index.blade.php",
+        "resources/views/target/show.blade.php",
+        "resources/views/errors/423.blade.php",
+        "resources/js/app.js",
+        "tests/Feature/AnggaranTest.php",
+        "tests/Feature/TargetTriwulanTest.php",
+        "tests/Unit/SerapanCalculatorTest.php",
+        "tests/Unit/RupiahHelperTest.php"
+      ],
+      "total_step": 0,
+      "step": [
+        {
+          "no": 1,
+          "nama": "1/7 Skema (program, kegiatan, sub_kegiatan, target_triwulan, realisasi_keuangan)",
+          "mulai": "2026-09-15T10:08:48+08:00",
+          "selesai": "2026-09-15T10:09:57+08:00",
+          "detik": 70,
+          "tok_est": 0,
+          "muat": [
+            "docs/23",
+            "docs/07",
+            "docs/06",
+            "docs/04",
+            "docs/14",
+            "docs/08",
+            "docs/16",
+            "database/migrations/2026_09_15_000008..12"
+          ]
+        },
+        {
+          "no": 2,
+          "nama": "2/7 Model + trait + factory",
+          "mulai": "2026-09-15T10:09:58+08:00",
+          "selesai": "2026-09-15T10:10:12+08:00",
+          "detik": 14,
+          "tok_est": 2700,
+          "muat": [
+            "app/Models/Program.php",
+            "app/Models/Kegiatan.php",
+            "app/Models/SubKegiatan.php",
+            "app/Models/TargetTriwulan.php",
+            "app/Models/RealisasiKeuangan.php",
+            "app/Models/Concerns/ScopedByBidang.php",
+            "app/Models/TahunAnggaran.php",
+            "database/factories/ProgramFactory.php",
+            "database/factories/KegiatanFactory.php",
+            "database/factories/SubKegiatanFactory.php",
+            "database/factories/RealisasiKeuanganFactory.php"
+          ]
+        },
+        {
+          "no": 3,
+          "nama": "3/7 Service (Anggaran, Target, SerapanCalculator) + exception",
+          "mulai": "2026-09-15T10:10:12+08:00",
+          "selesai": "2026-09-15T10:11:05+08:00",
+          "detik": 53,
+          "tok_est": 2903,
+          "muat": [
+            "app/Exceptions/TahunTerkunciException.php",
+            "app/Services/SerapanCalculator.php",
+            "app/Services/AnggaranService.php",
+            "app/Services/TargetService.php",
+            "app/Support/helpers.php"
+          ]
+        },
+        {
+          "no": 4,
+          "nama": "4/7 Endpoint (anggaran x3, target) + middleware tahun + policy + FormRequest",
+          "mulai": "2026-09-15T10:11:05+08:00",
+          "selesai": "2026-09-15T10:13:37+08:00",
+          "detik": 153,
+          "tok_est": 4804,
+          "muat": [
+            "app/Http/Middleware/EnsureTahunTerbuka.php",
+            "app/Policies/SubKegiatanPolicy.php",
+            "app/Policies/TargetTriwulanPolicy.php",
+            "app/Http/Requests/Anggaran/*",
+            "app/Http/Requests/Target/UpdateTargetTriwulanRequest.php",
+            "app/Http/Controllers/Anggaran/*",
+            "app/Http/Controllers/TargetTriwulanController.php",
+            "routes/web.php",
+            "bootstrap/app.php",
+            "resources/views/errors/423.blade.php"
+          ]
+        },
+        {
+          "no": 5,
+          "nama": "5/7 UI (Anggaran pohon + modal, Target 4 baris)",
+          "mulai": "2026-09-15T10:13:37+08:00",
+          "selesai": "2026-09-15T10:17:46+08:00",
+          "detik": 249,
+          "tok_est": 7970,
+          "muat": [
+            "resources/js/app.js",
+            "resources/views/anggaran/index.blade.php",
+            "resources/views/target/index.blade.php",
+            "resources/views/target/_pilih.blade.php",
+            "resources/views/target/show.blade.php"
+          ]
+        },
+        {
+          "no": 6,
+          "nama": "6/7 Tes (AnggaranTest, TargetTriwulanTest, SerapanCalculatorTest)",
+          "mulai": "2026-09-15T10:17:46+08:00",
+          "selesai": "2026-09-15T10:19:02+08:00",
+          "detik": 77,
+          "tok_est": 12470,
+          "muat": [
+            "tests/Feature/AnggaranTest.php",
+            "tests/Feature/TargetTriwulanTest.php",
+            "tests/Unit/SerapanCalculatorTest.php",
+            "tests/Unit/RupiahHelperTest.php",
+            "docs/23_ACCEPTANCE_CRITERIA.md",
+            "docs/03_ROADMAP.md",
+            "docs/12_PROJECT_STRUCTURE.md",
+            "docs/_MANIFEST.json"
+          ]
+        }
+      ],
+      "detik": 616,
+      "tok_est": 30847,
+      "deviasi": [
+        "Tabel realisasi_keuangan + model/factory dibuat di S2 (bukan S3) agar kriteria F03 pagu<realisasi & hapus ber-realisasi bisa diuji; endpoint/UI realisasi tetap S3",
+        "Partial resources/views/target/_pilih.blade.php di luar daftar rencana (select sub kegiatan dipakai index & show)",
+        "ScopedByBidang = scope lokal forUser() bukan global scope (docs/05: semua peran melihat semua bidang)"
+      ],
+      "warn_dilewati": [
+        "gerbang.sh tak bisa dijalankan (bash 3.2) — S3–S8 manual",
+        "S8: target/show & target/index tanpa state kosong pada berkas yang sama (kosong ada di index, form di show)"
+      ],
+      "asumsi": [
+        "Hapus Program/Kegiatan yang masih punya anak → 422 (06 tidak menyebut; cascade dianggap berbahaya)",
+        "423 dirender halaman errors/423 bertema + pesan 'Tahun anggaran N telah dikunci' (form biasa) / JSON (fetch); tombol tulis sudah disembunyikan saat terkunci",
+        "Ubah/hapus Program & Kegiatan ikut konfirmasi-sandi (21 menyebut 'anggaran' secara umum)",
+        "Program/Kegiatan memakai SubKegiatanPolicy (admin-only) — tidak ada Policy terpisah di 12",
+        "SerapanCalculator baru memuat realisasi/sisa/serapan/targetPersen; deviasi/fisik/status/agregat di S3",
+        "Kode rekening divalidasi regex angka+titik saja (format Kepmendagri penuh tidak dipaksa; 02: sistem hanya validasi format & keunikan)"
+      ],
+      "dokumen_diperbarui": [
+        "docs/23 (F03,F04 diarsipkan)",
+        "docs/03_ROADMAP.md (S2 selesai)",
+        "docs/12_PROJECT_STRUCTURE.md (Exceptions, target views, parseRupiah)",
+        "docs/_MANIFEST.json"
+      ],
+      "landmine_tersentuh": [
+        "can('update', [TargetTriwulan::class, $sk]) — Policy diresolusi dari nama kelas elemen pertama; jangan pakai nama kelas Policy",
+        "Alpine anggaranForm: modal edit dibuka setelah konfirmasi sandi lewat aksi closure; x-modal harus punya x-data modal() sendiri agar buka-modal by id bekerja",
+        "Pagu input teks diparse parseRupiah di prepareForValidation — jangan pakai type=number (titik ribuan ditolak browser)"
+      ],
+      "ditunda": [
+        "Realisasi keuangan/fisik endpoint+UI, SerapanCalculator lengkap, dashboard nyata → S3",
+        "Kunci/buka tahun UI → S5"
+      ],
+      "selesai": "2026-09-15T10:19:02+08:00"
     }
   ],
   "akumulasi": {
-    "detik": 2592,
-    "tok_est": 114613,
+    "detik": 3208,
+    "tok_est": 145460,
     "tok_terukur": 0,
-    "step": 12,
-    "fitur": 2
+    "step": 18,
+    "fitur": 3
   }
 }

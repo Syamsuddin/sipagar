@@ -6,6 +6,7 @@ Struktur Laravel 12 standar + folder tambahan di bawah. Arsitektur → docs/08.
 app/
   Console/Commands/BuatAdminCommand.php        # sipagar:buat-admin
   Enums/{Role,StatusTahun,StatusSerapan}.php   # backed enum string
+  Exceptions/{TahunTerkunci,MelebihiSisaPagu}Exception.php   # docs/14
   Exports/{MonevTriwulan,RekapSumberDana,RekapBidang,BukuRealisasi,TrenSerapan}Export.php
   Http/
     Controllers/
@@ -61,7 +62,7 @@ deploy.sh
 | URL | kebab-case | `/realisasi/keuangan`, `/laporan/buku-realisasi` |
 | Komponen Blade | `x-` + nama kelas prototipe | `.stat-card` → `<x-stat-card>` |
 | Enum | `app/Enums`, backed string | `Role::Operator->value === 'operator'` |
-| Uang | int rupiah; format tampil `Rp 1.234.567` via helper `rupiah()`; stat-card memakai `rupiah_singkat()` (`Rp 2.8 M`, identik fRs prototipe) — keduanya di `app/Support/helpers.php` | |
+| Uang | input diterima lewat `parseRupiah()` ("Rp 1.234.567" → int); int rupiah; format tampil `Rp 1.234.567` via helper `rupiah()`; stat-card memakai `rupiah_singkat()` (`Rp 2.8 M`, identik fRs prototipe) — keduanya di `app/Support/helpers.php` | |
 | Teks UI | Bahasa Indonesia, tanpa file terjemahan | |
 
 ## Lokasi jenis kode

@@ -31,3 +31,19 @@ if (! function_exists('rupiah_singkat')) {
         return 'Rp '.$nilai;
     }
 }
+
+if (! function_exists('parseRupiah')) {
+    /**
+     * "Rp 1.234.567" / "1234567" / "1.234.567,00" → 1234567 (docs/16 #6: jangan intval pada string bertitik).
+     */
+    function parseRupiah(string|int|null $teks): int
+    {
+        if (is_int($teks)) {
+            return $teks;
+        }
+        $bersih = preg_replace('/,\d{1,2}$/', '', trim((string) $teks)) ?? '';
+        $angka = preg_replace('/[^\d-]/', '', $bersih) ?? '';
+
+        return $angka === '' || $angka === '-' ? 0 : (int) $angka;
+    }
+}
