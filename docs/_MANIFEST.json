@@ -1,0 +1,484 @@
+{
+  "app": {
+    "name": "SIPAGAR",
+    "long_name": "Sistem Informasi Pagu Anggaran & Realisasi",
+    "owner": "BKPSDM Kabupaten Hulu Sungai Selatan",
+    "description": "Monitoring & evaluasi anggaran OPD: struktur Program→Kegiatan→Sub Kegiatan, target triwulan, realisasi keuangan per transaksi & fisik bulanan, dashboard serapan, 4 laporan (web/Excel/PDF). Menggantikan prototipe single-user 'SIPAGAR BKPSDM.html' (localStorage).",
+    "type": "greenfield",
+    "reference_prototype": "SIPAGAR BKPSDM.html (root) — sumber kebenaran DESAIN UI; SCHEMA.sql & SEED.sql (root) — skema prototipe v1, hanya rujukan migrasi data"
+  },
+  "confirmed_at": "2026-09-15T08:10:00+08:00",
+  "requirements": {
+    "goal": "Satu sumber data anggaran BKPSDM yang multi-user, terkontrol per bidang, dan menghasilkan laporan monev triwulan otomatis.",
+    "success_metric": "Laporan Monev Triwulan (PDF/Excel) tersusun < 5 menit dari data transaksi tanpa rekap manual Excel.",
+    "features": [
+      {
+        "id": "F01",
+        "name": "Auth & manajemen pengguna (3 peran)",
+        "priority": "mvp"
+      },
+      {
+        "id": "F02",
+        "name": "Master: Bidang, Sumber Dana, Tahun Anggaran, Pengaturan laporan",
+        "priority": "mvp"
+      },
+      {
+        "id": "F03",
+        "name": "Struktur anggaran Program→Kegiatan→Sub Kegiatan (kode, pagu, bidang PJ, sumber dana)",
+        "priority": "mvp"
+      },
+      {
+        "id": "F04",
+        "name": "Target triwulan keuangan (Rp) & fisik (%) per Sub Kegiatan",
+        "priority": "mvp"
+      },
+      {
+        "id": "F05",
+        "name": "Realisasi keuangan per transaksi (tanggal, jumlah, uraian, no. SP2D, lampiran)",
+        "priority": "mvp"
+      },
+      {
+        "id": "F06",
+        "name": "Realisasi fisik (%) per bulan per Sub Kegiatan",
+        "priority": "mvp"
+      },
+      {
+        "id": "F07",
+        "name": "Dashboard: kartu statistik, grafik, ringkasan status serapan",
+        "priority": "mvp"
+      },
+      {
+        "id": "F08",
+        "name": "Laporan Monev Triwulan per Sub Kegiatan (web/xlsx/pdf)",
+        "priority": "mvp"
+      },
+      {
+        "id": "F09",
+        "name": "Rekap per Sumber Dana & per Bidang (web/xlsx/pdf)",
+        "priority": "mvp"
+      },
+      {
+        "id": "F10",
+        "name": "Buku Realisasi (rincian transaksi) (web/xlsx/pdf)",
+        "priority": "mvp"
+      },
+      {
+        "id": "F11",
+        "name": "Tren Serapan Bulanan (grafik+tabel) (web/xlsx/pdf)",
+        "priority": "mvp"
+      },
+      {
+        "id": "F12",
+        "name": "Audit log, soft delete, kunci tahun anggaran",
+        "priority": "mvp"
+      },
+      {
+        "id": "F13",
+        "name": "Seed data demo dari prototipe (SEED.sql) ke struktur baru",
+        "priority": "mvp"
+      },
+      {
+        "id": "F14",
+        "name": "Alur verifikasi realisasi (peran Verifikator)",
+        "priority": "later"
+      },
+      {
+        "id": "F15",
+        "name": "Notifikasi email & impor Excel DPA",
+        "priority": "later"
+      },
+      {
+        "id": "F16",
+        "name": "Multi-OPD & API publik",
+        "priority": "later"
+      }
+    ],
+    "out_of_scope": [
+      "Multi-OPD dalam satu instalasi",
+      "Integrasi SIPD / SIMDA / e-Kinerja",
+      "Penatausahaan keuangan (pembuatan SPP/SPM/SP2D) — hanya nomor SP2D dirujuk",
+      "Aplikasi mobile native",
+      "Multi-bahasa",
+      "Tanda tangan elektronik (TTE) pada dokumen laporan",
+      "Tema terang / kustomisasi tema oleh pengguna",
+      "Signup publik & reset password mandiri (ada di prototipe, sengaja dihapus)"
+    ],
+    "roles": [
+      {
+        "name": "admin",
+        "label": "Admin",
+        "can": [
+          "kelola pengguna",
+          "kelola master & pengaturan",
+          "CRUD struktur anggaran semua bidang",
+          "CRUD target & realisasi semua bidang",
+          "kunci/buka tahun anggaran",
+          "lihat audit log",
+          "semua laporan & ekspor"
+        ],
+        "cannot": [
+          "hapus permanen data ber-audit (hanya soft delete)"
+        ]
+      },
+      {
+        "name": "operator",
+        "label": "Operator",
+        "can": [
+          "lihat struktur anggaran semua bidang",
+          "CRUD target & realisasi HANYA Sub Kegiatan bidangnya",
+          "dashboard & semua laporan & ekspor",
+          "ubah sandi sendiri"
+        ],
+        "cannot": [
+          "ubah struktur anggaran",
+          "master",
+          "pengguna",
+          "audit log",
+          "kunci tahun"
+        ]
+      },
+      {
+        "name": "pimpinan",
+        "label": "Pimpinan",
+        "can": [
+          "dashboard",
+          "semua laporan & ekspor",
+          "lihat struktur/target/realisasi (read-only)",
+          "ubah sandi sendiri"
+        ],
+        "cannot": [
+          "tulis apa pun selain sandi sendiri"
+        ]
+      }
+    ],
+    "processes": [
+      {
+        "name": "Penyusunan anggaran tahun N",
+        "happy_path": "Admin buat Tahun Anggaran (draft) → input Program/Kegiatan/Sub Kegiatan + pagu + bidang + sumber dana → set status Aktif",
+        "failure": "kode duplikat dalam tahun yang sama ditolak; pagu ≤ 0 ditolak; tahun terkunci tidak bisa diubah"
+      },
+      {
+        "name": "Penetapan target triwulan",
+        "happy_path": "Operator bidang / Admin isi target kumulatif TW1–TW4 keuangan & fisik per Sub Kegiatan",
+        "failure": "target tidak monoton naik ditolak; TW4 keuangan ≠ pagu atau fisik ≠ 100 ditolak; bidang lain → 403"
+      },
+      {
+        "name": "Pencatatan realisasi",
+        "happy_path": "Operator catat transaksi keuangan (tanggal, jumlah, uraian, SP2D, lampiran) & fisik % per bulan → sistem hitung serapan/deviasi/status",
+        "failure": "jumlah > sisa pagu ditolak; tanggal di luar tahun anggaran ditolak; fisik % menurun dari bulan sebelumnya ditolak; tahun terkunci → 423; bidang lain → 403"
+      },
+      {
+        "name": "Pelaporan",
+        "happy_path": "Pimpinan/Admin/Operator buka laporan → filter (tahun, triwulan/bulan, bidang, sumber dana) → tampil web → unduh xlsx/pdf",
+        "failure": "filter tanpa tahun → default tahun aktif; data kosong → empty-state, ekspor tetap menghasilkan file berisi header"
+      },
+      {
+        "name": "Penutupan tahun anggaran",
+        "happy_path": "Admin kunci tahun → semua tulis pada tahun itu diblokir, laporan tetap bisa diakses",
+        "failure": "kunci butuh konfirmasi password Admin (modal); buka kunci juga dicatat audit"
+      }
+    ],
+    "entities": [
+      {
+        "name": "User",
+        "key_attrs": [
+          "username unik",
+          "role",
+          "bidang (wajib utk operator)"
+        ],
+        "relations": [
+          "User ∈ Bidang"
+        ]
+      },
+      {
+        "name": "Bidang",
+        "key_attrs": [
+          "kode",
+          "nama"
+        ],
+        "relations": [
+          "1 Bidang → n Sub Kegiatan",
+          "1 Bidang → n User"
+        ]
+      },
+      {
+        "name": "SumberDana",
+        "key_attrs": [
+          "kode",
+          "nama",
+          "css_class (badge)"
+        ],
+        "relations": [
+          "1 SumberDana → n Sub Kegiatan"
+        ]
+      },
+      {
+        "name": "TahunAnggaran",
+        "key_attrs": [
+          "tahun unik",
+          "status draft|aktif|terkunci"
+        ],
+        "relations": [
+          "1 Tahun → n Program"
+        ]
+      },
+      {
+        "name": "Program",
+        "key_attrs": [
+          "kode",
+          "nama"
+        ],
+        "relations": [
+          "Program ∈ TahunAnggaran",
+          "1 Program → n Kegiatan"
+        ]
+      },
+      {
+        "name": "Kegiatan",
+        "key_attrs": [
+          "kode",
+          "nama"
+        ],
+        "relations": [
+          "Kegiatan ∈ Program",
+          "1 Kegiatan → n SubKegiatan"
+        ]
+      },
+      {
+        "name": "SubKegiatan",
+        "key_attrs": [
+          "kode",
+          "nama",
+          "pagu",
+          "bidang",
+          "sumber dana",
+          "pptk"
+        ],
+        "relations": [
+          "SubKegiatan ∈ Kegiatan",
+          "1 SubKegiatan → 4 TargetTriwulan, n RealisasiKeuangan, ≤12 RealisasiFisik"
+        ]
+      },
+      {
+        "name": "TargetTriwulan",
+        "key_attrs": [
+          "triwulan 1–4",
+          "target_keuangan kumulatif",
+          "target_fisik kumulatif"
+        ],
+        "relations": [
+          "∈ SubKegiatan"
+        ]
+      },
+      {
+        "name": "RealisasiKeuangan",
+        "key_attrs": [
+          "tanggal",
+          "jumlah",
+          "uraian",
+          "no_sp2d",
+          "lampiran"
+        ],
+        "relations": [
+          "∈ SubKegiatan",
+          "dibuat oleh User"
+        ]
+      },
+      {
+        "name": "RealisasiFisik",
+        "key_attrs": [
+          "bulan 1–12",
+          "persen kumulatif"
+        ],
+        "relations": [
+          "∈ SubKegiatan"
+        ]
+      },
+      {
+        "name": "AuditLog",
+        "key_attrs": [
+          "aksi",
+          "model",
+          "old/new values"
+        ],
+        "relations": [
+          "oleh User"
+        ]
+      },
+      {
+        "name": "Setting",
+        "key_attrs": [
+          "key",
+          "value (kop, pejabat penandatangan)"
+        ],
+        "relations": []
+      }
+    ],
+    "sensitive_data": [
+      "password (bcrypt)",
+      "audit log (siapa-kapan-apa, IP)",
+      "lampiran bukti realisasi (private disk, akses lewat controller ber-otorisasi)"
+    ],
+    "stack": {
+      "backend": "Laravel 12 (PHP 8.4)",
+      "frontend": "Blade + CSS kanonik prototipe (resources/css/app.css) + Tailwind utilitas layout + Alpine.js + Chart.js, dibundel Vite",
+      "db": "MySQL 8",
+      "versions": {
+        "php": "8.4",
+        "laravel": "^12.0",
+        "mysql": "8.0",
+        "tailwindcss": "^3.4",
+        "alpinejs": "^3.14",
+        "chart.js": "^4.4",
+        "maatwebsite/excel": "^3.1",
+        "barryvdh/laravel-dompdf": "^3.0",
+        "pestphp/pest": "^3.0",
+        "fontawesome": "6.5 (npm @fortawesome/fontawesome-free)",
+        "node": "20 LTS"
+      },
+      "forbidden": [
+        "daisyUI",
+        "Bootstrap",
+        "jQuery",
+        "Livewire",
+        "Inertia/React/Vue",
+        "CDN runtime untuk aset (semua via Vite)",
+        "warna/font di luar token docs/26"
+      ]
+    },
+    "architecture": {
+      "pattern": "Monolit modular Laravel: Controller tipis → FormRequest → Service → Eloquent; Policy utk otorisasi + scope bidang; Query class utk laporan; Export class utk xlsx/pdf",
+      "integrations": []
+    },
+    "ui": {
+      "design_system": "Prototipe 'SIPAGAR BKPSDM.html' diangkat utuh: token CSS variables + kelas komponen di resources/css/app.css; dibungkus komponen Blade. Tema gelap tunggal.",
+      "screens": "lihat docs/26_UI_DESIGN.md",
+      "navigation": "Header sticky + tab-pill horizontal (scroll) per peran",
+      "states": [
+        "loading",
+        "kosong (.empty-state)",
+        "error (toast-error + .input-error)",
+        "sukses (toast-success)"
+      ],
+      "device_targets": "desktop-first; layak ≤768px; ≤480px stat-grid 1 kolom",
+      "language": "id-ID",
+      "accessibility": "[TERBUKA] pasca-MVP; prefers-reduced-motion sudah dihormati"
+    },
+    "environment": {
+      "os": "Ubuntu 22.04/24.04 + nginx + php8.4-fpm + MySQL 8",
+      "services": [
+        "MySQL",
+        "storage lokal (disk private)"
+      ],
+      "commands": "lihat docs/11_COMMANDS.md"
+    },
+    "testing": "Pest: feature test per alur kritikal + unit test SerapanCalculator; lihat docs/13",
+    "security": [
+      "CSRF",
+      "Policy per peran + scope bidang",
+      "FormRequest semua input",
+      "rate limit login 5/menit",
+      "bcrypt",
+      ".env",
+      "lampiran private + validasi mime/size",
+      "header keamanan",
+      "konfirmasi password utk aksi destruktif (modal prototipe)"
+    ],
+    "acceptance": "per fitur di docs/23 (Given/When/Then + blok verifikasi)",
+    "definition_of_done": "docs/24",
+    "change_policy": {
+      "git": "branch per fitur (feat/*, fix/*), PR ke main, dilarang commit langsung ke main",
+      "irreversible_ops": [
+        "migrasi destruktif",
+        "hapus permanen/forceDelete",
+        "kunci/buka tahun anggaran",
+        "reset password user lain",
+        "rilis produksi"
+      ],
+      "release_steps": [
+        "tes hijau",
+        "backup DB",
+        "migrate --force",
+        "build aset",
+        "cache",
+        "smoke test",
+        "rollback plan"
+      ]
+    }
+  },
+  "canonical_owners": {
+    "product_value": "00/01",
+    "features": "01",
+    "scope": "02",
+    "roadmap": "03",
+    "domain_terms_and_formulas": "04",
+    "roles": "05",
+    "business_process": "06",
+    "schema": "07",
+    "architecture": "08",
+    "stack": "09",
+    "dev_env": "10",
+    "commands": "11",
+    "project_structure": "12",
+    "testing": "13",
+    "error_handling": "14",
+    "observability": "15",
+    "landmines": "16",
+    "repair_rules": "18",
+    "guardrails": "20",
+    "security": "21",
+    "change_policy": "22",
+    "definition_of_done": "24",
+    "ui": "26"
+  },
+  "landmines": [
+    "Prototipe menyimpan `tahun` sebagai STRING ('2025') dan membandingkan dengan === — di v2 tahun adalah INT via tahun_anggaran_id.",
+    "Prototipe memakai dua label berbeda utk ambang ≥90%: 'Hampir Habis' (tab Ringkasan) dan 'Kritis' (tab Sisa). v2 menyatukan: Kritis (docs/04).",
+    "Hash password prototipe = SHA-256(pw+salt) — TIDAK bisa dikonversi ke bcrypt. Akun prototipe tidak dimigrasi; Admin membuat ulang.",
+    "SCHEMA.sql/SEED.sql di root adalah skema prototipe FLAT (programs/realisasi). Bukan skema v2 — jangan dipakai sebagai migrasi; hanya sumber data seeder F13.",
+    "Prototipe memuat Tailwind via CDN + inline style. v2: semua via Vite; inline style prototipe diterjemahkan ke kelas utilitas — visual harus tetap identik.",
+    "Nominal rupiah bisa > 2^31 (TPP 2,4 M). Selalu BIGINT & cast int di PHP; jangan float.",
+    "Target & realisasi fisik/keuangan di v2 bersifat KUMULATIF (s.d. triwulan/bulan), bukan per-periode. Salah tafsir ini merusak deviasi.",
+    "Chart.js default warna teks/grid terang; wajib set warna dari token (--fg-muted, --border) agar identik dengan prototipe."
+  ],
+  "assumptions": [
+    "Bidang awal: Sekretariat; Bidang Pengadaan, Pemberhentian & Informasi Kepegawaian; Bidang Mutasi & Promosi; Bidang Pengembangan Kompetensi; Bidang Penilaian Kinerja & Penghargaan — dapat diedit Admin.",
+    "Kode rekening mengikuti format Kepmendagri 900.1.15.5-1317/2023 (Program X.XX.XX, Kegiatan X.XX.XX.X.XX, Sub Kegiatan X.XX.XX.X.XX.XXXX), input manual.",
+    "Ambang status serapan mengikuti prototipe (docs/04).",
+    "Satu Sub Kegiatan hanya satu sumber dana.",
+    "PDF laporan berkop BKPSDM + blok tanda tangan (nama/NIP/jabatan dari tabel settings), layout cetak terang.",
+    "Seed demo: 10 program prototipe menjadi 10 Sub Kegiatan di bawah Program 'X.XX.01 Program Penunjang Urusan Pemerintahan Daerah' / Kegiatan 'Migrasi Prototipe'.",
+    "Lampiran realisasi: pdf/jpg/png ≤ 2 MB, satu file per transaksi.",
+    "Tahun anggaran yang bisa dibuat: 2020–2034 (rentang prototipe).",
+    "Hanya satu tahun anggaran berstatus aktif; mengaktifkan tahun baru ditolak (422) selama tahun aktif lama belum dikunci."
+  ],
+  "open_questions": [
+    "Alur verifikasi realisasi (Verifikator) — F14 pasca-MVP.",
+    "Isi kop surat & pejabat penandatangan — diisi lewat halaman Pengaturan saat implementasi."
+  ],
+  "archive_pattern": "23-*.md",
+  "build": {
+    "roadmap_status": {
+      "S0": "selesai 2026-09-15",
+      "S1": "belum",
+      "S2": "belum",
+      "S3": "belum",
+      "S4": "belum",
+      "S5": "belum"
+    },
+    "installed": {
+      "laravel/framework": "12.69.2",
+      "pestphp/pest": "^3.0",
+      "tailwindcss": "3.4.19",
+      "alpinejs": "3.17.3",
+      "chart.js": "4.5.1",
+      "@fortawesome/fontawesome-free": "6.7.2",
+      "vite": "7.3.6"
+    },
+    "env_dev_actual": {
+      "php": "8.4.23",
+      "node": "22.19.0 (dok: 20 LTS)",
+      "mysql_server": "8.4.8 (dok: 8.0)"
+    }
+  }
+}

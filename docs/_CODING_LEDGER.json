@@ -1,0 +1,246 @@
+{
+  "versi": "1.1",
+  "genesis": "2026-09-15T08:20:32+08:00",
+  "perintah": {
+    "test": "php artisan test",
+    "run": "php artisan serve",
+    "migrate": "php artisan migrate --seed",
+    "lint": "vendor/bin/pint --test",
+    "build": "npm run build"
+  },
+  "sesi": [
+    {
+      "mulai": "2026-09-15T08:20:32+08:00",
+      "selesai": null,
+      "step": 5,
+      "detik": 942,
+      "tok_est": 66186
+    }
+  ],
+  "step_berjalan": null,
+  "blueprint": {
+    "sidik_awal": "d84adb4f47d606de",
+    "sidik": "d84adb4f47d606de",
+    "dokumen": 27,
+    "disegel": "2026-09-15T08:20:32+08:00"
+  },
+  "riwayat_fitur": [
+    {
+      "fitur": "S0-skeleton",
+      "rute": "Fitur baru (vertical slice)",
+      "mulai": "2026-09-15T08:23:44+08:00",
+      "rencana": [
+        "package.json",
+        "package-lock.json",
+        "vite.config.js",
+        "tailwind.config.js",
+        "postcss.config.js",
+        "phpunit.xml",
+        "composer.json",
+        "composer.lock",
+        "resources/css/app.css",
+        "resources/js/app.js",
+        "resources/views/layouts/app.blade.php",
+        "resources/views/layouts/auth.blade.php",
+        "resources/views/components/tab-nav.blade.php",
+        "resources/views/components/card.blade.php",
+        "resources/views/components/stat-card.blade.php",
+        "resources/views/components/data-table.blade.php",
+        "resources/views/components/badge.blade.php",
+        "resources/views/components/badge-sumber.blade.php",
+        "resources/views/components/form-input.blade.php",
+        "resources/views/components/form-select.blade.php",
+        "resources/views/components/form-textarea.blade.php",
+        "resources/views/components/btn.blade.php",
+        "resources/views/components/modal.blade.php",
+        "resources/views/components/modal-konfirmasi-sandi.blade.php",
+        "resources/views/components/toast.blade.php",
+        "resources/views/components/empty-state.blade.php",
+        "resources/views/components/progress.blade.php",
+        "resources/views/components/user-badge.blade.php",
+        "resources/views/auth/login.blade.php",
+        "resources/views/dashboard/index.blade.php",
+        "resources/views/errors/403.blade.php",
+        "resources/views/errors/404.blade.php",
+        "resources/views/errors/423.blade.php",
+        "resources/views/errors/500.blade.php",
+        "app/View/Components/Layout/App.php",
+        "app/View/Components/Layout/Auth.php",
+        "app/Http/Controllers/DashboardController.php",
+        "app/Http/Controllers/Auth/LoginController.php",
+        "app/Support/helpers.php",
+        "routes/web.php",
+        "tests/Feature/DashboardTest.php",
+        "tests/Feature/AuthTest.php",
+        ".gitignore"
+      ],
+      "total_step": 0,
+      "step": [
+        {
+          "no": 1,
+          "nama": "1/7 Skema (scaffold Laravel 12 + migrasi bawaan)",
+          "mulai": "2026-09-15T08:23:44+08:00",
+          "selesai": "2026-09-15T08:26:33+08:00",
+          "detik": 170,
+          "tok_est": 12823,
+          "muat": [
+            "docs/11_COMMANDS.md",
+            "docs/03_ROADMAP.md",
+            "docs/02_SCOPE.md",
+            "docs/23_ACCEPTANCE_CRITERIA.md",
+            "docs/24_DEFINITION_OF_DONE.md",
+            "docs/13_TESTING.md",
+            "docs/26_UI_DESIGN.md",
+            "docs/07_DATA_MODEL.md",
+            "docs/12_PROJECT_STRUCTURE.md",
+            "docs/10_DEV_ENV.md",
+            "docs/09_STACK.md",
+            "docs/22_CHANGE_POLICY.md",
+            ".env",
+            ".env.example",
+            "phpunit.xml",
+            "tests/Pest.php",
+            "composer.json",
+            "package.json"
+          ]
+        },
+        {
+          "no": 2,
+          "nama": "4/7 Rute & controller (GET /login, GET /dashboard dummy)",
+          "mulai": "2026-09-15T08:26:33+08:00",
+          "selesai": "2026-09-15T08:27:08+08:00",
+          "detik": 35,
+          "tok_est": 1635,
+          "muat": [
+            "app/Http/Controllers/Auth/LoginController.php",
+            "app/Http/Controllers/DashboardController.php",
+            "app/Support/helpers.php",
+            "routes/web.php",
+            "composer.json"
+          ]
+        },
+        {
+          "no": 3,
+          "nama": "5/7 UI (app.css prototipe, Vite/Tailwind 3.4, layout, komponen, login & dashboard dummy)",
+          "mulai": "2026-09-15T08:27:08+08:00",
+          "selesai": "2026-09-15T08:36:38+08:00",
+          "detik": 570,
+          "tok_est": 41979,
+          "muat": [
+            "SIPAGAR BKPSDM.html",
+            "package.json",
+            "vite.config.js",
+            "tailwind.config.js",
+            "postcss.config.js",
+            "resources/css/app.css",
+            "resources/js/app.js",
+            "resources/views/layouts/app.blade.php",
+            "resources/views/layouts/auth.blade.php",
+            "resources/views/components/tab-nav.blade.php",
+            "resources/views/components/card.blade.php",
+            "resources/views/components/stat-card.blade.php",
+            "resources/views/components/data-table.blade.php",
+            "resources/views/components/badge.blade.php",
+            "resources/views/components/badge-sumber.blade.php",
+            "resources/views/components/form-input.blade.php",
+            "resources/views/components/form-select.blade.php",
+            "resources/views/components/form-textarea.blade.php",
+            "resources/views/components/btn.blade.php",
+            "resources/views/components/modal.blade.php",
+            "resources/views/components/modal-konfirmasi-sandi.blade.php",
+            "resources/views/components/toast.blade.php",
+            "resources/views/components/empty-state.blade.php",
+            "resources/views/components/progress.blade.php",
+            "resources/views/components/user-badge.blade.php",
+            "resources/views/auth/login.blade.php",
+            "resources/views/dashboard/index.blade.php",
+            "resources/views/errors/403.blade.php",
+            "resources/views/errors/404.blade.php",
+            "resources/views/errors/423.blade.php",
+            "resources/views/errors/500.blade.php",
+            "app/View/Components/Layout/App.php",
+            "app/View/Components/Layout/Auth.php",
+            "app/Support/helpers.php"
+          ]
+        },
+        {
+          "no": 4,
+          "nama": "6/7 Tes (UI smoke Pest)",
+          "mulai": "2026-09-15T08:36:38+08:00",
+          "selesai": "2026-09-15T08:37:12+08:00",
+          "detik": 35,
+          "tok_est": 731,
+          "muat": [
+            "tests/Feature/DashboardTest.php",
+            "tests/Feature/AuthTest.php",
+            "tests/Unit/RupiahHelperTest.php",
+            "tests/Pest.php"
+          ]
+        },
+        {
+          "no": 5,
+          "nama": "7/7 Gerbang fitur",
+          "mulai": "2026-09-15T08:37:12+08:00",
+          "selesai": "2026-09-15T08:39:23+08:00",
+          "detik": 132,
+          "tok_est": 9018,
+          "muat": [
+            "docs/03_ROADMAP.md",
+            "docs/12_PROJECT_STRUCTURE.md",
+            "docs/26_UI_DESIGN.md",
+            "docs/_MANIFEST.json",
+            ".gitignore"
+          ]
+        }
+      ],
+      "detik": 942,
+      "tok_est": 66186,
+      "deviasi": [
+        "scripts/validate.sh & token_ledger.py tidak ada di paket VCBD terpasang — gerbang kesehatan blueprint dilewati, token hanya [ESTIMASI]",
+        "gerbang.sh gagal parse di bash 3.2 macOS (line 115: case dalam $( )) — S5/S7/S8 dijalankan manual dgn logika sama",
+        "app/View/Components/Layout/{App,Auth}.php di luar pohon docs/12 — jembatan agar <x-layout.app> (26) menunjuk views/layouts/app.blade.php (12)",
+        "helper rupiah_singkat() ditambah (bukan di 12 semula) agar stat-card identik fRs prototipe — 12 diperbarui",
+        "Laravel installer default menghasilkan v13 → dibuat ulang via composer create-project laravel/laravel:^12 sesuai 09"
+      ],
+      "warn_dilewati": [
+        "S1: 23 tidak punya blok S0 (skeleton tanpa fitur F) — kriteria diambil dari baris S0 docs/03 + §Kriteria UI umum 23",
+        "S7: 94 berkas tersentuh = scaffold laravel new; berkas rencana 43 semuanya ada",
+        "S8: gerbang cek per-berkas 3/4; state tersebar di komponen (empty-state, form-input error, toast di layout, tombol Memproses...)"
+      ],
+      "asumsi": [
+        "Migrasi users bawaan Laravel dibiarkan; penyesuaian ke skema 07 (username, role, bidang_id, is_active) milik S1/F01",
+        "Node 22 & MySQL server 8.4 lokal (dok: 20 / 8.0) — tidak mengubah 09",
+        "Kunci flash toast: sukses",
+        "gagal",
+        "info (dicatat di 26)",
+        "Persen serapan di stat-card dibulatkan (76%) mengikuti prototipe; 2 desimal di tabel — rumus final milik SerapanCalculator S3",
+        "Footer prototipe dipertahankan tanpa nama pembuat (Copyright by Ihwan Apriadi dihilangkan) — konfirmasi bila ingin dikembalikan"
+      ],
+      "dokumen_diperbarui": [
+        "docs/03_ROADMAP.md (kolom Status)",
+        "docs/12_PROJECT_STRUCTURE.md (Support/helpers, View/Components/Layout, RupiahHelperTest)",
+        "docs/26_UI_DESIGN.md (mekanisme modal/toast/konfirmasi, footer, rupiah_singkat)",
+        "docs/_MANIFEST.json (build.roadmap_status, installed, env_dev_actual)"
+      ],
+      "landmine_tersentuh": [
+        "Metode public pada komponen kelas Blade ikut diekspos ke view dan menimpa data view bernama sama (menu()) — pakai protected",
+        "Kelas Tailwind di Blade harus literal statis, bukan hasil interpolasi PHP (JIT tidak melihatnya)",
+        "Google Fonts via @import butuh internet klien (09 [ASUMSI])"
+      ],
+      "ditunda": [
+        "POST /login, logout, auth middleware, modal ubah sandi aktif → S1",
+        "DashboardController data dummy → S3 DashboardQuery",
+        "Endpoint /konfirmasi-sandi → S5 (komponen JS sudah siap)",
+        "Repo belum punya branch main — pemilik membuat main dari commit 374f624 saat merge PR"
+      ],
+      "selesai": "2026-09-15T08:39:23+08:00"
+    }
+  ],
+  "akumulasi": {
+    "detik": 942,
+    "tok_est": 66186,
+    "tok_terukur": 0,
+    "step": 5,
+    "fitur": 1
+  }
+}
