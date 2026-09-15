@@ -351,6 +351,7 @@
       "integrations": []
     },
     "ui": {
+      "enabled": true,
       "design_system": "Prototipe 'SIPAGAR BKPSDM.html' diangkat utuh: token CSS variables + kelas komponen di resources/css/app.css; dibungkus komponen Blade. Tema gelap tunggal.",
       "screens": "lihat docs/26_UI_DESIGN.md",
       "navigation": "Header sticky + tab-pill horizontal (scroll) per peran",

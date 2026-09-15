@@ -1,0 +1,43 @@
+{
+  "meta": {
+    "created": "2026-09-15T11:49:08+08:00",
+    "unit": "token",
+    "cpt_default": 3.5
+  },
+  "est_entries": [],
+  "measured_sessions": {
+    "cbd392db-3bf1-4b5b-a473-35c011fdc813": {
+      "input": 6,
+      "output": 257,
+      "cache_create": 18357,
+      "cache_read": 132978,
+      "msgs": 3,
+      "first_ts": "2026-09-15T03:44:59.109Z",
+      "last_ts": "2026-09-15T03:45:07.508Z",
+      "file": "/Users/syams/.claude/projects/-Users-syams-PROJECTS-SIPAGAR/cbd392db-3bf1-4b5b-a473-35c011fdc813.jsonl",
+      "synced_at": "2026-09-15T11:49:08+08:00"
+    },
+    "29026451-aad6-41f3-94a7-ddd386420a4a": {
+      "input": 122,
+      "output": 95439,
+      "cache_create": 240501,
+      "cache_read": 5725042,
+      "msgs": 61,
+      "first_ts": "2026-09-14T23:31:17.957Z",
+      "last_ts": "2026-09-15T00:01:42.215Z",
+      "file": "/Users/syams/.claude/projects/-Users-syams-PROJECTS-SIPAGAR/29026451-aad6-41f3-94a7-ddd386420a4a.jsonl",
+      "synced_at": "2026-09-15T11:49:08+08:00"
+    },
+    "bca0534b-7a9d-457a-b56a-cdfe01c68a45": {
+      "input": 862,
+      "output": 777000,
+      "cache_create": 1068515,
+      "cache_read": 139194666,
+      "msgs": 432,
+      "first_ts": "2026-09-15T00:19:57.455Z",
+      "last_ts": "2026-09-15T03:48:53.132Z",
+      "file": "/Users/syams/.claude/projects/-Users-syams-PROJECTS-SIPAGAR/bca0534b-7a9d-457a-b56a-cdfe01c68a45.jsonl",
+      "synced_at": "2026-09-15T11:49:08+08:00"
+    }
+  }
+}

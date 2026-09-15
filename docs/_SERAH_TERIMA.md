@@ -9,19 +9,19 @@ Git: branch `main` @ `7fdb12d`, tag `v1.0.0-rc1`, 7 commit linear (S0→S5). Bel
 | Semua fase docs/03 selesai | ✅ S0–S5 kode selesai |
 | docs/23 tanpa fitur aktif | ✅ F01–F13 terarsip di `docs/_archive/23-F*.md` |
 | Suite penuh hijau pada context bersih | ✅ `php artisan test` → 131 passed (867 assertions); `pint --test` PASS |
-| `bash scripts/validate.sh` exit 0 | ⚠️ skrip tidak ada di paket VCBD terpasang — tidak dapat diuji |
+| `bash scripts/validate.sh` exit 0 | ✅ LULUS BERSIH (11 PASS) — skrip dipasang di `scripts/` dari paket VCBD terbaru (eTimses, 24 Agu) |
 | docs/25 dijalankan berurutan | ⏸ langkah 1 lulus; langkah 2–11 (tag final, backup, deploy, smoke produksi) **menunggu pemilik** |
 
-Kesimpulan: **kode MVP lengkap & teruji; aplikasi belum dinyatakan "selesai" sampai rilis produksi (docs/25) dijalankan.**
+Kesimpulan: **kode MVP lengkap & teruji, blueprint konsisten; aplikasi belum dinyatakan "selesai" sampai rilis produksi (docs/25) dijalankan.**
 
 ## 2. Ringkasan pembangunan
-- 7 slice · 34 step · 82 menit jam dinding · ~383k token [ESTIMASI, bukan terukur].
+- 7 slice · 34 step · 82 menit jam dinding · ~383k token [ESTIMASI meter.py]; **[TERUKUR]** `scripts/token_ledger.py sync-cc`: 3 sesi Claude Code, total 147,25 jt token (input 990 · output 872.696 · cache 146,38 jt — sebagian besar cache read).
 - Stack aktual: Laravel 12.69 · PHP 8.4.23 · MySQL 8.4 (lokal) · Tailwind 3.4.19 · Alpine 3.17 · Chart.js 4.5 · maatwebsite/excel 3.1.70 · laravel-dompdf 3.1.2 · Pest 3.
 - Perintah (docs/11): `php artisan test` · `vendor/bin/pint --test` · `npm run build` · `php artisan migrate --seed` · `php artisan serve`.
 
 ## 3. Langkah selanjutnya (urutan disarankan)
 1. **Audit** — jalankan skill `review-vcbd` dengan `docs/_SERAH_BUILD.json`: periksa berkas deviasi lebih dulu, tiap WARN yang dilewati = kandidat temuan, tiap asumsi = pertanyaan ke dokumen pemiliknya.
-2. **Perbaiki paket VCBD** — pasang `scripts/validate.sh` & `token_ledger.py`, lalu `bash scripts/validate.sh` harus exit 0 (indikator #4). Bug `coding-vcbd/scripts/gerbang.sh:115` (bash 3.2 macOS) juga perlu diperbaiki.
+2. **Paket VCBD** — `scripts/validate.sh` & `token_ledger.py` sudah dipasang (validate LULUS BERSIH). Tersisa: bug `coding-vcbd/scripts/gerbang.sh:115` (bash 3.2 macOS) — jalankan dengan bash ≥ 4 atau perbaiki `case` di dalam `$( )`.
 3. **Remote & PR** — `git remote add origin <url> && git push -u origin main --tags`; ke depan alur `feat/*` → PR → merge pemilik (docs/22).
 4. **Persiapan server** (docs/10): Ubuntu + nginx + php8.4-fpm (ext pdo_mysql, mbstring, gd, zip, intl) + MySQL 8; `/var/www/sipagar` milik user deploy; `.env` produksi `APP_ENV=production`, `APP_DEBUG=false`, `SESSION_SECURE_COOKIE=true`, `APP_TIMEZONE=Asia/Makassar`, DB, `SIPAGAR_TAHUN_MIN/MAX`.
 5. **Rilis v1.0.0** (docs/25): tag `v1.0.0` → di server `bash deploy.sh v1.0.0` (backup → maintenance → pull → build → `migrate --force` → optimize → reload → up → smoke `DEPLOY OK`). Lalu `php artisan sipagar:buat-admin`, `php artisan db:seed --class=MasterSeeder`, isi **Master › Pengaturan** (kop & penandatangan) agar PDF berkop lengkap. Jangan jalankan `PrototipeSeeder` di produksi kecuali ingin data demo. Catat di `CHANGELOG.md` (langkah 11).
