@@ -12,9 +12,9 @@
     {
       "mulai": "2026-09-15T08:20:32+08:00",
       "selesai": null,
-      "step": 24,
-      "detik": 3875,
-      "tok_est": 187193
+      "step": 29,
+      "detik": 4408,
+      "tok_est": 339260
     }
   ],
   "step_berjalan": null,
@@ -906,13 +906,198 @@
         "Trait Auditable otomatis, kunci/buka tahun, Audit Log, deploy.sh → S5"
       ],
       "selesai": "2026-09-15T10:43:47+08:00"
+    },
+    {
+      "fitur": "S4-laporan (F08-F11)",
+      "rute": "Fitur baru (vertical slice)",
+      "mulai": "2026-09-15T10:50:42+08:00",
+      "rencana": [
+        "composer.json",
+        "composer.lock",
+        "app/Queries/MonevTriwulanQuery.php",
+        "app/Queries/RekapQuery.php",
+        "app/Queries/BukuRealisasiQuery.php",
+        "app/Queries/TrenSerapanQuery.php",
+        "app/Queries/LaporanFilter.php",
+        "app/Exports/MonevTriwulanExport.php",
+        "app/Exports/RekapSumberDanaExport.php",
+        "app/Exports/RekapBidangExport.php",
+        "app/Exports/RekapExport.php",
+        "app/Exports/BukuRealisasiExport.php",
+        "app/Exports/TrenSerapanExport.php",
+        "app/Http/Controllers/Laporan/MonevTriwulanController.php",
+        "app/Http/Controllers/Laporan/RekapController.php",
+        "app/Http/Controllers/Laporan/BukuRealisasiController.php",
+        "app/Http/Controllers/Laporan/TrenSerapanController.php",
+        "app/Http/Controllers/Laporan/LaporanController.php",
+        "app/Http/Requests/Laporan/FilterLaporanRequest.php",
+        "app/View/Components/Layout/App.php",
+        "routes/web.php",
+        "resources/js/app.js",
+        "resources/css/print.css",
+        "resources/views/layouts/pdf.blade.php",
+        "resources/views/laporan/_filter.blade.php",
+        "resources/views/laporan/monev/index.blade.php",
+        "resources/views/laporan/rekap/index.blade.php",
+        "resources/views/laporan/buku/index.blade.php",
+        "resources/views/laporan/tren/index.blade.php",
+        "resources/views/pdf/monev.blade.php",
+        "resources/views/pdf/rekap.blade.php",
+        "resources/views/pdf/buku.blade.php",
+        "resources/views/pdf/tren.blade.php",
+        "tests/Feature/LaporanMonevTest.php",
+        "tests/Feature/LaporanRekapTest.php",
+        "tests/Feature/LaporanBukuRealisasiTest.php",
+        "tests/Feature/LaporanTrenTest.php",
+        "tests/Feature/LaporanExportTest.php"
+      ],
+      "total_step": 0,
+      "step": [
+        {
+          "no": 1,
+          "nama": "1/7 Skema (dilewati: tanpa migrasi; paket Excel+DomPDF terpasang)",
+          "mulai": "2026-09-15T10:50:42+08:00",
+          "selesai": "2026-09-15T10:50:42+08:00",
+          "detik": 0,
+          "tok_est": 111979,
+          "muat": [
+            "composer.json",
+            "composer.lock",
+            "docs/23",
+            "docs/26",
+            "docs/08",
+            "docs/09",
+            "docs/13",
+            "docs/01"
+          ]
+        },
+        {
+          "no": 2,
+          "nama": "3/7 Query ×4 (satu sumber angka)",
+          "mulai": "2026-09-15T10:50:42+08:00",
+          "selesai": "2026-09-15T10:51:59+08:00",
+          "detik": 77,
+          "tok_est": 4422,
+          "muat": [
+            "app/Queries/LaporanFilter.php",
+            "app/Queries/MonevTriwulanQuery.php",
+            "app/Queries/RekapQuery.php",
+            "app/Queries/BukuRealisasiQuery.php",
+            "app/Queries/TrenSerapanQuery.php"
+          ]
+        },
+        {
+          "no": 3,
+          "nama": "4/7 Exports xlsx + controller + rute",
+          "mulai": "2026-09-15T10:51:59+08:00",
+          "selesai": "2026-09-15T10:53:02+08:00",
+          "detik": 63,
+          "tok_est": 7565,
+          "muat": [
+            "app/Exports/MonevTriwulanExport.php",
+            "app/Exports/RekapSumberDanaExport.php",
+            "app/Exports/RekapBidangExport.php",
+            "app/Exports/RekapExport.php",
+            "app/Exports/BukuRealisasiExport.php",
+            "app/Exports/TrenSerapanExport.php",
+            "app/Http/Requests/Laporan/FilterLaporanRequest.php",
+            "app/Http/Controllers/Laporan/LaporanController.php",
+            "app/Http/Controllers/Laporan/MonevTriwulanController.php",
+            "app/Http/Controllers/Laporan/RekapController.php",
+            "app/Http/Controllers/Laporan/BukuRealisasiController.php",
+            "app/Http/Controllers/Laporan/TrenSerapanController.php",
+            "routes/web.php",
+            "app/View/Components/Layout/App.php"
+          ]
+        },
+        {
+          "no": 4,
+          "nama": "5/7 UI laporan + PDF",
+          "mulai": "2026-09-15T10:53:02+08:00",
+          "selesai": "2026-09-15T10:56:26+08:00",
+          "detik": 205,
+          "tok_est": 11582,
+          "muat": [
+            "resources/css/print.css",
+            "resources/views/layouts/pdf.blade.php",
+            "app/View/Components/Layout/Pdf.php",
+            "resources/views/pdf/monev.blade.php",
+            "resources/views/pdf/rekap.blade.php",
+            "resources/views/pdf/buku.blade.php",
+            "resources/views/pdf/tren.blade.php",
+            "resources/views/laporan/_filter.blade.php",
+            "resources/views/laporan/monev/index.blade.php",
+            "resources/views/laporan/rekap/index.blade.php",
+            "resources/views/laporan/buku/index.blade.php",
+            "resources/views/laporan/tren/index.blade.php",
+            "resources/js/app.js"
+          ]
+        },
+        {
+          "no": 5,
+          "nama": "6/7 Tes laporan + ekspor",
+          "mulai": "2026-09-15T10:56:26+08:00",
+          "selesai": "2026-09-15T10:59:33+08:00",
+          "detik": 188,
+          "tok_est": 16519,
+          "muat": [
+            "tests/Feature/LaporanMonevTest.php",
+            "tests/Feature/LaporanRekapTest.php",
+            "tests/Feature/LaporanBukuRealisasiTest.php",
+            "tests/Feature/LaporanTrenTest.php",
+            "tests/Feature/LaporanExportTest.php",
+            "resources/views/laporan/rekap/index.blade.php",
+            "docs/23_ACCEPTANCE_CRITERIA.md",
+            "docs/03_ROADMAP.md",
+            "docs/12_PROJECT_STRUCTURE.md",
+            "docs/26_UI_DESIGN.md",
+            "docs/_MANIFEST.json"
+          ]
+        }
+      ],
+      "detik": 533,
+      "tok_est": 152067,
+      "deviasi": [
+        "app/View/Components/Layout/Pdf.php di luar rencana (jembatan <x-layout.pdf> → layouts/pdf.blade.php, pola sama dgn App/Auth) — 12 diperbarui",
+        "RekapExport (satu xlsx dua sheet) ditambah di atas RekapSumberDana/RekapBidang yang disebut 12"
+      ],
+      "warn_dilewati": [
+        "gerbang.sh tak bisa dijalankan (bash 3.2) — S3–S8 manual",
+        "S8 laporan: layar baca-saja (kosong/filter/layout), tanpa form tulis"
+      ],
+      "asumsi": [
+        "Default filter: tahun aktif, TW berjalan (TW4 bila tahun ≠ tahun ini); tanpa tahun anggaran → empty-state",
+        "Rekap memakai filter s.d. TW (realisasi ≤ akhir TW); Buku memakai rentang tanggal (default 1 Jan–31 Des)",
+        "Tren: target kumulatif diinterpolasi linear antar titik TW (bulan 0=0, 3n=target TWn); tahun lalu = data tahun N−1 bila ada",
+        "Deviasi keu di Monev ditampilkan dalam poin % (23 menyebut 'Deviasi Keu (%)'); Rp tersedia di SerapanCalculator",
+        "Nama berkas: sipagar_monev_<th>_TWn, sipagar_rekap_<th>_TWn, sipagar_buku-realisasi_<th>_<dari>_<sampai>, sipagar_tren_<th>_bulanan",
+        "PDF: print.css disisipkan inline (DomPDF tanpa Vite); logo kop dari settings.kop_logo_path pada disk private bila ada",
+        "Lampiran di Buku Realisasi web = ikon tautan; di xlsx/pdf = 'Ada'/'-'"
+      ],
+      "dokumen_diperbarui": [
+        "docs/23 (F08–F11 diarsipkan)",
+        "docs/03_ROADMAP.md (S4 selesai)",
+        "docs/12_PROJECT_STRUCTURE.md (LaporanFilter, LaporanController, RekapExport, Layout/Pdf, laporan/_filter)",
+        "docs/26_UI_DESIGN.md (detail layar laporan)",
+        "docs/_MANIFEST.json (S4, paket Excel/DomPDF)"
+      ],
+      "landmine_tersentuh": [
+        "Prototipe .chart-grid{1fr !important} di ≤768px membuat grid item min-width:auto → kartu berisi tabel melebar; beri min-w-0 pada kartu",
+        "end($e->array()) → 'Only variables should be passed by reference'",
+        "Excel::fake() menerima closure bertipe kelas export; RekapExport (WithMultipleSheets) diuji lewat ->sheets()",
+        "sips -s format png file.pdf cukup untuk pratinjau PDF di macOS"
+      ],
+      "ditunda": [
+        "Audit Log layar + trait Auditable, kunci/buka tahun (modal sandi), deploy.sh, rilis → S5"
+      ],
+      "selesai": "2026-09-15T10:59:33+08:00"
     }
   ],
   "akumulasi": {
-    "detik": 3875,
-    "tok_est": 187193,
+    "detik": 4408,
+    "tok_est": 339260,
     "tok_terukur": 0,
-    "step": 24,
-    "fitur": 4
+    "step": 29,
+    "fitur": 5
   }
 }

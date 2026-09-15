@@ -42,7 +42,7 @@ class App extends Component
     }
 
     /**
-     * Sub-menu baris kedua (docs/26): Master, Realisasi. Laporan menyusul di S4.
+     * Sub-menu baris kedua (docs/26): Master, Realisasi, Laporan.
      *
      * @return array<int, array{label: string, icon: string, href: string, aktif: bool}>
      */
@@ -54,6 +54,12 @@ class App extends Component
                 ['Sumber Dana', 'fa-coins', 'master.sumber-dana.index', 'master.sumber-dana.*'],
                 ['Tahun Anggaran', 'fa-calendar', 'master.tahun-anggaran.index', 'master.tahun-anggaran.*'],
                 ['Pengaturan', 'fa-gear', 'master.pengaturan.index', 'master.pengaturan.*'],
+            ],
+            request()->routeIs('laporan.*') => [
+                ['Monev Triwulan', 'fa-table-list', 'laporan.monev.index', 'laporan.monev.*'],
+                ['Rekap', 'fa-layer-group', 'laporan.rekap.index', 'laporan.rekap.*'],
+                ['Buku Realisasi', 'fa-book', 'laporan.buku.index', 'laporan.buku.*'],
+                ['Tren Serapan', 'fa-chart-line', 'laporan.tren.index', 'laporan.tren.*'],
             ],
             request()->routeIs('realisasi.*') => [
                 ['Keuangan', 'fa-file-invoice-dollar', 'realisasi.keuangan.index', 'realisasi.keuangan.*'],

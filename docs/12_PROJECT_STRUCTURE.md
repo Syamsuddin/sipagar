@@ -7,7 +7,7 @@ app/
   Console/Commands/BuatAdminCommand.php        # sipagar:buat-admin
   Enums/{Role,StatusTahun,StatusSerapan}.php   # backed enum string
   Exceptions/{TahunTerkunci,MelebihiSisaPagu}Exception.php   # docs/14
-  Exports/{MonevTriwulan,RekapSumberDana,RekapBidang,BukuRealisasi,TrenSerapan}Export.php
+  Exports/{MonevTriwulan,Rekap,RekapSumberDana,RekapBidang,BukuRealisasi,TrenSerapan}Export.php   # RekapExport = 2 sheet
   Http/
     Controllers/
       Auth/{Login,KonfirmasiSandi}Controller.php   # KonfirmasiSandi = POST /konfirmasi-sandi (docs/21)
@@ -15,7 +15,7 @@ app/
       Anggaran/{Program,Kegiatan,SubKegiatan}Controller.php
       TargetTriwulanController.php
       Realisasi/{RealisasiKeuangan,RealisasiFisik,Lampiran}Controller.php
-      Laporan/{MonevTriwulan,Rekap,BukuRealisasi,TrenSerapan}Controller.php
+      Laporan/{Laporan,MonevTriwulan,Rekap,BukuRealisasi,TrenSerapan}Controller.php   # LaporanController = dasar unduh xlsx/pdf
       Master/{Bidang,SumberDana,TahunAnggaran,Pengaturan}Controller.php
       {Pengguna,AuditLog,Profil}Controller.php
     Middleware/{EnsureRole,EnsureTahunTerbuka,KonfirmasiSandi}.php   # `role` tanpa argumen = user aktif apa pun (grup auth)
@@ -23,10 +23,10 @@ app/
   Models/{User,Bidang,SumberDana,TahunAnggaran,Program,Kegiatan,SubKegiatan,TargetTriwulan,RealisasiKeuangan,RealisasiFisik,AuditLog,Setting}.php
   Models/Concerns/{Auditable,ScopedByBidang}.php
   Policies/{SubKegiatan,TargetTriwulan,RealisasiKeuangan,RealisasiFisik,User,TahunAnggaran}Policy.php
-  Queries/{DashboardQuery,MonevTriwulanQuery,RekapQuery,BukuRealisasiQuery,TrenSerapanQuery}.php
+  Queries/{LaporanFilter,DashboardQuery,MonevTriwulanQuery,RekapQuery,BukuRealisasiQuery,TrenSerapanQuery}.php   # LaporanFilter = filter bersama (default tahun aktif, TW berjalan)
   Services/{SerapanCalculator,AnggaranService,TargetService,RealisasiService,TahunAnggaranService,PenggunaService,AuditService}.php
   Support/helpers.php                           # rupiah(), rupiah_singkat() — autoload `files` composer.json
-  View/Components/Layout/{App,Auth}.php         # kelas komponen <x-layout.app>/<x-layout.auth> → views/layouts/*
+  View/Components/Layout/{App,Auth,Pdf}.php     # kelas komponen <x-layout.app>/<x-layout.auth>/<x-layout.pdf> → views/layouts/*
 config/sipagar.php                             # tahun_min/max (.env), konfirmasi_sandi_menit
 database/
   migrations/                                   # satu file per tabel docs/07

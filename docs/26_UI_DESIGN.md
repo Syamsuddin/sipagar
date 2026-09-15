@@ -54,7 +54,7 @@ Tab-nav (urut kiri→kanan; tampil sesuai peran): **Dashboard** `fa-chart-pie` �
 | Target | `/target/{subKegiatan}` | admin, operator (bidang) | pilih sub kegiatan (select) → tabel 4 baris TW × (keu Rp, fisik %) editable → simpan |
 | Realisasi › Keuangan | `/realisasi/keuangan?sub_kegiatan=&edit=` | semua baca; tulis admin, operator (bidang) | pola form(400) + daftar; select sub kegiatan menampilkan "Sisa: Rp …" aksen/danger seperti prototipe |
 | Realisasi › Fisik | `/realisasi/fisik/{subKegiatan}` | semua baca; tulis admin, operator (bidang) | 4 stat-card TW (fisik s.d. bulan 3n, deviasi vs target) + grid 12 bulan input % (kosong = bulan dihapus) |
-| Laporan › Monev / Rekap / Buku / Tren | `/laporan/{monev|rekap|buku-realisasi|tren}` (+`?export=xlsx|pdf`) | semua | card filter (baris flex seperti filter "Sisa Anggaran" prototipe) → tombol `btn-secondary` Unduh Excel/PDF → tabel/grafik |
+| Laporan › Monev / Rekap / Buku / Tren | `/laporan/{monev|rekap|buku-realisasi|tren}` (+`?export=xlsx|pdf`, filter `tahun, triwulan, bidang, sumber_dana, sub_kegiatan, dari, sampai, halaman`) | semua | card filter (`laporan/_filter`, baris flex seperti filter "Sisa Anggaran" prototipe, auto-submit) → tombol `btn-secondary` Unduh Excel/PDF → tabel/grafik; Rekap = 4 stat-card + 2 tabel; Tren = grafik garis (realisasi, target putus-putus, tahun lalu) + tabel 12 bulan; Buku paginasi 50 |
 | Master › Bidang / Sumber Dana / Tahun / Pengaturan | `/master/{bidang|sumber-dana|tahun-anggaran|pengaturan}` | admin | form + daftar; Tahun: tombol Kunci/Buka → modal sandi |
 | Pengguna | `/pengguna` | admin | form + daftar; aksi aktif/nonaktif, reset sandi (modal sandi) |
 | Audit Log | `/audit-log` | admin | filter + tabel, paginasi 50 |

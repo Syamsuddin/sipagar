@@ -6,6 +6,10 @@ use App\Http\Controllers\Anggaran\SubKegiatanController;
 use App\Http\Controllers\Auth\KonfirmasiSandiController;
 use App\Http\Controllers\Auth\LoginController;
 use App\Http\Controllers\DashboardController;
+use App\Http\Controllers\Laporan\BukuRealisasiController;
+use App\Http\Controllers\Laporan\MonevTriwulanController;
+use App\Http\Controllers\Laporan\RekapController;
+use App\Http\Controllers\Laporan\TrenSerapanController;
 use App\Http\Controllers\Master\BidangController;
 use App\Http\Controllers\Master\PengaturanController;
 use App\Http\Controllers\Master\SumberDanaController;
@@ -63,6 +67,14 @@ Route::middleware(['auth', 'role'])->group(function () {
         Route::get('/fisik', [RealisasiFisikController::class, 'index'])->name('fisik.index');
         Route::get('/fisik/{subKegiatan}', [RealisasiFisikController::class, 'show'])->name('fisik.show');
         Route::put('/fisik/{subKegiatan}', [RealisasiFisikController::class, 'update'])->middleware('tahun-terbuka')->name('fisik.update');
+    });
+
+    // Laporan: semua peran (docs/05); ?export=xlsx|pdf
+    Route::prefix('laporan')->name('laporan.')->group(function () {
+        Route::get('/monev', [MonevTriwulanController::class, 'index'])->name('monev.index');
+        Route::get('/rekap', [RekapController::class, 'index'])->name('rekap.index');
+        Route::get('/buku-realisasi', [BukuRealisasiController::class, 'index'])->name('buku.index');
+        Route::get('/tren', [TrenSerapanController::class, 'index'])->name('tren.index');
     });
 
     // Target triwulan: Admin semua bidang, Operator bidangnya (Policy); tahun terbuka

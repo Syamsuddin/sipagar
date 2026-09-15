@@ -463,7 +463,7 @@
       "S1": "selesai 2026-09-15",
       "S2": "selesai 2026-09-15",
       "S3": "selesai 2026-09-15",
-      "S4": "belum",
+      "S4": "selesai 2026-09-15",
       "S5": "belum"
     },
     "installed": {
@@ -473,7 +473,9 @@
       "alpinejs": "3.17.3",
       "chart.js": "4.5.1",
       "@fortawesome/fontawesome-free": "6.7.2",
-      "vite": "7.3.6"
+      "vite": "7.3.6",
+      "maatwebsite/excel": "3.1.70",
+      "barryvdh/laravel-dompdf": "3.1.2"
     },
     "env_dev_actual": {
       "php": "8.4.23",

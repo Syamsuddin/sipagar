@@ -1,0 +1,25 @@
+/* Layout cetak PDF (docs/26 §PDF) — satu-satunya pengecualian tema gelap. DomPDF: DejaVu Sans. */
+* { box-sizing: border-box; }
+body { font-family: 'DejaVu Sans', sans-serif; font-size: 9pt; color: #111; margin: 0; }
+.kop { width: 100%; border-bottom: 2px solid #111; padding-bottom: 6px; margin-bottom: 10px; }
+.kop td { vertical-align: middle; }
+.kop .logo { width: 64px; }
+.kop .logo img { width: 56px; height: 56px; }
+.kop h1 { font-size: 13pt; margin: 0; text-transform: uppercase; letter-spacing: .5px; }
+.kop p { margin: 2px 0 0; font-size: 8.5pt; }
+h2.judul { text-align: center; font-size: 11pt; margin: 8px 0 2px; text-transform: uppercase; }
+p.sub { text-align: center; margin: 0 0 10px; font-size: 9pt; }
+table.data { width: 100%; border-collapse: collapse; }
+table.data th, table.data td { border: 0.5pt solid #444; padding: 3px 4px; font-size: 8pt; vertical-align: top; }
+table.data th { background: #eee; font-weight: bold; text-align: center; }
+table.data td.angka { text-align: right; white-space: nowrap; }
+table.data td.tengah { text-align: center; }
+table.data tr.kelompok td { background: #f5f5f5; font-weight: bold; }
+table.data tr.subtotal td, table.data tr.total td { font-weight: bold; background: #f0f0f0; }
+table.data tr.total td { background: #e4e4e4; }
+.kosong { text-align: center; padding: 20px; font-style: italic; }
+table.ttd { width: 100%; margin-top: 24px; page-break-inside: avoid; }
+table.ttd td { width: 50%; vertical-align: top; font-size: 9pt; }
+.ttd .blok { text-align: center; }
+.ttd .nama { margin-top: 56px; font-weight: bold; text-decoration: underline; }
+.catatan { font-size: 7.5pt; color: #555; margin-top: 8px; }

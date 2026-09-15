@@ -192,6 +192,34 @@ Alpine.data('grafikDoughnut', (data) => ({
     destroy() { this.grafik?.destroy(); },
 }));
 
+// ---- Grafik garis tren serapan (F11): realisasi, target, tahun lalu — % kumulatif per bulan
+Alpine.data('grafikGaris', (data) => ({
+    grafik: null,
+    init() {
+        const seri = [
+            { label: 'Realisasi ' + data.tahun, data: data.realisasi, borderColor: '#00e68a', backgroundColor: 'rgba(0,230,138,0.12)', fill: true, tension: 0.3, borderWidth: 2 },
+            { label: 'Target ' + data.tahun, data: data.target, borderColor: '#00b4d8', borderDash: [6, 4], tension: 0.3, borderWidth: 2, pointRadius: 2 },
+        ];
+        if (data.tahunLalu) seri.push({ label: 'Realisasi ' + data.tahunLalu, data: data.lalu, borderColor: '#ffb347', tension: 0.3, borderWidth: 2, pointRadius: 2 });
+        this.grafik = new Chart(this.$refs.kanvas.getContext('2d'), {
+            type: 'line',
+            data: { labels: data.labels, datasets: seri },
+            options: {
+                responsive: true, maintainAspectRatio: false,
+                plugins: {
+                    legend: { labels: { color: TOKEN.fgMuted, font: { size: 11, family: TOKEN.font } } },
+                    tooltip: { callbacks: { label: (c) => c.dataset.label + ': ' + c.parsed.y + '%' } },
+                },
+                scales: {
+                    x: { ticks: { color: TOKEN.fgMuted, font: { size: 10 } }, grid: { color: TOKEN.grid } },
+                    y: { min: 0, suggestedMax: 100, ticks: { color: TOKEN.fgMuted, font: { size: 10 }, callback: (v) => v + '%' }, grid: { color: TOKEN.grid } },
+                },
+            },
+        });
+    },
+    destroy() { this.grafik?.destroy(); },
+}));
+
 // ---- Form anggaran (layar Anggaran): satu state utk modal Program/Kegiatan/Sub Kegiatan
 // detail: { jenis: 'program'|'kegiatan'|'sub', mode: 'tambah'|'ubah', id, induk, nilai: {...} }
 Alpine.data('anggaranForm', (awal = null) => ({
