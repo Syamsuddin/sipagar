@@ -52,6 +52,28 @@ Alpine.data('toggleSandi', () => ({
     balik() { this.terlihat = !this.terlihat; },
 }));
 
+// ---- Meter kekuatan sandi (updateStrength prototipe) — nilai warna = token docs/26
+Alpine.data('kekuatanSandi', () => ({
+    sandi: '',
+    get tingkat() {
+        const pw = this.sandi; let s = 0;
+        if (pw.length >= 6) s++;
+        if (pw.length >= 10) s++;
+        if (/[A-Z]/.test(pw)) s++;
+        if (/[0-9]/.test(pw)) s++;
+        if (/[^A-Za-z0-9]/.test(pw)) s++;
+        const l = [
+            { w: '0%', c: 'transparent', t: '' },
+            { w: '20%', c: '#ff5c5c', t: 'Sangat lemah' },
+            { w: '40%', c: '#ff5c5c', t: 'Lemah' },
+            { w: '60%', c: '#ffb347', t: 'Cukup' },
+            { w: '80%', c: '#00e68a', t: 'Kuat' },
+            { w: '100%', c: '#00e68a', t: 'Sangat kuat' },
+        ];
+        return l[s] || l[0];
+    },
+}));
+
 // ---- Modal konfirmasi sandi (x-modal-konfirmasi-sandi): 3 gagal → tutup
 // Memanggil POST /konfirmasi-sandi (docs/21); 403 = sandi salah.
 Alpine.data('konfirmasiSandi', (url) => ({

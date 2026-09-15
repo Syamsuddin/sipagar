@@ -9,7 +9,7 @@ app/
   Exports/{MonevTriwulan,RekapSumberDana,RekapBidang,BukuRealisasi,TrenSerapan}Export.php
   Http/
     Controllers/
-      Auth/LoginController.php
+      Auth/{Login,KonfirmasiSandi}Controller.php   # KonfirmasiSandi = POST /konfirmasi-sandi (docs/21)
       DashboardController.php
       Anggaran/{Program,Kegiatan,SubKegiatan}Controller.php
       TargetTriwulanController.php
@@ -26,6 +26,7 @@ app/
   Services/{SerapanCalculator,AnggaranService,TargetService,RealisasiService,TahunAnggaranService,PenggunaService,AuditService}.php
   Support/helpers.php                           # rupiah(), rupiah_singkat() — autoload `files` composer.json
   View/Components/Layout/{App,Auth}.php         # kelas komponen <x-layout.app>/<x-layout.auth> → views/layouts/*
+config/sipagar.php                             # tahun_min/max (.env), konfirmasi_sandi_menit
 database/
   migrations/                                   # satu file per tabel docs/07
   seeders/{DatabaseSeeder,MasterSeeder,AdminLokalSeeder,PrototipeSeeder}.php

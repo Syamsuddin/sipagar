@@ -1,29 +1,34 @@
 <?php
 
-// S0: dashboard dummy tanpa auth. S1 (F01) menambahkan skenario tamu → redirect login.
+use App\Models\User;
 
-test('dashboard tampil dengan komponen prototipe', function () {
-    $this->get(route('dashboard'))
+test('dashboard tampil dengan komponen prototipe untuk semua peran', function (string $peran) {
+    $user = match ($peran) {
+        'admin' => User::factory()->admin()->create(),
+        'operator' => User::factory()->operator()->create(),
+        default => User::factory()->pimpinan()->create(),
+    };
+
+    $this->actingAs($user)->get(route('dashboard'))
         ->assertOk()
         ->assertSee('class="tab-btn', false)
         ->assertSee('stat-card', false)
         ->assertSee('data-table', false)
         ->assertSee('chart-grid', false)
-        ->assertSee('Rp 2.8 M');
-});
+        ->assertSee($user->name);
+})->with(['admin', 'operator', 'pimpinan']);
 
-test('dashboard memuat nav delapan menu docs/26 dan Dashboard aktif', function () {
-    $html = $this->get(route('dashboard'))->getContent();
+test('menu Master/Pengguna/Audit hanya tampil untuk Admin', function () {
+    $adminHtml = $this->actingAs(User::factory()->admin()->create())->get(route('dashboard'))->getContent();
+    $opHtml = $this->actingAs(User::factory()->operator()->create())->get(route('dashboard'))->getContent();
 
-    foreach (['Dashboard', 'Anggaran', 'Target', 'Realisasi', 'Laporan', 'Master', 'Pengguna', 'Audit'] as $menu) {
-        expect($html)->toContain($menu);
-    }
-    expect(substr_count($html, 'role="tab"'))->toBe(8)
-        ->and(substr_count($html, 'aria-selected="true"'))->toBe(1);
+    expect(substr_count($adminHtml, 'role="tab"'))->toBe(8)
+        ->and(substr_count($opHtml, 'role="tab"'))->toBe(5)
+        ->and($opHtml)->not->toContain('>Pengguna<');
 });
 
 test('dashboard memuat aset lewat Vite, bukan CDN', function () {
-    $html = $this->get(route('dashboard'))->getContent();
+    $html = $this->actingAs(User::factory()->create())->get(route('dashboard'))->getContent();
 
     expect($html)->toContain('/build/assets/')
         ->not->toContain('cdn.tailwindcss.com')

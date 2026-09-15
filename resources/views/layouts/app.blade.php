@@ -26,9 +26,9 @@
                 <div class="header-right flex items-center gap-[10px]">
                     <div class="pulse-dot"></div>
                     <span class="text-[0.75rem] text-[var(--fg-muted)] hide-mobile">BKPSDM Kab. Hulu Sungai Selatan</span>
-                    <x-user-badge :nama="auth()->user()?->name ?? 'Admin'" />
+                    <x-user-badge :nama="auth()->user()->name" />
                     <button type="button" class="btn-pw-settings" title="Ubah kata sandi" x-data @click="$dispatch('buka-modal', 'ubah-password')"><i class="fa-solid fa-key"></i> <span class="hide-mobile">Sandi</span></button>
-                    <form method="POST" action="{{ Route::has('logout') ? route('logout') : '#' }}" class="inline-flex">
+                    <form method="POST" action="{{ route('logout') }}" class="inline-flex">
                         @csrf
                         <button type="submit" class="btn-logout" title="Keluar"><i class="fa-solid fa-right-from-bracket"></i> <span class="hide-mobile">Keluar</span></button>
                     </form>
@@ -39,6 +39,9 @@
 
     <main class="max-w-[1320px] mx-auto px-6 pt-7 pb-[60px]">
         <x-tab-nav :items="$menu" />
+        @if ($subMenu)
+            <x-tab-nav :items="$subMenu" class="-mt-3" />
+        @endif
 
         <section class="tab-panel active" role="tabpanel">
             {{ $slot }}
@@ -51,12 +54,16 @@
 <x-toast />
 
 {{-- Modal ubah sandi (docs/26 §Profil): form aktif di S1 (POST /profil/sandi) --}}
-<x-modal id="ubah-password" title="Ubah Kata Sandi" icon="fa-key" variant="accent" pesan="Masukkan kata sandi lama, lalu buat baru.">
-    <form method="POST" action="{{ Route::has('profil.sandi') ? route('profil.sandi') : '#' }}" autocomplete="off" x-data="{ memproses: false }" @submit="memproses = true">
+<x-modal id="ubah-password" title="Ubah Kata Sandi" icon="fa-key" variant="accent" pesan="Masukkan kata sandi lama, lalu buat baru." :terbuka="$errors->hasAny(['sandi_lama', 'sandi_baru'])">
+    <form method="POST" action="{{ route('profil.sandi') }}" autocomplete="off" x-data="{ memproses: false }" @submit="memproses = true">
         @csrf
         <div class="mb-[14px]"><x-form-input name="sandi_lama" label="Kata Sandi Lama" type="password" placeholder="Kata sandi lama" icon="fa-lock" required /></div>
-        <div class="mb-[14px]"><x-form-input name="sandi_baru" label="Kata Sandi Baru" type="password" placeholder="Minimal 6 karakter" icon="fa-lock" required minlength="6" /></div>
-        <div class="mb-5"><x-form-input name="sandi_baru_confirmation" label="Konfirmasi" type="password" placeholder="Ulangi kata sandi baru" icon="fa-lock" required minlength="6" /></div>
+        <div class="mb-[14px]" x-data="kekuatanSandi()">
+            <x-form-input name="sandi_baru" label="Kata Sandi Baru" type="password" placeholder="Minimal 8 karakter, huruf & angka" icon="fa-lock" required minlength="8" x-model="sandi" />
+            <div class="pw-strength-track"><div class="pw-strength-fill" :style="'width:' + tingkat.w + ';background:' + tingkat.c"></div></div>
+            <div class="pw-strength-text" x-text="tingkat.t"></div>
+        </div>
+        <div class="mb-5"><x-form-input name="sandi_baru_confirmation" label="Konfirmasi" type="password" placeholder="Ulangi kata sandi baru" icon="fa-lock" required minlength="8" /></div>
         <div class="flex gap-[10px]">
             <x-btn variant="secondary" class="flex-1 justify-center" @click="tutup()">Batal</x-btn>
             <x-btn type="submit" variant="primary" class="flex-1 justify-center" icon="fa-check" x-bind:disabled="memproses">

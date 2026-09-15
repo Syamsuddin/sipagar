@@ -13,7 +13,7 @@ Wajib & defensif. Peran → docs/05. Skema → docs/07.
 | CSRF | semua form POST/PUT/DELETE `@csrf`; fetch Alpine kirim header `X-CSRF-TOKEN` |
 | Lampiran | disk `private` (`storage/app/private`), tidak pernah publik; validasi `mimes:pdf,jpg,jpeg,png` + `max:2048` + cek mime aktual; nama file = `{id}.{ext}` (bukan nama asli); unduh lewat `LampiranController@show` dengan Policy `view` → `response()->file()` |
 | Output | Blade `{{ }}` default escape; `{!! !!}` dilarang kecuali konten PDF yang sudah disanitasi |
-| Header | middleware `SecurityHeaders`: `X-Frame-Options: DENY`, `X-Content-Type-Options: nosniff`, `Referrer-Policy: same-origin`, CSP `default-src 'self'; font-src 'self' fonts.gstatic.com; style-src 'self' 'unsafe-inline' fonts.googleapis.com; img-src 'self' data:` |
+| Header | middleware `SecurityHeaders`: `X-Frame-Options: DENY`, `X-Content-Type-Options: nosniff`, `Referrer-Policy: same-origin`, CSP `default-src 'self'; script-src 'self' 'unsafe-eval'; font-src 'self' fonts.gstatic.com data:; style-src 'self' 'unsafe-inline' fonts.googleapis.com; img-src 'self' data:` (`unsafe-eval` wajib untuk Alpine standar; alternatif build `@alpinejs/csp` ditolak karena melarang ekspresi inline) |
 | Sesi | `SESSION_SECURE_COOKIE=true`, `SameSite=Lax`, lifetime 120 menit, regenerate saat login |
 | Rahasia | hanya `.env`; `.env` tidak di git; `APP_DEBUG=false` produksi |
 | Audit | trait `Auditable` mengecualikan `password`, `remember_token`; `audit_logs` append-only (tidak ada route update/delete) |

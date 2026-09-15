@@ -1,25 +1,8 @@
 # 23 — Kriteria Terima per Fitur
 
+Terarsip (selesai): F01, F02 → `docs/_archive/23-F0x.md`.
+
 Selesai = semua kriteria fitur di bawah **+** docs/24. Pola UI (states, breakpoint, komponen) → docs/26; setiap layar data wajib memenuhi "Kriteria UI umum" di akhir dokumen. Perintah → docs/11.
-
-## F01 — Auth & pengguna
-- Given user aktif, When login username+sandi benar, Then redirect `/dashboard`, `last_login_at` terisi, audit `login`.
-- Given sandi salah 5× dalam 1 menit, Then 429 dengan pesan waktu tunggu.
-- Given user `is_active=0`, Then login ditolak "Akun nonaktif".
-- Given Admin, When tambah user role `operator` tanpa bidang, Then 422 "Bidang wajib untuk Operator".
-- Given user login, When ubah sandi lewat modal dengan sandi lama benar & baru ≥ 8 (huruf+angka), Then sukses + toast; sandi lama salah → teks error modal.
-- Given Operator/Pimpinan, When akses `/pengguna`, Then 403.
-```
-php artisan test tests/Feature/AuthTest.php tests/Feature/PenggunaTest.php → passed
-```
-
-## F02 — Master & pengaturan
-- CRUD Bidang, Sumber Dana (seed 15 kode prototipe hadir), Tahun Anggaran; kode unik → 422 bila duplikat.
-- Hanya satu tahun `aktif`: mengaktifkan tahun baru saat masih ada tahun aktif → 422 "Kunci tahun N dulu" (asumsi di `_MANIFEST.json`).
-- Pengaturan kop/ttd tersimpan di `settings` dan muncul di PDF.
-```
-php artisan test tests/Feature/MasterTest.php → passed
-```
 
 ## F03 — Struktur anggaran
 - Admin membuat Program/Kegiatan/Sub Kegiatan; kode duplikat pada tingkat & induk sama → 422; pagu ≤ 0 → 422.

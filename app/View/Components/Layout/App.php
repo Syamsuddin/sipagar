@@ -14,34 +14,58 @@ class App extends Component
     public function __construct(public string $title = 'Dashboard') {}
 
     /**
-     * Menu tab-nav (urutan & ikon: docs/26). Filter per peran menyusul di S1
-     * lewat Policy; rute yang belum ada mengarah ke '#'.
+     * Menu tab-nav (urutan & ikon docs/26; peran docs/05). Rute yang belum ada → '#'.
      *
      * @return array<int, array{label: string, icon: string, href: string, aktif: bool}>
      */
     protected function menu(): array
     {
+        $admin = auth()->user()?->isAdmin() ?? false;
+
         $daftar = [
-            ['Dashboard', 'fa-chart-pie', 'dashboard', 'dashboard'],
-            ['Anggaran', 'fa-folder-open', 'anggaran.index', 'anggaran.*'],
-            ['Target', 'fa-bullseye', 'target.index', 'target.*'],
-            ['Realisasi', 'fa-receipt', 'realisasi.keuangan.index', 'realisasi.*'],
-            ['Laporan', 'fa-file-lines', 'laporan.monev.index', 'laporan.*'],
-            ['Master', 'fa-database', 'master.bidang.index', 'master.*'],
-            ['Pengguna', 'fa-users', 'pengguna.index', 'pengguna.*'],
-            ['Audit', 'fa-clock-rotate-left', 'audit-log.index', 'audit-log.*'],
+            ['Dashboard', 'fa-chart-pie', 'dashboard', 'dashboard', true],
+            ['Anggaran', 'fa-folder-open', 'anggaran.index', 'anggaran.*', true],
+            ['Target', 'fa-bullseye', 'target.index', 'target.*', true],
+            ['Realisasi', 'fa-receipt', 'realisasi.keuangan.index', 'realisasi.*', true],
+            ['Laporan', 'fa-file-lines', 'laporan.monev.index', 'laporan.*', true],
+            ['Master', 'fa-database', 'master.bidang.index', 'master.*', $admin],
+            ['Pengguna', 'fa-users', 'pengguna.index', 'pengguna.*', $admin],
+            ['Audit', 'fa-clock-rotate-left', 'audit-log.index', 'audit-log.*', $admin],
         ];
 
-        return array_map(fn (array $m) => [
+        return array_values(array_map(fn (array $m) => [
             'label' => $m[0],
             'icon' => $m[1],
             'href' => Route::has($m[2]) ? route($m[2]) : '#',
             'aktif' => request()->routeIs($m[3]),
+        ], array_filter($daftar, fn (array $m) => $m[4])));
+    }
+
+    /**
+     * Sub-menu baris kedua (docs/26): Master. Realisasi/Laporan menyusul di S3/S4.
+     *
+     * @return array<int, array{label: string, icon: string, href: string, aktif: bool}>
+     */
+    protected function subMenu(): array
+    {
+        if (! request()->routeIs('master.*')) {
+            return [];
+        }
+
+        $daftar = [
+            ['Bidang', 'fa-sitemap', 'master.bidang.index', 'master.bidang.*'],
+            ['Sumber Dana', 'fa-coins', 'master.sumber-dana.index', 'master.sumber-dana.*'],
+            ['Tahun Anggaran', 'fa-calendar', 'master.tahun-anggaran.index', 'master.tahun-anggaran.*'],
+            ['Pengaturan', 'fa-gear', 'master.pengaturan.index', 'master.pengaturan.*'],
+        ];
+
+        return array_map(fn (array $m) => [
+            'label' => $m[0], 'icon' => $m[1], 'href' => route($m[2]), 'aktif' => request()->routeIs($m[3]),
         ], $daftar);
     }
 
     public function render(): View
     {
-        return view('layouts.app', ['menu' => $this->menu()]);
+        return view('layouts.app', ['menu' => $this->menu(), 'subMenu' => $this->subMenu()]);
     }
 }
