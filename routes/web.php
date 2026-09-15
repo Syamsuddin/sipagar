@@ -12,6 +12,9 @@ use App\Http\Controllers\Master\SumberDanaController;
 use App\Http\Controllers\Master\TahunAnggaranController;
 use App\Http\Controllers\PenggunaController;
 use App\Http\Controllers\ProfilController;
+use App\Http\Controllers\Realisasi\LampiranController;
+use App\Http\Controllers\Realisasi\RealisasiFisikController;
+use App\Http\Controllers\Realisasi\RealisasiKeuanganController;
 use App\Http\Controllers\TargetTriwulanController;
 use Illuminate\Support\Facades\Route;
 
@@ -22,7 +25,8 @@ Route::middleware('guest')->group(function () {
     Route::post('/login', [LoginController::class, 'store'])->name('login.store');
 });
 
-Route::middleware('auth')->group(function () {
+// `role` tanpa argumen: user harus aktif (nonaktif → 403 walau sesi ada)
+Route::middleware(['auth', 'role'])->group(function () {
     Route::post('/logout', [LoginController::class, 'destroy'])->name('logout');
     Route::post('/konfirmasi-sandi', [KonfirmasiSandiController::class, 'store'])->name('konfirmasi-sandi');
     Route::post('/profil/sandi', [ProfilController::class, 'ubahSandi'])->name('profil.sandi');
@@ -44,6 +48,21 @@ Route::middleware('auth')->group(function () {
             Route::put('/sub-kegiatan/{subKegiatan}', [SubKegiatanController::class, 'update'])->name('sub-kegiatan.update');
             Route::delete('/sub-kegiatan/{subKegiatan}', [SubKegiatanController::class, 'destroy'])->name('sub-kegiatan.destroy');
         });
+    });
+
+    // Realisasi: baca semua peran; tulis Admin/Operator bidangnya (Policy) + tahun terbuka; ubah/hapus + konfirmasi sandi
+    Route::prefix('realisasi')->name('realisasi.')->group(function () {
+        Route::get('/keuangan', [RealisasiKeuanganController::class, 'index'])->name('keuangan.index');
+        Route::post('/keuangan', [RealisasiKeuanganController::class, 'store'])->middleware('tahun-terbuka')->name('keuangan.store');
+        Route::middleware(['tahun-terbuka', 'konfirmasi-sandi'])->group(function () {
+            Route::put('/keuangan/{realisasiKeuangan}', [RealisasiKeuanganController::class, 'update'])->name('keuangan.update');
+            Route::delete('/keuangan/{realisasiKeuangan}', [RealisasiKeuanganController::class, 'destroy'])->name('keuangan.destroy');
+        });
+        Route::get('/lampiran/{realisasiKeuangan}', [LampiranController::class, 'show'])->name('lampiran.show');
+
+        Route::get('/fisik', [RealisasiFisikController::class, 'index'])->name('fisik.index');
+        Route::get('/fisik/{subKegiatan}', [RealisasiFisikController::class, 'show'])->name('fisik.show');
+        Route::put('/fisik/{subKegiatan}', [RealisasiFisikController::class, 'update'])->middleware('tahun-terbuka')->name('fisik.update');
     });
 
     // Target triwulan: Admin semua bidang, Operator bidangnya (Policy); tahun terbuka

@@ -12,9 +12,9 @@
     {
       "mulai": "2026-09-15T08:20:32+08:00",
       "selesai": null,
-      "step": 18,
-      "detik": 3208,
-      "tok_est": 145460
+      "step": 24,
+      "detik": 3875,
+      "tok_est": 187193
     }
   ],
   "step_berjalan": null,
@@ -715,13 +715,204 @@
         "Kunci/buka tahun UI → S5"
       ],
       "selesai": "2026-09-15T10:19:02+08:00"
+    },
+    {
+      "fitur": "S3-realisasi-dashboard-seed (F05,F06,F07,F13)",
+      "rute": "Fitur baru (vertical slice)",
+      "mulai": "2026-09-15T10:32:42+08:00",
+      "rencana": [
+        "database/migrations/2026_09_15_000013_create_realisasi_fisik_table.php",
+        "database/factories/RealisasiFisikFactory.php",
+        "database/seeders/PrototipeSeeder.php",
+        "app/Models/RealisasiFisik.php",
+        "app/Models/RealisasiKeuangan.php",
+        "app/Models/SubKegiatan.php",
+        "app/Enums/StatusSerapan.php",
+        "app/Exceptions/MelebihiSisaPaguException.php",
+        "app/Services/RealisasiService.php",
+        "app/Services/SerapanCalculator.php",
+        "app/Queries/DashboardQuery.php",
+        "app/Policies/RealisasiKeuanganPolicy.php",
+        "app/Policies/RealisasiFisikPolicy.php",
+        "app/Http/Controllers/Realisasi/RealisasiKeuanganController.php",
+        "app/Http/Controllers/Realisasi/RealisasiFisikController.php",
+        "app/Http/Controllers/Realisasi/LampiranController.php",
+        "app/Http/Controllers/DashboardController.php",
+        "app/Http/Requests/Realisasi/StoreRealisasiKeuanganRequest.php",
+        "app/Http/Requests/Realisasi/UpdateRealisasiKeuanganRequest.php",
+        "app/Http/Requests/Realisasi/UpdateRealisasiFisikRequest.php",
+        "app/Http/Middleware/EnsureTahunTerbuka.php",
+        "app/View/Components/Layout/App.php",
+        "routes/web.php",
+        "bootstrap/app.php",
+        "config/filesystems.php",
+        "resources/js/app.js",
+        "resources/views/realisasi/keuangan/index.blade.php",
+        "resources/views/realisasi/fisik/index.blade.php",
+        "resources/views/realisasi/fisik/show.blade.php",
+        "resources/views/realisasi/_pilih.blade.php",
+        "resources/views/dashboard/index.blade.php",
+        "tests/Feature/RealisasiKeuanganTest.php",
+        "tests/Feature/LampiranTest.php",
+        "tests/Feature/RealisasiFisikTest.php",
+        "tests/Feature/DashboardTest.php",
+        "tests/Feature/PrototipeSeederTest.php",
+        "tests/Unit/SerapanCalculatorTest.php"
+      ],
+      "total_step": 0,
+      "step": [
+        {
+          "no": 1,
+          "nama": "1/7 Skema (realisasi_fisik) + disk private",
+          "mulai": "2026-09-15T10:32:42+08:00",
+          "selesai": "2026-09-15T10:33:05+08:00",
+          "detik": 23,
+          "tok_est": 2957,
+          "muat": [
+            "database/migrations/2026_09_15_000013_create_realisasi_fisik_table.php",
+            "config/filesystems.php",
+            "SEED.sql",
+            "docs/23",
+            "docs/07",
+            "docs/06",
+            "docs/26",
+            "docs/08"
+          ]
+        },
+        {
+          "no": 2,
+          "nama": "2/7 Model, enum, factory",
+          "mulai": "2026-09-15T10:33:05+08:00",
+          "selesai": "2026-09-15T10:33:05+08:00",
+          "detik": 1,
+          "tok_est": 1441,
+          "muat": [
+            "app/Models/RealisasiFisik.php",
+            "app/Models/RealisasiKeuangan.php",
+            "app/Models/SubKegiatan.php",
+            "app/Enums/StatusSerapan.php",
+            "database/factories/RealisasiFisikFactory.php",
+            "app/Exceptions/MelebihiSisaPaguException.php"
+          ]
+        },
+        {
+          "no": 3,
+          "nama": "3/7 SerapanCalculator lengkap, RealisasiService, DashboardQuery, PrototipeSeeder",
+          "mulai": "2026-09-15T10:33:05+08:00",
+          "selesai": "2026-09-15T10:35:11+08:00",
+          "detik": 126,
+          "tok_est": 5363,
+          "muat": [
+            "app/Services/SerapanCalculator.php",
+            "app/Services/RealisasiService.php",
+            "app/Queries/DashboardQuery.php",
+            "database/seeders/PrototipeSeeder.php"
+          ]
+        },
+        {
+          "no": 4,
+          "nama": "4/7 Endpoint realisasi keuangan/fisik/lampiran + dashboard",
+          "mulai": "2026-09-15T10:35:11+08:00",
+          "selesai": "2026-09-15T10:37:38+08:00",
+          "detik": 148,
+          "tok_est": 8677,
+          "muat": [
+            "app/Policies/RealisasiKeuanganPolicy.php",
+            "app/Policies/RealisasiFisikPolicy.php",
+            "app/Http/Requests/Realisasi/StoreRealisasiKeuanganRequest.php",
+            "app/Http/Requests/Realisasi/UpdateRealisasiKeuanganRequest.php",
+            "app/Http/Requests/Realisasi/UpdateRealisasiFisikRequest.php",
+            "app/Http/Controllers/Realisasi/RealisasiKeuanganController.php",
+            "app/Http/Controllers/Realisasi/RealisasiFisikController.php",
+            "app/Http/Controllers/Realisasi/LampiranController.php",
+            "app/Http/Controllers/DashboardController.php",
+            "routes/web.php",
+            "bootstrap/app.php",
+            "app/Http/Middleware/EnsureTahunTerbuka.php",
+            "app/View/Components/Layout/App.php"
+          ]
+        },
+        {
+          "no": 5,
+          "nama": "5/7 UI (Realisasi keuangan, fisik, dashboard nyata)",
+          "mulai": "2026-09-15T10:37:38+08:00",
+          "selesai": "2026-09-15T10:41:51+08:00",
+          "detik": 253,
+          "tok_est": 5148,
+          "muat": [
+            "resources/views/realisasi/_pilih.blade.php",
+            "resources/views/realisasi/keuangan/index.blade.php",
+            "resources/views/realisasi/fisik/index.blade.php",
+            "resources/views/realisasi/fisik/show.blade.php",
+            "resources/views/dashboard/index.blade.php"
+          ]
+        },
+        {
+          "no": 6,
+          "nama": "6/7 Tes",
+          "mulai": "2026-09-15T10:41:51+08:00",
+          "selesai": "2026-09-15T10:43:47+08:00",
+          "detik": 116,
+          "tok_est": 18147,
+          "muat": [
+            "tests/Feature/RealisasiKeuanganTest.php",
+            "tests/Feature/LampiranTest.php",
+            "tests/Feature/RealisasiFisikTest.php",
+            "tests/Feature/DashboardTest.php",
+            "tests/Feature/PrototipeSeederTest.php",
+            "tests/Unit/SerapanCalculatorTest.php",
+            "tests/Feature/AuthTest.php",
+            "app/Http/Middleware/EnsureRole.php",
+            "docs/23_ACCEPTANCE_CRITERIA.md",
+            "docs/03_ROADMAP.md",
+            "docs/26_UI_DESIGN.md",
+            "docs/12_PROJECT_STRUCTURE.md",
+            "docs/_MANIFEST.json"
+          ]
+        }
+      ],
+      "detik": 667,
+      "tok_est": 41733,
+      "deviasi": [
+        "Filter dashboard mendapat opsi tahun 'Semua' (seperti prototipe) agar angka verifikasi F07 lintas tahun (3,9 M/1,33 M/34%) terpenuhi; default tetap tahun aktif — 26 diperbarui",
+        "EnsureRole + routes + AuthTest disentuh di luar rencana: user nonaktif bersesi bisa akses route auth (temuan tes F05) → 'role' tanpa argumen = wajib aktif pada grup auth",
+        "Layar Realisasi dibaca semua peran (docs/05) meski 26 menulis 'admin, operator' — 26 diperbarui"
+      ],
+      "warn_dilewati": [
+        "gerbang.sh tak bisa dijalankan (bash 3.2) — S3–S8 manual",
+        "S8 dashboard 2/4: layar baca-saja (tanpa form)"
+      ],
+      "asumsi": [
+        "PrototipeSeeder: 2024 terkunci / 2025 aktif / 2026 draft; program 5.03.01 + kegiatan 5.03.01.2.01 'Migrasi Prototipe' per tahun; bidang dipetakan dari nama (PK/PPIK/MP/SEK); target triwulan & fisik tidak diisi",
+        "Realisasi fisik: bulan kosong pada payload = baris bulan dihapus",
+        "Sisa pagu dicek di FormRequest withValidator (pesan 422 per-field) DAN di RealisasiService dalam transaksi lockForUpdate (MelebihiSisaPaguException → 422)",
+        "Lampiran lama tidak dihapus saat soft delete transaksi (dipulihkan bila restore)",
+        "Grafik bar = top-10 pagu; doughnut = Σ pagu per sumber dana"
+      ],
+      "dokumen_diperbarui": [
+        "docs/23 (F05,F06,F07,F13 diarsipkan)",
+        "docs/03_ROADMAP.md (S3 selesai)",
+        "docs/26_UI_DESIGN.md (dashboard Semua, realisasi baca semua peran, fisik stat TW)",
+        "docs/12_PROJECT_STRUCTURE.md (views realisasi, catatan role)",
+        "docs/_MANIFEST.json"
+      ],
+      "landmine_tersentuh": [
+        "agent-browser fill tidak mengisi input type=date — isi via JS",
+        "eval berulang dengan 'const' nama sama di halaman yang sama gagal diam-diam (SyntaxError) — pakai IIFE",
+        "Storage::fake('private') wajib di tes lampiran agar storage lokal tidak terisi"
+      ],
+      "ditunda": [
+        "Laporan ×4 + ekspor → S4",
+        "Trait Auditable otomatis, kunci/buka tahun, Audit Log, deploy.sh → S5"
+      ],
+      "selesai": "2026-09-15T10:43:47+08:00"
     }
   ],
   "akumulasi": {
-    "detik": 3208,
-    "tok_est": 145460,
+    "detik": 3875,
+    "tok_est": 187193,
     "tok_terukur": 0,
-    "step": 18,
-    "fitur": 3
+    "step": 24,
+    "fitur": 4
   }
 }

@@ -1,5 +1,6 @@
 <?php
 
+use App\Exceptions\MelebihiSisaPaguException;
 use App\Exceptions\TahunTerkunciException;
 use App\Http\Middleware\EnsureRole;
 use App\Http\Middleware\EnsureTahunTerbuka;
@@ -28,6 +29,15 @@ return Application::configure(basePath: dirname(__DIR__))
         $middleware->redirectUsersTo(fn () => route('dashboard'));
     })
     ->withExceptions(function (Exceptions $exceptions): void {
+        // Melebihi sisa pagu → 422 (docs/14): error field `jumlah` seperti validasi
+        $exceptions->render(function (MelebihiSisaPaguException $e, Request $request) {
+            if ($request->expectsJson()) {
+                return response()->json(['message' => $e->getMessage(), 'errors' => ['jumlah' => [$e->getMessage()]]], 422);
+            }
+
+            return back()->withInput()->withErrors(['jumlah' => $e->getMessage()]);
+        });
+
         // Tahun terkunci → 423 (docs/14): JSON utk fetch, halaman 423 bertema utk form
         $exceptions->render(function (TahunTerkunciException $e, Request $request) {
             Log::info('Tulis pada tahun terkunci ditolak', ['tahun' => $e->tahunAnggaran->tahun, 'user_id' => $request->user()?->id, 'route' => $request->path()]);

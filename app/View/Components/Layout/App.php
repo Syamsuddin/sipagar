@@ -42,22 +42,28 @@ class App extends Component
     }
 
     /**
-     * Sub-menu baris kedua (docs/26): Master. Realisasi/Laporan menyusul di S3/S4.
+     * Sub-menu baris kedua (docs/26): Master, Realisasi. Laporan menyusul di S4.
      *
      * @return array<int, array{label: string, icon: string, href: string, aktif: bool}>
      */
     protected function subMenu(): array
     {
-        if (! request()->routeIs('master.*')) {
+        $daftar = match (true) {
+            request()->routeIs('master.*') => [
+                ['Bidang', 'fa-sitemap', 'master.bidang.index', 'master.bidang.*'],
+                ['Sumber Dana', 'fa-coins', 'master.sumber-dana.index', 'master.sumber-dana.*'],
+                ['Tahun Anggaran', 'fa-calendar', 'master.tahun-anggaran.index', 'master.tahun-anggaran.*'],
+                ['Pengaturan', 'fa-gear', 'master.pengaturan.index', 'master.pengaturan.*'],
+            ],
+            request()->routeIs('realisasi.*') => [
+                ['Keuangan', 'fa-file-invoice-dollar', 'realisasi.keuangan.index', 'realisasi.keuangan.*'],
+                ['Fisik', 'fa-percent', 'realisasi.fisik.index', 'realisasi.fisik.*'],
+            ],
+            default => [],
+        };
+        if ($daftar === []) {
             return [];
         }
-
-        $daftar = [
-            ['Bidang', 'fa-sitemap', 'master.bidang.index', 'master.bidang.*'],
-            ['Sumber Dana', 'fa-coins', 'master.sumber-dana.index', 'master.sumber-dana.*'],
-            ['Tahun Anggaran', 'fa-calendar', 'master.tahun-anggaran.index', 'master.tahun-anggaran.*'],
-            ['Pengaturan', 'fa-gear', 'master.pengaturan.index', 'master.pengaturan.*'],
-        ];
 
         return array_map(fn (array $m) => [
             'label' => $m[0], 'icon' => $m[1], 'href' => route($m[2]), 'aktif' => request()->routeIs($m[3]),

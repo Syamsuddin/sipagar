@@ -49,11 +49,11 @@ Tab-nav (urut kiri→kanan; tampil sesuai peran): **Dashboard** `fa-chart-pie` �
 | Layar | Route | Peran | Pola |
 |---|---|---|---|
 | Login | `GET/POST /login`, `POST /logout` | semua | `x-layout.auth` |
-| Dashboard | `/dashboard` | semua | filter (tahun, bidang) → 4 stat-card → chart-grid 2 kolom (bar, doughnut) → card tabel ringkasan |
+| Dashboard | `/dashboard?tahun=&bidang=` | semua | filter tahun (default aktif; opsi **Semua** seperti prototipe) & bidang (Operator default bidangnya) → 4 stat-card → chart-grid 2 kolom (bar top-10, doughnut per sumber dana) → card tabel ringkasan; kosong → `x-empty-state` |
 | Anggaran | `/anggaran?tahun=` | semua (tulis: admin) | pohon Program › Kegiatan › Sub Kegiatan sebagai tabel berindentasi; form tambah/edit di modal (`x-modal`) |
 | Target | `/target/{subKegiatan}` | admin, operator (bidang) | pilih sub kegiatan (select) → tabel 4 baris TW × (keu Rp, fisik %) editable → simpan |
-| Realisasi › Keuangan | `/realisasi/keuangan` | admin, operator | pola form(400) + daftar; select sub kegiatan menampilkan "Sisa: Rp …" aksen/danger seperti prototipe |
-| Realisasi › Fisik | `/realisasi/fisik/{subKegiatan}` | admin, operator | grid 12 bulan input % |
+| Realisasi › Keuangan | `/realisasi/keuangan?sub_kegiatan=&edit=` | semua baca; tulis admin, operator (bidang) | pola form(400) + daftar; select sub kegiatan menampilkan "Sisa: Rp …" aksen/danger seperti prototipe |
+| Realisasi › Fisik | `/realisasi/fisik/{subKegiatan}` | semua baca; tulis admin, operator (bidang) | 4 stat-card TW (fisik s.d. bulan 3n, deviasi vs target) + grid 12 bulan input % (kosong = bulan dihapus) |
 | Laporan › Monev / Rekap / Buku / Tren | `/laporan/{monev|rekap|buku-realisasi|tren}` (+`?export=xlsx|pdf`) | semua | card filter (baris flex seperti filter "Sisa Anggaran" prototipe) → tombol `btn-secondary` Unduh Excel/PDF → tabel/grafik |
 | Master › Bidang / Sumber Dana / Tahun / Pengaturan | `/master/{bidang|sumber-dana|tahun-anggaran|pengaturan}` | admin | form + daftar; Tahun: tombol Kunci/Buka → modal sandi |
 | Pengguna | `/pengguna` | admin | form + daftar; aksi aktif/nonaktif, reset sandi (modal sandi) |

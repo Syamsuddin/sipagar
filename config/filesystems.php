@@ -38,6 +38,14 @@ return [
             'report' => false,
         ],
 
+        // Lampiran realisasi (docs/10, docs/21): tidak pernah publik, diakses lewat LampiranController
+        'private' => [
+            'driver' => 'local',
+            'root' => storage_path('app/private'),
+            'serve' => false,
+            'throw' => false,
+        ],
+
         'public' => [
             'driver' => 'local',
             'root' => storage_path('app/public'),

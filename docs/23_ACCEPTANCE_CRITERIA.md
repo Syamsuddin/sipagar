@@ -1,34 +1,8 @@
 # 23 — Kriteria Terima per Fitur
 
-Terarsip (selesai): F01, F02, F03, F04 → `docs/_archive/23-F0x.md`.
+Terarsip (selesai): F01–F07, F13 → `docs/_archive/23-F0x.md`.
 
 Selesai = semua kriteria fitur di bawah **+** docs/24. Pola UI (states, breakpoint, komponen) → docs/26; setiap layar data wajib memenuhi "Kriteria UI umum" di akhir dokumen. Perintah → docs/11.
-
-## F05 — Realisasi keuangan
-- Simpan transaksi valid → 302 + toast "Realisasi dicatat"; sisa & serapan di layar berkurang sesuai.
-- `jumlah` > sisa → 422 "Melebihi sisa! Sisa: Rp …"; tanggal di luar tahun → 422; lampiran > 2 MB / mime salah → 422.
-- Lampiran tersimpan di disk private; `GET /realisasi/lampiran/{id}` mengembalikan file untuk user berhak, 403 untuk yang tidak (semua peran boleh lihat — uji user nonaktif/tamu → 401/403).
-- Edit/hapus memerlukan konfirmasi sandi (sesi `password_confirmed_at` ≤ 5 menit) → tanpa itu 403.
-- Hapus = soft delete; serapan tidak menghitung yang terhapus; audit `deleted`.
-```
-php artisan test tests/Feature/RealisasiKeuanganTest.php tests/Feature/LampiranTest.php → passed
-```
-
-## F06 — Realisasi fisik
-- Upsert 12 bulan; persen menurun dari bulan terisi sebelumnya atau > 100 → 422 menyebut bulan.
-- Scope bidang & tahun terkunci seperti F05.
-```
-php artisan test tests/Feature/RealisasiFisikTest.php → passed
-```
-
-## F07 — Dashboard
-- Kartu Total Pagu / Total Realisasi / Sisa / Serapan + sub-teks (jumlah sub kegiatan, transaksi, % tersisa) sama persis dengan hasil `DashboardQuery`.
-- Grafik "Pagu vs Realisasi" (bar per sub kegiatan, top 10) & "Distribusi Pagu" (doughnut per sumber dana) memakai palet docs/26.
-- Tabel ringkasan: No, Kode, Sub Kegiatan, Bidang, Sumber Dana, Pagu, Realisasi, Sisa, Serapan, Status (badge sesuai docs/04).
-- Filter tahun (default aktif) & bidang; Operator default bidangnya.
-```
-php artisan test tests/Feature/DashboardTest.php → passed ; buka /dashboard dengan seed prototipe → total pagu Rp 3.900.000.000, realisasi Rp 1.330.000.000, serapan 34%
-```
 
 ## F08 — Laporan Monev Triwulan
 - Filter tahun + TW + bidang + sumber dana. Kolom: No, Kode, Sub Kegiatan, Bidang, Sumber Dana, Pagu, Target Keu (Rp, %), Realisasi Keu (Rp, %), Deviasi Keu (%), Target Fisik %, Realisasi Fisik %, Deviasi Fisik, Status; baris subtotal per Program & total.
@@ -49,12 +23,6 @@ php artisan test tests/Feature/Laporan*Test.php → passed ; setiap laporan: GET
 - Layar Audit Log: filter user, aksi, model, rentang tanggal; hanya Admin.
 ```
 php artisan test tests/Feature/AuditLogTest.php tests/Feature/TahunAnggaranLockTest.php → passed
-```
-
-## F13 — Seed prototipe
-- `php artisan db:seed --class=PrototipeSeeder` memuat 10 sub kegiatan & 16 transaksi `SEED.sql` ke tahun 2024/2025/2026 sesuai kolom `tahun`; idempoten.
-```
-php artisan test tests/Feature/PrototipeSeederTest.php → passed
 ```
 
 ## Kriteria UI umum (semua layar; detail docs/26)

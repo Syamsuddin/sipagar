@@ -5,6 +5,7 @@ namespace App\Http\Middleware;
 use App\Exceptions\TahunTerkunciException;
 use App\Models\Kegiatan;
 use App\Models\Program;
+use App\Models\RealisasiKeuangan;
 use App\Models\SubKegiatan;
 use App\Models\TahunAnggaran;
 use Closure;
@@ -30,8 +31,11 @@ class EnsureTahunTerbuka
 
     private function resolusiTahun(Request $request): ?TahunAnggaran
     {
-        foreach (['subKegiatan', 'sub_kegiatan', 'kegiatan', 'program', 'tahunAnggaran', 'tahun_anggaran'] as $param) {
+        foreach (['realisasiKeuangan', 'subKegiatan', 'sub_kegiatan', 'kegiatan', 'program', 'tahunAnggaran', 'tahun_anggaran'] as $param) {
             $model = $request->route($param);
+            if ($model instanceof RealisasiKeuangan) {
+                return $model->tahunAnggaran();
+            }
             if ($model instanceof SubKegiatan || $model instanceof Kegiatan) {
                 return $model->tahunAnggaran();
             }

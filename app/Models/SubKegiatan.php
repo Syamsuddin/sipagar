@@ -49,6 +49,11 @@ class SubKegiatan extends Model
         return $this->hasMany(RealisasiKeuangan::class);
     }
 
+    public function realisasiFisik(): HasMany
+    {
+        return $this->hasMany(RealisasiFisik::class)->orderBy('bulan');
+    }
+
     /** Rantai sub_kegiatan → kegiatan → program → tahun (docs/16 #3). */
     public function tahunAnggaran(): TahunAnggaran
     {

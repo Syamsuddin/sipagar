@@ -8,7 +8,8 @@ use Illuminate\Http\Request;
 use Symfony\Component\HttpFoundation\Response;
 
 /**
- * `role:admin` / `role:admin,operator` (docs/21). User nonaktif diputus di sini juga.
+ * `role:admin` / `role:admin,operator` (docs/21); tanpa argumen (`role`) = user aktif peran apa pun.
+ * User nonaktif (is_active=0) selalu 403 walau sesinya masih ada (docs/05, F05).
  */
 class EnsureRole
 {
@@ -18,6 +19,10 @@ class EnsureRole
 
         if (! $user || ! $user->is_active) {
             abort(403);
+        }
+
+        if ($roles === []) {
+            return $next($request);
         }
 
         $izin = array_map(fn (string $r) => Role::from($r), $roles);

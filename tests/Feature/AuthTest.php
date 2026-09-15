@@ -98,3 +98,9 @@ test('konfirmasi sandi: benar → ok; salah 3x → 403 lalu 429', function () {
     }
     $this->actingAs($user)->postJson(route('konfirmasi-sandi'), ['password' => 'Sandi1234'])->assertStatus(429);
 });
+
+test('user nonaktif dengan sesi tersisa → 403 pada route ber-auth', function () {
+    $nonaktif = User::factory()->nonaktif()->create();
+    $this->actingAs($nonaktif)->get(route('dashboard'))->assertForbidden();
+    $this->actingAs($nonaktif)->get(route('anggaran.index'))->assertForbidden();
+});

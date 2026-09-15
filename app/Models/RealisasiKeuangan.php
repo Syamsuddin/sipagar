@@ -26,4 +26,14 @@ class RealisasiKeuangan extends Model
     {
         return $this->belongsTo(SubKegiatan::class);
     }
+
+    public function pembuat(): BelongsTo
+    {
+        return $this->belongsTo(User::class, 'created_by');
+    }
+
+    public function tahunAnggaran(): TahunAnggaran
+    {
+        return $this->subKegiatan->tahunAnggaran();
+    }
 }

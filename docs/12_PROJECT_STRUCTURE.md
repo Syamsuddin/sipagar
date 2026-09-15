@@ -18,7 +18,7 @@ app/
       Laporan/{MonevTriwulan,Rekap,BukuRealisasi,TrenSerapan}Controller.php
       Master/{Bidang,SumberDana,TahunAnggaran,Pengaturan}Controller.php
       {Pengguna,AuditLog,Profil}Controller.php
-    Middleware/{EnsureRole,EnsureTahunTerbuka,KonfirmasiSandi}.php
+    Middleware/{EnsureRole,EnsureTahunTerbuka,KonfirmasiSandi}.php   # `role` tanpa argumen = user aktif apa pun (grup auth)
     Requests/<Modul>/{Store,Update}<Model>Request.php
   Models/{User,Bidang,SumberDana,TahunAnggaran,Program,Kegiatan,SubKegiatan,TargetTriwulan,RealisasiKeuangan,RealisasiFisik,AuditLog,Setting}.php
   Models/Concerns/{Auditable,ScopedByBidang}.php
