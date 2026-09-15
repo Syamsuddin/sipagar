@@ -1,29 +1,14 @@
 {
-  "versi": "1.1",
-  "genesis": "2026-09-15T08:20:32+08:00",
-  "perintah": {
-    "test": "php artisan test",
-    "run": "php artisan serve",
-    "migrate": "php artisan migrate --seed",
-    "lint": "vendor/bin/pint --test",
-    "build": "npm run build"
-  },
-  "sesi": [
-    {
-      "mulai": "2026-09-15T08:20:32+08:00",
-      "selesai": null,
-      "step": 34,
-      "detik": 4943,
-      "tok_est": 383882
-    }
-  ],
-  "step_berjalan": null,
+  "versi": "1.0",
+  "sumber": "coding-vcbd 1.1",
+  "diterbitkan": "2026-09-15T11:43:25+08:00",
   "blueprint": {
     "sidik_awal": "d84adb4f47d606de",
-    "sidik": "774093c70fdf4ad7",
+    "sidik_saat_segel": "774093c70fdf4ad7",
+    "sidik_saat_serah": "774093c70fdf4ad7",
     "dokumen": 27,
-    "disegel": "2026-09-15T11:43:25+08:00",
-    "sidik_sebelumnya": "d84adb4f47d606de",
+    "bergeser": false,
+    "bergeser_sejak_awal": true,
     "riwayat": [
       {
         "dari": "d84adb4f47d606de",
@@ -32,11 +17,26 @@
       }
     ]
   },
-  "riwayat_fitur": [
+  "perintah": {
+    "test": "php artisan test",
+    "run": "php artisan serve",
+    "migrate": "php artisan migrate --seed",
+    "lint": "vendor/bin/pint --test",
+    "build": "npm run build"
+  },
+  "ringkas": {
+    "slice": 7,
+    "step": 34,
+    "detik": 4943,
+    "tok_est": 383882
+  },
+  "slice": [
     {
       "fitur": "S0-skeleton",
-      "rute": "Fitur baru (vertical slice)",
-      "mulai": "2026-09-15T08:23:44+08:00",
+      "selesai": "2026-09-15T08:39:23+08:00",
+      "step": 5,
+      "detik": 942,
+      "tok_est": 66186,
       "rencana": [
         "package.json",
         "package-lock.json",
@@ -82,127 +82,6 @@
         "tests/Feature/AuthTest.php",
         ".gitignore"
       ],
-      "total_step": 0,
-      "step": [
-        {
-          "no": 1,
-          "nama": "1/7 Skema (scaffold Laravel 12 + migrasi bawaan)",
-          "mulai": "2026-09-15T08:23:44+08:00",
-          "selesai": "2026-09-15T08:26:33+08:00",
-          "detik": 170,
-          "tok_est": 12823,
-          "muat": [
-            "docs/11_COMMANDS.md",
-            "docs/03_ROADMAP.md",
-            "docs/02_SCOPE.md",
-            "docs/23_ACCEPTANCE_CRITERIA.md",
-            "docs/24_DEFINITION_OF_DONE.md",
-            "docs/13_TESTING.md",
-            "docs/26_UI_DESIGN.md",
-            "docs/07_DATA_MODEL.md",
-            "docs/12_PROJECT_STRUCTURE.md",
-            "docs/10_DEV_ENV.md",
-            "docs/09_STACK.md",
-            "docs/22_CHANGE_POLICY.md",
-            ".env",
-            ".env.example",
-            "phpunit.xml",
-            "tests/Pest.php",
-            "composer.json",
-            "package.json"
-          ]
-        },
-        {
-          "no": 2,
-          "nama": "4/7 Rute & controller (GET /login, GET /dashboard dummy)",
-          "mulai": "2026-09-15T08:26:33+08:00",
-          "selesai": "2026-09-15T08:27:08+08:00",
-          "detik": 35,
-          "tok_est": 1635,
-          "muat": [
-            "app/Http/Controllers/Auth/LoginController.php",
-            "app/Http/Controllers/DashboardController.php",
-            "app/Support/helpers.php",
-            "routes/web.php",
-            "composer.json"
-          ]
-        },
-        {
-          "no": 3,
-          "nama": "5/7 UI (app.css prototipe, Vite/Tailwind 3.4, layout, komponen, login & dashboard dummy)",
-          "mulai": "2026-09-15T08:27:08+08:00",
-          "selesai": "2026-09-15T08:36:38+08:00",
-          "detik": 570,
-          "tok_est": 41979,
-          "muat": [
-            "SIPAGAR BKPSDM.html",
-            "package.json",
-            "vite.config.js",
-            "tailwind.config.js",
-            "postcss.config.js",
-            "resources/css/app.css",
-            "resources/js/app.js",
-            "resources/views/layouts/app.blade.php",
-            "resources/views/layouts/auth.blade.php",
-            "resources/views/components/tab-nav.blade.php",
-            "resources/views/components/card.blade.php",
-            "resources/views/components/stat-card.blade.php",
-            "resources/views/components/data-table.blade.php",
-            "resources/views/components/badge.blade.php",
-            "resources/views/components/badge-sumber.blade.php",
-            "resources/views/components/form-input.blade.php",
-            "resources/views/components/form-select.blade.php",
-            "resources/views/components/form-textarea.blade.php",
-            "resources/views/components/btn.blade.php",
-            "resources/views/components/modal.blade.php",
-            "resources/views/components/modal-konfirmasi-sandi.blade.php",
-            "resources/views/components/toast.blade.php",
-            "resources/views/components/empty-state.blade.php",
-            "resources/views/components/progress.blade.php",
-            "resources/views/components/user-badge.blade.php",
-            "resources/views/auth/login.blade.php",
-            "resources/views/dashboard/index.blade.php",
-            "resources/views/errors/403.blade.php",
-            "resources/views/errors/404.blade.php",
-            "resources/views/errors/423.blade.php",
-            "resources/views/errors/500.blade.php",
-            "app/View/Components/Layout/App.php",
-            "app/View/Components/Layout/Auth.php",
-            "app/Support/helpers.php"
-          ]
-        },
-        {
-          "no": 4,
-          "nama": "6/7 Tes (UI smoke Pest)",
-          "mulai": "2026-09-15T08:36:38+08:00",
-          "selesai": "2026-09-15T08:37:12+08:00",
-          "detik": 35,
-          "tok_est": 731,
-          "muat": [
-            "tests/Feature/DashboardTest.php",
-            "tests/Feature/AuthTest.php",
-            "tests/Unit/RupiahHelperTest.php",
-            "tests/Pest.php"
-          ]
-        },
-        {
-          "no": 5,
-          "nama": "7/7 Gerbang fitur",
-          "mulai": "2026-09-15T08:37:12+08:00",
-          "selesai": "2026-09-15T08:39:23+08:00",
-          "detik": 132,
-          "tok_est": 9018,
-          "muat": [
-            "docs/03_ROADMAP.md",
-            "docs/12_PROJECT_STRUCTURE.md",
-            "docs/26_UI_DESIGN.md",
-            "docs/_MANIFEST.json",
-            ".gitignore"
-          ]
-        }
-      ],
-      "detik": 942,
-      "tok_est": 66186,
       "deviasi": [
         "scripts/validate.sh & token_ledger.py tidak ada di paket VCBD terpasang — gerbang kesehatan blueprint dilewati, token hanya [ESTIMASI]",
         "gerbang.sh gagal parse di bash 3.2 macOS (line 115: case dalam $( )) — S5/S7/S8 dijalankan manual dgn logika sama",
@@ -240,13 +119,14 @@
         "DashboardController data dummy → S3 DashboardQuery",
         "Endpoint /konfirmasi-sandi → S5 (komponen JS sudah siap)",
         "Repo belum punya branch main — pemilik membuat main dari commit 374f624 saat merge PR"
-      ],
-      "selesai": "2026-09-15T08:39:23+08:00"
+      ]
     },
     {
       "fitur": "S1-auth-master (F01,F02)",
-      "rute": "Fitur baru (vertical slice)",
-      "mulai": "2026-09-15T09:16:45+08:00",
+      "selesai": "2026-09-15T09:44:12+08:00",
+      "step": 7,
+      "detik": 1650,
+      "tok_est": 48427,
       "rencana": [
         "database/migrations/2026_09_15_000000_create_bidang_table.php",
         "database/migrations/2026_09_15_000001_create_users_table.php",
@@ -325,169 +205,6 @@
         "tests/Feature/DashboardTest.php",
         "app/Http/Controllers/DashboardController.php"
       ],
-      "total_step": 0,
-      "step": [
-        {
-          "no": 1,
-          "nama": "1/7 Skema (8 migrasi docs/07)",
-          "mulai": "2026-09-15T09:16:45+08:00",
-          "selesai": "2026-09-15T09:17:22+08:00",
-          "detik": 37,
-          "tok_est": 7247,
-          "muat": [
-            "docs/07_DATA_MODEL.md",
-            "docs/05_USER_ROLE.md",
-            "docs/06_BUSINESS_PROCESS.md",
-            "docs/21_SECURITY_RULES.md",
-            "docs/23_ACCEPTANCE_CRITERIA.md",
-            "database/migrations/2026_09_15_000000_create_bidang_table.php",
-            "database/migrations/2026_09_15_000001_create_users_table.php",
-            "database/migrations/2026_09_15_000002_create_password_reset_tokens_table.php",
-            "database/migrations/2026_09_15_000003_create_sessions_table.php",
-            "database/migrations/2026_09_15_000004_create_sumber_dana_table.php",
-            "database/migrations/2026_09_15_000005_create_tahun_anggaran_table.php",
-            "database/migrations/2026_09_15_000006_create_audit_logs_table.php",
-            "database/migrations/2026_09_15_000007_create_settings_table.php"
-          ]
-        },
-        {
-          "no": 2,
-          "nama": "2/7 Model, enum, factory, seeder",
-          "mulai": "2026-09-15T09:17:22+08:00",
-          "selesai": "2026-09-15T09:18:29+08:00",
-          "detik": 68,
-          "tok_est": 3488,
-          "muat": [
-            "app/Enums/Role.php",
-            "app/Enums/StatusTahun.php",
-            "app/Models/User.php",
-            "app/Models/Bidang.php",
-            "app/Models/SumberDana.php",
-            "app/Models/TahunAnggaran.php",
-            "app/Models/AuditLog.php",
-            "app/Models/Setting.php",
-            "database/factories/UserFactory.php",
-            "database/factories/BidangFactory.php",
-            "database/factories/SumberDanaFactory.php",
-            "database/factories/TahunAnggaranFactory.php",
-            "database/seeders/MasterSeeder.php",
-            "database/seeders/AdminLokalSeeder.php",
-            "database/seeders/DatabaseSeeder.php"
-          ]
-        },
-        {
-          "no": 3,
-          "nama": "3/7 Service (Pengguna, TahunAnggaran, Audit)",
-          "mulai": "2026-09-15T09:18:29+08:00",
-          "selesai": "2026-09-15T09:19:06+08:00",
-          "detik": 37,
-          "tok_est": 3295,
-          "muat": [
-            "app/Services/AuditService.php",
-            "app/Services/PenggunaService.php",
-            "app/Services/TahunAnggaranService.php",
-            "config/sipagar.php",
-            "docs/16_DEBUGGING_GUIDE.md",
-            "docs/14_ERROR_HANDLING.md",
-            "docs/15_OBSERVABILITY.md"
-          ]
-        },
-        {
-          "no": 4,
-          "nama": "4/7 Endpoint (auth, konfirmasi-sandi, profil, pengguna, master) + middleware + policy + FormRequest",
-          "mulai": "2026-09-15T09:19:06+08:00",
-          "selesai": "2026-09-15T09:21:50+08:00",
-          "detik": 165,
-          "tok_est": 9355,
-          "muat": [
-            "app/Http/Middleware/EnsureRole.php",
-            "app/Http/Middleware/KonfirmasiSandi.php",
-            "app/Http/Middleware/SecurityHeaders.php",
-            "app/Policies/UserPolicy.php",
-            "app/Policies/TahunAnggaranPolicy.php",
-            "app/Http/Requests/Auth/LoginRequest.php",
-            "app/Http/Requests/Auth/KonfirmasiSandiRequest.php",
-            "app/Http/Requests/Profil/UbahSandiRequest.php",
-            "app/Http/Requests/Pengguna/StoreUserRequest.php",
-            "app/Http/Requests/Pengguna/UpdateUserRequest.php",
-            "app/Http/Requests/Pengguna/ResetSandiRequest.php",
-            "app/Http/Requests/Master/StoreBidangRequest.php",
-            "app/Http/Requests/Master/UpdateBidangRequest.php",
-            "app/Http/Requests/Master/StoreSumberDanaRequest.php",
-            "app/Http/Requests/Master/UpdateSumberDanaRequest.php",
-            "app/Http/Requests/Master/StoreTahunAnggaranRequest.php",
-            "app/Http/Requests/Master/UpdateTahunAnggaranRequest.php",
-            "app/Http/Requests/Master/UpdatePengaturanRequest.php",
-            "app/Http/Controllers/Auth/LoginController.php",
-            "app/Http/Controllers/Auth/KonfirmasiSandiController.php",
-            "app/Http/Controllers/ProfilController.php",
-            "app/Http/Controllers/PenggunaController.php",
-            "app/Http/Controllers/Master/BidangController.php",
-            "app/Http/Controllers/Master/SumberDanaController.php",
-            "app/Http/Controllers/Master/TahunAnggaranController.php",
-            "app/Http/Controllers/Master/PengaturanController.php",
-            "app/Console/Commands/BuatAdminCommand.php",
-            "app/Http/Controllers/Controller.php",
-            "routes/web.php",
-            "bootstrap/app.php"
-          ]
-        },
-        {
-          "no": 5,
-          "nama": "5/7 UI (login, layout per peran, pengguna, master x4)",
-          "mulai": "2026-09-15T09:21:50+08:00",
-          "selesai": "2026-09-15T09:25:46+08:00",
-          "detik": 237,
-          "tok_est": 11652,
-          "muat": [
-            "app/View/Components/Layout/App.php",
-            "resources/views/layouts/app.blade.php",
-            "resources/views/components/modal.blade.php",
-            "resources/js/app.js",
-            "resources/views/auth/login.blade.php",
-            "resources/views/pengguna/index.blade.php",
-            "resources/views/master/bidang/index.blade.php",
-            "resources/views/master/sumber-dana/index.blade.php",
-            "resources/views/master/tahun-anggaran/index.blade.php",
-            "resources/views/master/pengaturan/index.blade.php",
-            "app/Http/Middleware/SecurityHeaders.php",
-            "docs/21_SECURITY_RULES.md"
-          ]
-        },
-        {
-          "no": 6,
-          "nama": "6/7 Tes (Auth, Pengguna, Master, Profil, Dashboard)",
-          "mulai": "2026-09-15T09:25:47+08:00",
-          "selesai": "2026-09-15T09:27:48+08:00",
-          "detik": 121,
-          "tok_est": 5349,
-          "muat": [
-            "tests/Feature/AuthTest.php",
-            "tests/Feature/PenggunaTest.php",
-            "tests/Feature/MasterTest.php",
-            "tests/Feature/ProfilTest.php",
-            "tests/Feature/DashboardTest.php"
-          ]
-        },
-        {
-          "no": 7,
-          "nama": "7/7 Gerbang fitur",
-          "mulai": "2026-09-15T09:27:48+08:00",
-          "selesai": "2026-09-15T09:44:12+08:00",
-          "detik": 985,
-          "tok_est": 8041,
-          "muat": [
-            "docs/23_ACCEPTANCE_CRITERIA.md",
-            "docs/_archive/23-F01.md",
-            "docs/_archive/23-F02.md",
-            "docs/03_ROADMAP.md",
-            "docs/12_PROJECT_STRUCTURE.md",
-            "docs/_MANIFEST.json"
-          ]
-        }
-      ],
-      "detik": 1650,
-      "tok_est": 48427,
       "deviasi": [
         "CSP docs/21 ditambah script-src 'self' 'unsafe-eval' — Alpine standar memerlukannya; 21 diperbarui (alternatif @alpinejs/csp ditolak)",
         "app/Http/Controllers/Controller.php (scaffold) ditambah trait AuthorizesRequests",
@@ -522,13 +239,14 @@
         "Layar Audit Log → S5",
         "Trait Auditable & ScopedByBidang → S3/S5",
         "Branch main belum ada — pemilik membuat saat merge PR"
-      ],
-      "selesai": "2026-09-15T09:44:12+08:00"
+      ]
     },
     {
       "fitur": "S2-anggaran-target (F03,F04)",
-      "rute": "Fitur baru (vertical slice)",
-      "mulai": "2026-09-15T10:08:48+08:00",
+      "selesai": "2026-09-15T10:19:02+08:00",
+      "step": 6,
+      "detik": 616,
+      "tok_est": 30847,
       "rencana": [
         "database/migrations/2026_09_15_000008_create_program_table.php",
         "database/migrations/2026_09_15_000009_create_kegiatan_table.php",
@@ -578,118 +296,6 @@
         "tests/Unit/SerapanCalculatorTest.php",
         "tests/Unit/RupiahHelperTest.php"
       ],
-      "total_step": 0,
-      "step": [
-        {
-          "no": 1,
-          "nama": "1/7 Skema (program, kegiatan, sub_kegiatan, target_triwulan, realisasi_keuangan)",
-          "mulai": "2026-09-15T10:08:48+08:00",
-          "selesai": "2026-09-15T10:09:57+08:00",
-          "detik": 70,
-          "tok_est": 0,
-          "muat": [
-            "docs/23",
-            "docs/07",
-            "docs/06",
-            "docs/04",
-            "docs/14",
-            "docs/08",
-            "docs/16",
-            "database/migrations/2026_09_15_000008..12"
-          ]
-        },
-        {
-          "no": 2,
-          "nama": "2/7 Model + trait + factory",
-          "mulai": "2026-09-15T10:09:58+08:00",
-          "selesai": "2026-09-15T10:10:12+08:00",
-          "detik": 14,
-          "tok_est": 2700,
-          "muat": [
-            "app/Models/Program.php",
-            "app/Models/Kegiatan.php",
-            "app/Models/SubKegiatan.php",
-            "app/Models/TargetTriwulan.php",
-            "app/Models/RealisasiKeuangan.php",
-            "app/Models/Concerns/ScopedByBidang.php",
-            "app/Models/TahunAnggaran.php",
-            "database/factories/ProgramFactory.php",
-            "database/factories/KegiatanFactory.php",
-            "database/factories/SubKegiatanFactory.php",
-            "database/factories/RealisasiKeuanganFactory.php"
-          ]
-        },
-        {
-          "no": 3,
-          "nama": "3/7 Service (Anggaran, Target, SerapanCalculator) + exception",
-          "mulai": "2026-09-15T10:10:12+08:00",
-          "selesai": "2026-09-15T10:11:05+08:00",
-          "detik": 53,
-          "tok_est": 2903,
-          "muat": [
-            "app/Exceptions/TahunTerkunciException.php",
-            "app/Services/SerapanCalculator.php",
-            "app/Services/AnggaranService.php",
-            "app/Services/TargetService.php",
-            "app/Support/helpers.php"
-          ]
-        },
-        {
-          "no": 4,
-          "nama": "4/7 Endpoint (anggaran x3, target) + middleware tahun + policy + FormRequest",
-          "mulai": "2026-09-15T10:11:05+08:00",
-          "selesai": "2026-09-15T10:13:37+08:00",
-          "detik": 153,
-          "tok_est": 4804,
-          "muat": [
-            "app/Http/Middleware/EnsureTahunTerbuka.php",
-            "app/Policies/SubKegiatanPolicy.php",
-            "app/Policies/TargetTriwulanPolicy.php",
-            "app/Http/Requests/Anggaran/*",
-            "app/Http/Requests/Target/UpdateTargetTriwulanRequest.php",
-            "app/Http/Controllers/Anggaran/*",
-            "app/Http/Controllers/TargetTriwulanController.php",
-            "routes/web.php",
-            "bootstrap/app.php",
-            "resources/views/errors/423.blade.php"
-          ]
-        },
-        {
-          "no": 5,
-          "nama": "5/7 UI (Anggaran pohon + modal, Target 4 baris)",
-          "mulai": "2026-09-15T10:13:37+08:00",
-          "selesai": "2026-09-15T10:17:46+08:00",
-          "detik": 249,
-          "tok_est": 7970,
-          "muat": [
-            "resources/js/app.js",
-            "resources/views/anggaran/index.blade.php",
-            "resources/views/target/index.blade.php",
-            "resources/views/target/_pilih.blade.php",
-            "resources/views/target/show.blade.php"
-          ]
-        },
-        {
-          "no": 6,
-          "nama": "6/7 Tes (AnggaranTest, TargetTriwulanTest, SerapanCalculatorTest)",
-          "mulai": "2026-09-15T10:17:46+08:00",
-          "selesai": "2026-09-15T10:19:02+08:00",
-          "detik": 77,
-          "tok_est": 12470,
-          "muat": [
-            "tests/Feature/AnggaranTest.php",
-            "tests/Feature/TargetTriwulanTest.php",
-            "tests/Unit/SerapanCalculatorTest.php",
-            "tests/Unit/RupiahHelperTest.php",
-            "docs/23_ACCEPTANCE_CRITERIA.md",
-            "docs/03_ROADMAP.md",
-            "docs/12_PROJECT_STRUCTURE.md",
-            "docs/_MANIFEST.json"
-          ]
-        }
-      ],
-      "detik": 616,
-      "tok_est": 30847,
       "deviasi": [
         "Tabel realisasi_keuangan + model/factory dibuat di S2 (bukan S3) agar kriteria F03 pagu<realisasi & hapus ber-realisasi bisa diuji; endpoint/UI realisasi tetap S3",
         "Partial resources/views/target/_pilih.blade.php di luar daftar rencana (select sub kegiatan dipakai index & show)",
@@ -721,13 +327,14 @@
       "ditunda": [
         "Realisasi keuangan/fisik endpoint+UI, SerapanCalculator lengkap, dashboard nyata → S3",
         "Kunci/buka tahun UI → S5"
-      ],
-      "selesai": "2026-09-15T10:19:02+08:00"
+      ]
     },
     {
       "fitur": "S3-realisasi-dashboard-seed (F05,F06,F07,F13)",
-      "rute": "Fitur baru (vertical slice)",
-      "mulai": "2026-09-15T10:32:42+08:00",
+      "selesai": "2026-09-15T10:43:47+08:00",
+      "step": 6,
+      "detik": 667,
+      "tok_est": 41733,
       "rencana": [
         "database/migrations/2026_09_15_000013_create_realisasi_fisik_table.php",
         "database/factories/RealisasiFisikFactory.php",
@@ -767,120 +374,6 @@
         "tests/Feature/PrototipeSeederTest.php",
         "tests/Unit/SerapanCalculatorTest.php"
       ],
-      "total_step": 0,
-      "step": [
-        {
-          "no": 1,
-          "nama": "1/7 Skema (realisasi_fisik) + disk private",
-          "mulai": "2026-09-15T10:32:42+08:00",
-          "selesai": "2026-09-15T10:33:05+08:00",
-          "detik": 23,
-          "tok_est": 2957,
-          "muat": [
-            "database/migrations/2026_09_15_000013_create_realisasi_fisik_table.php",
-            "config/filesystems.php",
-            "SEED.sql",
-            "docs/23",
-            "docs/07",
-            "docs/06",
-            "docs/26",
-            "docs/08"
-          ]
-        },
-        {
-          "no": 2,
-          "nama": "2/7 Model, enum, factory",
-          "mulai": "2026-09-15T10:33:05+08:00",
-          "selesai": "2026-09-15T10:33:05+08:00",
-          "detik": 1,
-          "tok_est": 1441,
-          "muat": [
-            "app/Models/RealisasiFisik.php",
-            "app/Models/RealisasiKeuangan.php",
-            "app/Models/SubKegiatan.php",
-            "app/Enums/StatusSerapan.php",
-            "database/factories/RealisasiFisikFactory.php",
-            "app/Exceptions/MelebihiSisaPaguException.php"
-          ]
-        },
-        {
-          "no": 3,
-          "nama": "3/7 SerapanCalculator lengkap, RealisasiService, DashboardQuery, PrototipeSeeder",
-          "mulai": "2026-09-15T10:33:05+08:00",
-          "selesai": "2026-09-15T10:35:11+08:00",
-          "detik": 126,
-          "tok_est": 5363,
-          "muat": [
-            "app/Services/SerapanCalculator.php",
-            "app/Services/RealisasiService.php",
-            "app/Queries/DashboardQuery.php",
-            "database/seeders/PrototipeSeeder.php"
-          ]
-        },
-        {
-          "no": 4,
-          "nama": "4/7 Endpoint realisasi keuangan/fisik/lampiran + dashboard",
-          "mulai": "2026-09-15T10:35:11+08:00",
-          "selesai": "2026-09-15T10:37:38+08:00",
-          "detik": 148,
-          "tok_est": 8677,
-          "muat": [
-            "app/Policies/RealisasiKeuanganPolicy.php",
-            "app/Policies/RealisasiFisikPolicy.php",
-            "app/Http/Requests/Realisasi/StoreRealisasiKeuanganRequest.php",
-            "app/Http/Requests/Realisasi/UpdateRealisasiKeuanganRequest.php",
-            "app/Http/Requests/Realisasi/UpdateRealisasiFisikRequest.php",
-            "app/Http/Controllers/Realisasi/RealisasiKeuanganController.php",
-            "app/Http/Controllers/Realisasi/RealisasiFisikController.php",
-            "app/Http/Controllers/Realisasi/LampiranController.php",
-            "app/Http/Controllers/DashboardController.php",
-            "routes/web.php",
-            "bootstrap/app.php",
-            "app/Http/Middleware/EnsureTahunTerbuka.php",
-            "app/View/Components/Layout/App.php"
-          ]
-        },
-        {
-          "no": 5,
-          "nama": "5/7 UI (Realisasi keuangan, fisik, dashboard nyata)",
-          "mulai": "2026-09-15T10:37:38+08:00",
-          "selesai": "2026-09-15T10:41:51+08:00",
-          "detik": 253,
-          "tok_est": 5148,
-          "muat": [
-            "resources/views/realisasi/_pilih.blade.php",
-            "resources/views/realisasi/keuangan/index.blade.php",
-            "resources/views/realisasi/fisik/index.blade.php",
-            "resources/views/realisasi/fisik/show.blade.php",
-            "resources/views/dashboard/index.blade.php"
-          ]
-        },
-        {
-          "no": 6,
-          "nama": "6/7 Tes",
-          "mulai": "2026-09-15T10:41:51+08:00",
-          "selesai": "2026-09-15T10:43:47+08:00",
-          "detik": 116,
-          "tok_est": 18147,
-          "muat": [
-            "tests/Feature/RealisasiKeuanganTest.php",
-            "tests/Feature/LampiranTest.php",
-            "tests/Feature/RealisasiFisikTest.php",
-            "tests/Feature/DashboardTest.php",
-            "tests/Feature/PrototipeSeederTest.php",
-            "tests/Unit/SerapanCalculatorTest.php",
-            "tests/Feature/AuthTest.php",
-            "app/Http/Middleware/EnsureRole.php",
-            "docs/23_ACCEPTANCE_CRITERIA.md",
-            "docs/03_ROADMAP.md",
-            "docs/26_UI_DESIGN.md",
-            "docs/12_PROJECT_STRUCTURE.md",
-            "docs/_MANIFEST.json"
-          ]
-        }
-      ],
-      "detik": 667,
-      "tok_est": 41733,
       "deviasi": [
         "Filter dashboard mendapat opsi tahun 'Semua' (seperti prototipe) agar angka verifikasi F07 lintas tahun (3,9 M/1,33 M/34%) terpenuhi; default tetap tahun aktif — 26 diperbarui",
         "EnsureRole + routes + AuthTest disentuh di luar rencana: user nonaktif bersesi bisa akses route auth (temuan tes F05) → 'role' tanpa argumen = wajib aktif pada grup auth",
@@ -912,13 +405,14 @@
       "ditunda": [
         "Laporan ×4 + ekspor → S4",
         "Trait Auditable otomatis, kunci/buka tahun, Audit Log, deploy.sh → S5"
-      ],
-      "selesai": "2026-09-15T10:43:47+08:00"
+      ]
     },
     {
       "fitur": "S4-laporan (F08-F11)",
-      "rute": "Fitur baru (vertical slice)",
-      "mulai": "2026-09-15T10:50:42+08:00",
+      "selesai": "2026-09-15T10:59:33+08:00",
+      "step": 5,
+      "detik": 533,
+      "tok_est": 152067,
       "rencana": [
         "composer.json",
         "composer.lock",
@@ -959,112 +453,6 @@
         "tests/Feature/LaporanTrenTest.php",
         "tests/Feature/LaporanExportTest.php"
       ],
-      "total_step": 0,
-      "step": [
-        {
-          "no": 1,
-          "nama": "1/7 Skema (dilewati: tanpa migrasi; paket Excel+DomPDF terpasang)",
-          "mulai": "2026-09-15T10:50:42+08:00",
-          "selesai": "2026-09-15T10:50:42+08:00",
-          "detik": 0,
-          "tok_est": 111979,
-          "muat": [
-            "composer.json",
-            "composer.lock",
-            "docs/23",
-            "docs/26",
-            "docs/08",
-            "docs/09",
-            "docs/13",
-            "docs/01"
-          ]
-        },
-        {
-          "no": 2,
-          "nama": "3/7 Query ×4 (satu sumber angka)",
-          "mulai": "2026-09-15T10:50:42+08:00",
-          "selesai": "2026-09-15T10:51:59+08:00",
-          "detik": 77,
-          "tok_est": 4422,
-          "muat": [
-            "app/Queries/LaporanFilter.php",
-            "app/Queries/MonevTriwulanQuery.php",
-            "app/Queries/RekapQuery.php",
-            "app/Queries/BukuRealisasiQuery.php",
-            "app/Queries/TrenSerapanQuery.php"
-          ]
-        },
-        {
-          "no": 3,
-          "nama": "4/7 Exports xlsx + controller + rute",
-          "mulai": "2026-09-15T10:51:59+08:00",
-          "selesai": "2026-09-15T10:53:02+08:00",
-          "detik": 63,
-          "tok_est": 7565,
-          "muat": [
-            "app/Exports/MonevTriwulanExport.php",
-            "app/Exports/RekapSumberDanaExport.php",
-            "app/Exports/RekapBidangExport.php",
-            "app/Exports/RekapExport.php",
-            "app/Exports/BukuRealisasiExport.php",
-            "app/Exports/TrenSerapanExport.php",
-            "app/Http/Requests/Laporan/FilterLaporanRequest.php",
-            "app/Http/Controllers/Laporan/LaporanController.php",
-            "app/Http/Controllers/Laporan/MonevTriwulanController.php",
-            "app/Http/Controllers/Laporan/RekapController.php",
-            "app/Http/Controllers/Laporan/BukuRealisasiController.php",
-            "app/Http/Controllers/Laporan/TrenSerapanController.php",
-            "routes/web.php",
-            "app/View/Components/Layout/App.php"
-          ]
-        },
-        {
-          "no": 4,
-          "nama": "5/7 UI laporan + PDF",
-          "mulai": "2026-09-15T10:53:02+08:00",
-          "selesai": "2026-09-15T10:56:26+08:00",
-          "detik": 205,
-          "tok_est": 11582,
-          "muat": [
-            "resources/css/print.css",
-            "resources/views/layouts/pdf.blade.php",
-            "app/View/Components/Layout/Pdf.php",
-            "resources/views/pdf/monev.blade.php",
-            "resources/views/pdf/rekap.blade.php",
-            "resources/views/pdf/buku.blade.php",
-            "resources/views/pdf/tren.blade.php",
-            "resources/views/laporan/_filter.blade.php",
-            "resources/views/laporan/monev/index.blade.php",
-            "resources/views/laporan/rekap/index.blade.php",
-            "resources/views/laporan/buku/index.blade.php",
-            "resources/views/laporan/tren/index.blade.php",
-            "resources/js/app.js"
-          ]
-        },
-        {
-          "no": 5,
-          "nama": "6/7 Tes laporan + ekspor",
-          "mulai": "2026-09-15T10:56:26+08:00",
-          "selesai": "2026-09-15T10:59:33+08:00",
-          "detik": 188,
-          "tok_est": 16519,
-          "muat": [
-            "tests/Feature/LaporanMonevTest.php",
-            "tests/Feature/LaporanRekapTest.php",
-            "tests/Feature/LaporanBukuRealisasiTest.php",
-            "tests/Feature/LaporanTrenTest.php",
-            "tests/Feature/LaporanExportTest.php",
-            "resources/views/laporan/rekap/index.blade.php",
-            "docs/23_ACCEPTANCE_CRITERIA.md",
-            "docs/03_ROADMAP.md",
-            "docs/12_PROJECT_STRUCTURE.md",
-            "docs/26_UI_DESIGN.md",
-            "docs/_MANIFEST.json"
-          ]
-        }
-      ],
-      "detik": 533,
-      "tok_est": 152067,
       "deviasi": [
         "app/View/Components/Layout/Pdf.php di luar rencana (jembatan <x-layout.pdf> → layouts/pdf.blade.php, pola sama dgn App/Auth) — 12 diperbarui",
         "RekapExport (satu xlsx dua sheet) ditambah di atas RekapSumberDana/RekapBidang yang disebut 12"
@@ -1097,13 +485,14 @@
       ],
       "ditunda": [
         "Audit Log layar + trait Auditable, kunci/buka tahun (modal sandi), deploy.sh, rilis → S5"
-      ],
-      "selesai": "2026-09-15T10:59:33+08:00"
+      ]
     },
     {
       "fitur": "S4b-keputusan-filter (TW+rentang tanggal Rekap/Buku)",
-      "rute": "Fitur baru (vertical slice)",
-      "mulai": "2026-09-15T11:26:57+08:00",
+      "selesai": "2026-09-15T11:28:11+08:00",
+      "step": 1,
+      "detik": 75,
+      "tok_est": 12533,
       "rencana": [
         "app/Queries/LaporanFilter.php",
         "app/Queries/RekapQuery.php",
@@ -1122,33 +511,6 @@
         "docs/_archive/23-F09.md",
         "docs/_archive/23-F10.md"
       ],
-      "total_step": 0,
-      "step": [
-        {
-          "no": 1,
-          "nama": "3/7 Query: rentang = preset TW, tanggal eksplisit menang",
-          "mulai": "2026-09-15T11:26:57+08:00",
-          "selesai": "2026-09-15T11:28:11+08:00",
-          "detik": 75,
-          "tok_est": 12533,
-          "muat": [
-            "app/Queries/LaporanFilter.php",
-            "app/Queries/RekapQuery.php",
-            "app/Http/Controllers/Laporan/RekapController.php",
-            "app/Http/Controllers/Laporan/BukuRealisasiController.php",
-            "resources/views/laporan/rekap/index.blade.php",
-            "resources/views/laporan/buku/index.blade.php",
-            "resources/views/laporan/_filter.blade.php",
-            "resources/views/pdf/rekap.blade.php",
-            "tests/Feature/LaporanRekapTest.php",
-            "tests/Feature/LaporanBukuRealisasiTest.php",
-            "tests/Feature/LaporanExportTest.php",
-            "docs/26_UI_DESIGN.md"
-          ]
-        }
-      ],
-      "detik": 75,
-      "tok_est": 12533,
       "deviasi": [
         "resources/views/laporan/_filter.blade.php disentuh di luar rencana (TW mengosongkan tanggal saat diganti)"
       ],
@@ -1159,13 +521,14 @@
       "dokumen_diperbarui": [
         "docs/26 (filter Rekap/Buku)",
         "docs/_archive/23-F09.md, 23-F10.md (catatan keputusan)"
-      ],
-      "selesai": "2026-09-15T11:28:11+08:00"
+      ]
     },
     {
       "fitur": "S5-audit-kunci-rilis (F12)",
-      "rute": "Fitur baru (vertical slice)",
-      "mulai": "2026-09-15T11:31:01+08:00",
+      "selesai": "2026-09-15T11:38:40+08:00",
+      "step": 4,
+      "detik": 460,
+      "tok_est": 32089,
       "rencana": [
         "app/Models/Concerns/Auditable.php",
         "app/Models/User.php",
@@ -1208,81 +571,6 @@
         "docs/23_ACCEPTANCE_CRITERIA.md",
         "docs/_MANIFEST.json"
       ],
-      "total_step": 0,
-      "step": [
-        {
-          "no": 1,
-          "nama": "2/7 Trait Auditable pada model ✎ + refactor service",
-          "mulai": "2026-09-15T11:31:02+08:00",
-          "selesai": "2026-09-15T11:32:27+08:00",
-          "detik": 86,
-          "tok_est": 9316,
-          "muat": [
-            "app/Models/Concerns/Auditable.php",
-            "app/Models/*.php",
-            "app/Services/PenggunaService.php",
-            "app/Services/AnggaranService.php",
-            "app/Services/TargetService.php",
-            "app/Services/RealisasiService.php",
-            "app/Services/TahunAnggaranService.php",
-            "tests/Feature/TargetTriwulanTest.php",
-            "tests/Feature/RealisasiFisikTest.php",
-            "docs/22_CHANGE_POLICY.md",
-            "docs/25_RELEASE_CHECKLIST.md",
-            "docs/15_OBSERVABILITY.md"
-          ]
-        },
-        {
-          "no": 2,
-          "nama": "4/7 Endpoint kunci/buka tahun, Audit Log, AssignRequestId",
-          "mulai": "2026-09-15T11:32:28+08:00",
-          "selesai": "2026-09-15T11:33:38+08:00",
-          "detik": 71,
-          "tok_est": 4472,
-          "muat": [
-            "app/Http/Middleware/AssignRequestId.php",
-            "app/Http/Controllers/AuditLogController.php",
-            "app/Http/Controllers/Master/TahunAnggaranController.php",
-            "routes/web.php",
-            "bootstrap/app.php",
-            "resources/views/errors/500.blade.php"
-          ]
-        },
-        {
-          "no": 3,
-          "nama": "5/7 UI kunci/buka + Audit Log + deploy.sh + CHANGELOG",
-          "mulai": "2026-09-15T11:33:38+08:00",
-          "selesai": "2026-09-15T11:35:25+08:00",
-          "detik": 107,
-          "tok_est": 4281,
-          "muat": [
-            "resources/views/master/tahun-anggaran/index.blade.php",
-            "resources/views/audit-log/index.blade.php",
-            "deploy.sh",
-            "CHANGELOG.md"
-          ]
-        },
-        {
-          "no": 4,
-          "nama": "6/7 Tes AuditLog + TahunAnggaranLock",
-          "mulai": "2026-09-15T11:35:25+08:00",
-          "selesai": "2026-09-15T11:38:40+08:00",
-          "detik": 196,
-          "tok_est": 14020,
-          "muat": [
-            "tests/Feature/AuditLogTest.php",
-            "tests/Feature/TahunAnggaranLockTest.php",
-            "config/app.php",
-            "docs/23_ACCEPTANCE_CRITERIA.md",
-            "docs/03_ROADMAP.md",
-            "docs/12_PROJECT_STRUCTURE.md",
-            "docs/26_UI_DESIGN.md",
-            "docs/_MANIFEST.json"
-          ]
-        }
-      ],
-      "detik": 460,
-      "tok_est": 32089,
       "deviasi": [
         "config/app.php: timezone => env('APP_TIMEZONE') — bawaan Laravel 12 mengunci UTC, bertentangan docs/10",
         "Audit target/fisik kini per baris (TargetTriwulan/RealisasiFisik ✎) menggantikan audit ringkasan di SubKegiatan (S2/S3) — tes disesuaikan",
@@ -1315,15 +603,155 @@
         "Rilis produksi v1.0.0 (docs/25 langkah 2–11) → menunggu keputusan pemilik",
         "Metrik/monitoring & audit aksesibilitas [TERBUKA] pasca-MVP",
         "F14–F16 pasca-MVP"
-      ],
-      "selesai": "2026-09-15T11:38:40+08:00"
+      ]
     }
   ],
-  "akumulasi": {
-    "detik": 4943,
-    "tok_est": 383882,
-    "tok_terukur": 0,
-    "step": 34,
-    "fitur": 7
-  }
+  "deviasi": [
+    "scripts/validate.sh & token_ledger.py tidak ada di paket VCBD terpasang — gerbang kesehatan blueprint dilewati, token hanya [ESTIMASI]",
+    "gerbang.sh gagal parse di bash 3.2 macOS (line 115: case dalam $( )) — S5/S7/S8 dijalankan manual dgn logika sama",
+    "app/View/Components/Layout/{App,Auth}.php di luar pohon docs/12 — jembatan agar <x-layout.app> (26) menunjuk views/layouts/app.blade.php (12)",
+    "helper rupiah_singkat() ditambah (bukan di 12 semula) agar stat-card identik fRs prototipe — 12 diperbarui",
+    "Laravel installer default menghasilkan v13 → dibuat ulang via composer create-project laravel/laravel:^12 sesuai 09",
+    "CSP docs/21 ditambah script-src 'self' 'unsafe-eval' — Alpine standar memerlukannya; 21 diperbarui (alternatif @alpinejs/csp ditolak)",
+    "app/Http/Controllers/Controller.php (scaffold) ditambah trait AuthorizesRequests",
+    "x-modal ditambah prop :terbuka agar modal ubah sandi terbuka kembali saat validasi server gagal",
+    "migrasi users bawaan Laravel diganti 8 migrasi per tabel (07); migrate:fresh dijalankan LOKAL (DB tanpa data nyata)",
+    "Tabel realisasi_keuangan + model/factory dibuat di S2 (bukan S3) agar kriteria F03 pagu<realisasi & hapus ber-realisasi bisa diuji; endpoint/UI realisasi tetap S3",
+    "Partial resources/views/target/_pilih.blade.php di luar daftar rencana (select sub kegiatan dipakai index & show)",
+    "ScopedByBidang = scope lokal forUser() bukan global scope (docs/05: semua peran melihat semua bidang)",
+    "Filter dashboard mendapat opsi tahun 'Semua' (seperti prototipe) agar angka verifikasi F07 lintas tahun (3,9 M/1,33 M/34%) terpenuhi; default tetap tahun aktif — 26 diperbarui",
+    "EnsureRole + routes + AuthTest disentuh di luar rencana: user nonaktif bersesi bisa akses route auth (temuan tes F05) → 'role' tanpa argumen = wajib aktif pada grup auth",
+    "Layar Realisasi dibaca semua peran (docs/05) meski 26 menulis 'admin, operator' — 26 diperbarui",
+    "app/View/Components/Layout/Pdf.php di luar rencana (jembatan <x-layout.pdf> → layouts/pdf.blade.php, pola sama dgn App/Auth) — 12 diperbarui",
+    "RekapExport (satu xlsx dua sheet) ditambah di atas RekapSumberDana/RekapBidang yang disebut 12",
+    "resources/views/laporan/_filter.blade.php disentuh di luar rencana (TW mengosongkan tanggal saat diganti)",
+    "config/app.php: timezone => env('APP_TIMEZONE') — bawaan Laravel 12 mengunci UTC, bertentangan docs/10",
+    "Audit target/fisik kini per baris (TargetTriwulan/RealisasiFisik ✎) menggantikan audit ringkasan di SubKegiatan (S2/S3) — tes disesuaikan",
+    "AssignRequestId & SecurityHeaders tidak ada di pohon 12 tetapi diwajibkan 15/21 — 12 diperbarui"
+  ],
+  "warn_dilewati": [
+    "S1: 23 tidak punya blok S0 (skeleton tanpa fitur F) — kriteria diambil dari baris S0 docs/03 + §Kriteria UI umum 23",
+    "S7: 94 berkas tersentuh = scaffold laravel new; berkas rencana 43 semuanya ada",
+    "S8: gerbang cek per-berkas 3/4; state tersebar di komponen (empty-state, form-input error, toast di layout, tombol Memproses...)",
+    "gerbang.sh tetap tidak bisa dijalankan (bash 3.2) — S3–S8 diverifikasi manual dengan logika sama",
+    "S8: Pengaturan & Login tanpa state kosong (layar form, bukan daftar)",
+    "gerbang.sh tak bisa dijalankan (bash 3.2) — S3–S8 manual",
+    "S8: target/show & target/index tanpa state kosong pada berkas yang sama (kosong ada di index, form di show)",
+    "gerbang.sh tak bisa dijalankan (bash 3.2) — S3–S8 manual",
+    "S8 dashboard 2/4: layar baca-saja (tanpa form)",
+    "gerbang.sh tak bisa dijalankan (bash 3.2) — S3–S8 manual",
+    "S8 laporan: layar baca-saja (kosong/filter/layout), tanpa form tulis",
+    "gerbang.sh tak bisa dijalankan (bash 3.2) — manual",
+    "docs/25 langkah 2–11 (merge/tag/backup/deploy/smoke produksi) TIDAK dijalankan — gerbang manusia; deploy.sh disiapkan, belum pernah dieksekusi di server"
+  ],
+  "asumsi": [
+    "Migrasi users bawaan Laravel dibiarkan; penyesuaian ke skema 07 (username, role, bidang_id, is_active) milik S1/F01",
+    "Node 22 & MySQL server 8.4 lokal (dok: 20 / 8.0) — tidak mengubah 09",
+    "Kunci flash toast: sukses",
+    "gagal",
+    "info (dicatat di 26)",
+    "Persen serapan di stat-card dibulatkan (76%) mengikuti prototipe; 2 desimal di tabel — rumus final milik SerapanCalculator S3",
+    "Footer prototipe dipertahankan tanpa nama pembuat (Copyright by Ihwan Apriadi dihilangkan) — konfirmasi bila ingin dikembalikan",
+    "Audit F01 hanya login/logout/created/updated/reset_password via AuditService::catat(); trait Auditable otomatis (F12) → S5",
+    "Kunci/buka tahun (modal sandi) → S5; S1 hanya draft→aktif dengan aturan satu tahun aktif",
+    "Konfirmasi sandi dipakai pada reset sandi pengguna; sesi konfirmasi 5 menit (config sipagar.konfirmasi_sandi_menit)",
+    "Nonaktif = hapus baris sessions user (SESSION_DRIVER=database) + EnsureRole abort 403",
+    "Seeder AdminLokalSeeder (admin/Admin12345) hanya env local/testing; produksi memakai sipagar:buat-admin",
+    "Hapus Program/Kegiatan yang masih punya anak → 422 (06 tidak menyebut; cascade dianggap berbahaya)",
+    "423 dirender halaman errors/423 bertema + pesan 'Tahun anggaran N telah dikunci' (form biasa) / JSON (fetch); tombol tulis sudah disembunyikan saat terkunci",
+    "Ubah/hapus Program & Kegiatan ikut konfirmasi-sandi (21 menyebut 'anggaran' secara umum)",
+    "Program/Kegiatan memakai SubKegiatanPolicy (admin-only) — tidak ada Policy terpisah di 12",
+    "SerapanCalculator baru memuat realisasi/sisa/serapan/targetPersen; deviasi/fisik/status/agregat di S3",
+    "Kode rekening divalidasi regex angka+titik saja (format Kepmendagri penuh tidak dipaksa; 02: sistem hanya validasi format & keunikan)",
+    "PrototipeSeeder: 2024 terkunci / 2025 aktif / 2026 draft; program 5.03.01 + kegiatan 5.03.01.2.01 'Migrasi Prototipe' per tahun; bidang dipetakan dari nama (PK/PPIK/MP/SEK); target triwulan & fisik tidak diisi",
+    "Realisasi fisik: bulan kosong pada payload = baris bulan dihapus",
+    "Sisa pagu dicek di FormRequest withValidator (pesan 422 per-field) DAN di RealisasiService dalam transaksi lockForUpdate (MelebihiSisaPaguException → 422)",
+    "Lampiran lama tidak dihapus saat soft delete transaksi (dipulihkan bila restore)",
+    "Grafik bar = top-10 pagu; doughnut = Σ pagu per sumber dana",
+    "Default filter: tahun aktif, TW berjalan (TW4 bila tahun ≠ tahun ini); tanpa tahun anggaran → empty-state",
+    "Rekap memakai filter s.d. TW (realisasi ≤ akhir TW); Buku memakai rentang tanggal (default 1 Jan–31 Des)",
+    "Tren: target kumulatif diinterpolasi linear antar titik TW (bulan 0=0, 3n=target TWn); tahun lalu = data tahun N−1 bila ada",
+    "Deviasi keu di Monev ditampilkan dalam poin % (23 menyebut 'Deviasi Keu (%)'); Rp tersedia di SerapanCalculator",
+    "Nama berkas: sipagar_monev_<th>_TWn, sipagar_rekap_<th>_TWn, sipagar_buku-realisasi_<th>_<dari>_<sampai>, sipagar_tren_<th>_bulanan",
+    "PDF: print.css disisipkan inline (DomPDF tanpa Vite); logo kop dari settings.kop_logo_path pada disk private bila ada",
+    "Lampiran di Buku Realisasi web = ikon tautan; di xlsx/pdf = 'Ada'/'-'",
+    "Tanggal dianggap eksplisit hanya bila berbeda dari preset TW (form mengirim ulang nilai preset)",
+    "Monev tetap per-TW (target per TW), Tren per-tahun — tidak diberi rentang tanggal",
+    "Buka kunci tahun → status draft (P5 tidak menyebut); aktifkan ulang tunduk aturan satu tahun aktif",
+    "Seeder menghasilkan audit dengan user_id null (docs/07 'aksi sistem/seeder')",
+    "Reset sandi: perubahan password tidak diaudit sebagai updated (tanpaAudit), hanya reset_password",
+    "Audit Log menampilkan perubahan sebagai daftar kunci lama → baru; model difilter lewat class_basename",
+    "deploy.sh mengikuti pola SIMURU + docs/25: maintenance, backup wajib 'Dump completed', gagal migrasi → petunjuk §R, smoke /login 200 & ERROR log tidak bertambah"
+  ],
+  "dokumen_diperbarui": [
+    "docs/03_ROADMAP.md (kolom Status)",
+    "docs/12_PROJECT_STRUCTURE.md (Support/helpers, View/Components/Layout, RupiahHelperTest)",
+    "docs/26_UI_DESIGN.md (mekanisme modal/toast/konfirmasi, footer, rupiah_singkat)",
+    "docs/_MANIFEST.json (build.roadmap_status, installed, env_dev_actual)",
+    "docs/21_SECURITY_RULES.md (CSP unsafe-eval)",
+    "docs/23 (F01,F02 diarsipkan ke docs/_archive)",
+    "docs/03_ROADMAP.md (S1 selesai)",
+    "docs/12_PROJECT_STRUCTURE.md (KonfirmasiSandiController, config/sipagar.php)",
+    "docs/_MANIFEST.json (build.roadmap_status.S1)",
+    "docs/23 (F03,F04 diarsipkan)",
+    "docs/03_ROADMAP.md (S2 selesai)",
+    "docs/12_PROJECT_STRUCTURE.md (Exceptions, target views, parseRupiah)",
+    "docs/_MANIFEST.json",
+    "docs/23 (F05,F06,F07,F13 diarsipkan)",
+    "docs/03_ROADMAP.md (S3 selesai)",
+    "docs/26_UI_DESIGN.md (dashboard Semua, realisasi baca semua peran, fisik stat TW)",
+    "docs/12_PROJECT_STRUCTURE.md (views realisasi, catatan role)",
+    "docs/_MANIFEST.json",
+    "docs/23 (F08–F11 diarsipkan)",
+    "docs/03_ROADMAP.md (S4 selesai)",
+    "docs/12_PROJECT_STRUCTURE.md (LaporanFilter, LaporanController, RekapExport, Layout/Pdf, laporan/_filter)",
+    "docs/26_UI_DESIGN.md (detail layar laporan)",
+    "docs/_MANIFEST.json (S4, paket Excel/DomPDF)",
+    "docs/26 (filter Rekap/Buku)",
+    "docs/_archive/23-F09.md, 23-F10.md (catatan keputusan)",
+    "docs/23 (F12 diarsipkan — seluruh MVP terarsip)",
+    "docs/03_ROADMAP.md (S5 kode selesai, rilis menunggu)",
+    "docs/12 (Auditable, AssignRequestId/SecurityHeaders, deploy.sh, CHANGELOG)",
+    "docs/26 (Tahun kunci/buka, Audit Log)",
+    "docs/_MANIFEST.json"
+  ],
+  "landmine_tersentuh": [
+    "Metode public pada komponen kelas Blade ikut diekspos ke view dan menimpa data view bernama sama (menu()) — pakai protected",
+    "Kelas Tailwind di Blade harus literal statis, bukan hasil interpolasi PHP (JIT tidak melihatnya)",
+    "Google Fonts via @import butuh internet klien (09 [ASUMSI])",
+    "CSP default-src 'self' mematikan Alpine tanpa pesan di UI — hanya terlihat di console",
+    "Metode public pada komponen kelas Blade menimpa data view (menu()) — pakai protected",
+    "Rule::requiredIf + pesan bidang_id.required dipakai agar pesan 422 persis 'Bidang wajib untuk Operator'",
+    "can('update', [TargetTriwulan::class, $sk]) — Policy diresolusi dari nama kelas elemen pertama; jangan pakai nama kelas Policy",
+    "Alpine anggaranForm: modal edit dibuka setelah konfirmasi sandi lewat aksi closure; x-modal harus punya x-data modal() sendiri agar buka-modal by id bekerja",
+    "Pagu input teks diparse parseRupiah di prepareForValidation — jangan pakai type=number (titik ribuan ditolak browser)",
+    "agent-browser fill tidak mengisi input type=date — isi via JS",
+    "eval berulang dengan 'const' nama sama di halaman yang sama gagal diam-diam (SyntaxError) — pakai IIFE",
+    "Storage::fake('private') wajib di tes lampiran agar storage lokal tidak terisi",
+    "Prototipe .chart-grid{1fr !important} di ≤768px membuat grid item min-width:auto → kartu berisi tabel melebar; beri min-w-0 pada kartu",
+    "end($e->array()) → 'Only variables should be passed by reference'",
+    "Excel::fake() menerima closure bertipe kelas export; RekapExport (WithMultipleSheets) diuji lewat ->sheets()",
+    "sips -s format png file.pdf cukup untuk pratinjau PDF di macOS",
+    "Tombol @click di luar cakupan x-data tidak diproses Alpine — beri x-data pada tombol/pembungkus",
+    "created_at tidak fillable di AuditLog (benar); tes yang butuh waktu buatan pakai forceCreate",
+    "Laravel 12 config/app.php timezone tidak membaca env — periksa saat upgrade"
+  ],
+  "ditunda": [
+    "POST /login, logout, auth middleware, modal ubah sandi aktif → S1",
+    "DashboardController data dummy → S3 DashboardQuery",
+    "Endpoint /konfirmasi-sandi → S5 (komponen JS sudah siap)",
+    "Repo belum punya branch main — pemilik membuat main dari commit 374f624 saat merge PR",
+    "Kunci/buka tahun + modal sandi → S5 (TahunAnggaranService siap diperluas)",
+    "Layar Audit Log → S5",
+    "Trait Auditable & ScopedByBidang → S3/S5",
+    "Branch main belum ada — pemilik membuat saat merge PR",
+    "Realisasi keuangan/fisik endpoint+UI, SerapanCalculator lengkap, dashboard nyata → S3",
+    "Kunci/buka tahun UI → S5",
+    "Laporan ×4 + ekspor → S4",
+    "Trait Auditable otomatis, kunci/buka tahun, Audit Log, deploy.sh → S5",
+    "Audit Log layar + trait Auditable, kunci/buka tahun (modal sandi), deploy.sh, rilis → S5",
+    "Rilis produksi v1.0.0 (docs/25 langkah 2–11) → menunggu keputusan pemilik",
+    "Metrik/monitoring & audit aksesibilitas [TERBUKA] pasca-MVP",
+    "F14–F16 pasca-MVP"
+  ]
 }

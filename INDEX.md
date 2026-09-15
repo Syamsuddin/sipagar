@@ -54,6 +54,7 @@ Esensi 17_AGENT_WORKFLOW & 19_TASK_TEMPLATE sudah diringkas di CLAUDE.md — ked
 | 25_RELEASE_CHECKLIST | rilis berurutan + rollback |
 | 26_UI_DESIGN | **token, komponen, layar, states** — tampilan wajib identik prototipe |
 | _MANIFEST.json | state kebutuhan terkonfirmasi, landmines, asumsi (bukan dokumen agen) |
+| _SERAH_TERIMA.md / _SERAH_BUILD.json | dosir serah-terima build MVP (status, deviasi, asumsi, langkah rilis) — baca sebelum audit `review-vcbd` atau rilis |
 
 ## Aturan emas
 1. Ragu? Muat paling sedikit dulu, eskalasi bila kurang.
