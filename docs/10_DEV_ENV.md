@@ -11,7 +11,7 @@ PHP 8.4 + ekstensi (docs/09), Composer 2, Node 20, MySQL 8 lokal (atau Docker `m
 3. `cp .env.example .env` → isi variabel di bawah → `php artisan key:generate`
 4. Buat database `sipagar` (utf8mb4) → `php artisan migrate --seed`
 5. `php artisan storage:link` (hanya utk logo kop; lampiran memakai disk private, tidak di-link)
-6. Terminal A `php artisan serve` · Terminal B `npm run dev` → buka `http://localhost:8000`, login `admin` / `admin123` (seeder lokal saja).
+6. Terminal A `php artisan serve` · Terminal B `npm run dev` → buka `http://localhost:8000`, login `admin` / `Admin12345` (`AdminLokalSeeder`, hanya env `local|testing`).
 
 ## Variabel `.env` (nama saja)
 | Variabel | Catatan |

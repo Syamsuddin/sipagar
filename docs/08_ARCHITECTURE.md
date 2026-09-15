@@ -32,7 +32,7 @@ Eloquent Model (+ Policy, Scope, trait Auditable) ─► MySQL
 | Server-rendered Blade, bukan SPA | tampilan prototipe statis-sederhana; Alpine cukup untuk tab/modal/toast |
 | Nilai turunan tidak disimpan | satu rumus di `SerapanCalculator`, tak ada drift antara tabel & laporan |
 | Target/realisasi kumulatif | selaras format monev Permendagri; deviasi = pengurangan langsung |
-| Scope bidang lewat Policy + global scope `forUser()` di model SubKegiatan | tidak bisa terlewat di controller mana pun |
+| Scope bidang lewat Policy `milikBidangUser()` + scope lokal `forUser()` (trait `ScopedByBidang`) pada select tulis — bukan global scope, karena semua peran boleh MELIHAT semua bidang (docs/05) | penegakan tulis ada di Policy, tak bisa terlewat di controller mana pun |
 | Ekspor dari Query yang sama dengan tampilan web | angka web = angka Excel = angka PDF |
 | Modal konfirmasi sandi untuk edit/hapus/kunci | mempertahankan kebiasaan prototipe; friksi sebanding irreversibilitas (docs/22) |
 | Tanpa queue di MVP | ekspor ≤ 10 detik sinkron; queue `database` disiapkan tapi tidak wajib |

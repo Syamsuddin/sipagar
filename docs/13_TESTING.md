@@ -19,7 +19,7 @@ Coverage target 70 % (`--min=70`) pada `app/Services`, `app/Queries`, `app/Polic
 3. Realisasi jumlah > sisa → 422 dengan pesan sisa; tepat = sisa → 201.
 4. Target tidak monoton / TW4 ≠ pagu → 422.
 5. Tahun terkunci: semua endpoint tulis → 423; laporan tetap 200.
-6. Kunci tahun tanpa sandi benar → 403; 3× salah → modal ditutup (state Alpine, tes JS tidak wajib — cukup endpoint `konfirmasi-sandi` mengembalikan 403 & counter di sesi).
+6. Kunci tahun tanpa sandi benar → 403; 3× salah → modal ditutup (state Alpine, tes JS tidak wajib — cukup endpoint `konfirmasi-sandi` mengembalikan 403 dengan nomor percobaan; counter = `RateLimiter` per user, percobaan ke-4 → 429).
 7. Audit log tercatat pada create/update/delete/lock dengan `old_values`/`new_values` benar & tanpa `password`.
 8. Soft delete: data terhapus tidak masuk hitungan serapan.
 9. Agregat laporan: Σ per bidang = Σ total; angka web = angka Export (bandingkan array dari Query yang sama).

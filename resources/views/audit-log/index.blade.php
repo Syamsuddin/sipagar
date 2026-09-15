@@ -2,18 +2,18 @@
     <x-card class="mb-5">
         <div class="flex items-center justify-between flex-wrap gap-3">
             <div class="font-bold text-[0.95rem] flex items-center gap-2"><i class="fa-solid fa-filter text-[var(--accent)] text-[0.85rem]"></i>Filter Audit</div>
-            <form method="GET" action="{{ route('audit-log.index') }}" class="flex items-center gap-3 flex-wrap">
+            <form x-data method="GET" action="{{ route('audit-log.index') }}" class="flex items-center gap-3 flex-wrap">
                 <div class="flex items-center gap-2"><label class="form-label !mb-0" for="user">Pengguna:</label>
-                    <select class="form-input !w-[170px] !py-2 !px-3" id="user" name="user" onchange="this.form.submit()"><option value="">Semua</option>
+                    <select class="form-input !w-[170px] !py-2 !px-3" id="user" name="user" @change="$el.form.submit()"><option value="">Semua</option>
                         @foreach ($daftarUser as $u)<option value="{{ $u->id }}" @selected(($filter['user'] ?? null) == $u->id)>{{ $u->name }}</option>@endforeach</select></div>
                 <div class="flex items-center gap-2"><label class="form-label !mb-0" for="aksi">Aksi:</label>
-                    <select class="form-input !w-[150px] !py-2 !px-3" id="aksi" name="aksi" onchange="this.form.submit()"><option value="">Semua</option>
+                    <select class="form-input !w-[150px] !py-2 !px-3" id="aksi" name="aksi" @change="$el.form.submit()"><option value="">Semua</option>
                         @foreach ($daftarAksi as $a)<option value="{{ $a }}" @selected(($filter['aksi'] ?? null) === $a)>{{ $a }}</option>@endforeach</select></div>
                 <div class="flex items-center gap-2"><label class="form-label !mb-0" for="model">Model:</label>
-                    <select class="form-input !w-[170px] !py-2 !px-3" id="model" name="model" onchange="this.form.submit()"><option value="">Semua</option>
+                    <select class="form-input !w-[170px] !py-2 !px-3" id="model" name="model" @change="$el.form.submit()"><option value="">Semua</option>
                         @foreach ($daftarModel as $m)<option value="{{ $m }}" @selected(($filter['model'] ?? null) === $m)>{{ $m }}</option>@endforeach</select></div>
-                <div class="flex items-center gap-2"><label class="form-label !mb-0" for="dari">Dari:</label><input class="form-input !w-[150px] !py-2 !px-3" type="date" id="dari" name="dari" value="{{ $filter['dari'] ?? '' }}" onchange="this.form.submit()"></div>
-                <div class="flex items-center gap-2"><label class="form-label !mb-0" for="sampai">Sampai:</label><input class="form-input !w-[150px] !py-2 !px-3" type="date" id="sampai" name="sampai" value="{{ $filter['sampai'] ?? '' }}" onchange="this.form.submit()"></div>
+                <div class="flex items-center gap-2"><label class="form-label !mb-0" for="dari">Dari:</label><input class="form-input !w-[150px] !py-2 !px-3" type="date" id="dari" name="dari" value="{{ $filter['dari'] ?? '' }}" @change="$el.form.submit()"></div>
+                <div class="flex items-center gap-2"><label class="form-label !mb-0" for="sampai">Sampai:</label><input class="form-input !w-[150px] !py-2 !px-3" type="date" id="sampai" name="sampai" value="{{ $filter['sampai'] ?? '' }}" @change="$el.form.submit()"></div>
             </form>
         </div>
         @if ($errors->any())<div class="pw-error show mt-3"><i class="fa-solid fa-circle-xmark"></i> <span>{{ $errors->first() }}</span></div>@endif

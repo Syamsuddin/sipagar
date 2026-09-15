@@ -5,7 +5,7 @@ Pemilik istilah domain, entitas konseptual, dan **rumus perhitungan**. Skema fis
 ## Glosarium
 | Istilah | Makna |
 |---|---|
-| Tahun Anggaran | Periode 1 Jan–31 Des; status `draft` (disusun), `aktif` (boleh dicatat), `terkunci` (baca saja) |
+| Tahun Anggaran | Periode 1 Jan–31 Des; status `draft` (disusun/dikoreksi — struktur, target & realisasi **dapat ditulis**; bukan default filter), `aktif` (tahun berjalan — dapat ditulis, default semua filter, maks satu), `terkunci` (baca saja, 423). Server hanya memblokir `terkunci`; UI menawarkan sub kegiatan tahun aktif saja |
 | Program / Kegiatan / Sub Kegiatan | Hierarki nomenklatur Kepmendagri; **pagu, target, realisasi hanya di Sub Kegiatan** |
 | Kode rekening | Kode nomenklatur (`X.XX.XX` / `X.XX.XX.X.XX` / `X.XX.XX.X.XX.XXXX`), unik per tahun pada tingkatnya |
 | Pagu | Alokasi anggaran Sub Kegiatan (rupiah bulat) |

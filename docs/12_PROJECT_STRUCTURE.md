@@ -22,7 +22,7 @@ app/
     Requests/<Modul>/{Store,Update}<Model>Request.php
   Models/{User,Bidang,SumberDana,TahunAnggaran,Program,Kegiatan,SubKegiatan,TargetTriwulan,RealisasiKeuangan,RealisasiFisik,AuditLog,Setting}.php
   Models/Concerns/{Auditable,ScopedByBidang}.php   # Auditable: created/updated/deleted/restored → audit_logs; tanpaAudit() utk aksi khusus Service
-  Policies/{SubKegiatan,TargetTriwulan,RealisasiKeuangan,RealisasiFisik,User,TahunAnggaran}Policy.php
+  Policies/{SubKegiatan,TargetTriwulan,RealisasiKeuangan,RealisasiFisik,User,TahunAnggaran}Policy.php   # Program & Kegiatan memakai SubKegiatanPolicy (admin-only), tanpa Policy terpisah
   Queries/{LaporanFilter,DashboardQuery,MonevTriwulanQuery,RekapQuery,BukuRealisasiQuery,TrenSerapanQuery}.php   # LaporanFilter = filter bersama (default tahun aktif, TW berjalan)
   Services/{SerapanCalculator,AnggaranService,TargetService,RealisasiService,TahunAnggaranService,PenggunaService,AuditService}.php
   Support/helpers.php                           # rupiah(), rupiah_singkat() — autoload `files` composer.json

@@ -11,4 +11,4 @@ Fase = **vertical slice** yang bisa didemokan (migrasi → model → service →
 | S4 | Empat laporan tampil web + unduh xlsx & pdf berkop | F08–F11 | Laporan ×4 | ✅ selesai 2026-09-15 (branch `feat/S4-laporan`) |
 | S5 | Audit log lengkap, kunci/buka tahun dengan konfirmasi password, `deploy.sh`, rilis produksi pertama | F12 | Audit Log | ✅ kode selesai 2026-09-15 (branch `feat/S5-audit-rilis`); **rilis produksi menunggu gerbang manusia docs/25** |
 
-Pasca-MVP (tidak dijadwalkan): F14 Verifikator → F15 notifikasi & impor DPA → F16 multi-OPD/API.
+Pasca-MVP (tidak dijadwalkan): F14 Verifikator → F15 notifikasi & impor DPA → F16 multi-OPD/API. Utang non-fitur `[TERBUKA]`: metrik/monitoring (docs/15), audit aksesibilitas kontras/keyboard (docs/26), perbaikan `coding-vcbd/scripts/gerbang.sh` untuk bash 3.2.

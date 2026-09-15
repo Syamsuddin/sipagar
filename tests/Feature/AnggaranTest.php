@@ -1,5 +1,6 @@
 <?php
 
+use App\Enums\StatusTahun;
 use App\Http\Middleware\KonfirmasiSandi;
 use App\Models\AuditLog;
 use App\Models\Bidang;
@@ -144,4 +145,40 @@ test('tahun terkunci: semua tulis → 423, baca tetap 200', function () {
 
 test('layar Anggaran default ke tahun aktif dan menampilkan empty-state tanpa program', function () {
     $this->actingAs($this->admin)->get(route('anggaran.index'))->assertOk()->assertSee('Struktur Anggaran 2025')->assertSee('empty-state', false);
+});
+
+// TEM-013 (review-vcbd): jalur ubah Program & Kegiatan (docs/05 CRUD, docs/21 konfirmasi sandi, docs/07 ✎)
+test('ubah Program & Kegiatan: butuh konfirmasi sandi, tersimpan + audit updated, tahun terkunci → 423', function () {
+    $sk = subKegiatanDasar($this->tahun, $this->bidang, $this->sumber);
+    $program = $sk->kegiatan->program;
+    $kegiatan = $sk->kegiatan;
+
+    $this->actingAs($this->admin)->put(route('anggaran.program.update', $program), ['kode' => $program->kode, 'nama' => 'Program Baru'])->assertForbidden();
+    $this->actingAs($this->admin)->put(route('anggaran.kegiatan.update', $kegiatan), ['kode' => $kegiatan->kode, 'nama' => 'Kegiatan Baru'])->assertForbidden();
+    expect($program->fresh()->nama)->not->toBe('Program Baru');
+
+    $this->actingAs($this->admin)->withSession($this->konfirmasi)
+        ->put(route('anggaran.program.update', $program), ['kode' => $program->kode, 'nama' => 'Program Baru', 'urutan' => 7])
+        ->assertRedirect(route('anggaran.index', ['tahun' => 2025]))->assertSessionHas('sukses', 'Program berhasil diperbarui');
+    $this->actingAs($this->admin)->withSession($this->konfirmasi)
+        ->put(route('anggaran.kegiatan.update', $kegiatan), ['kode' => $kegiatan->kode, 'nama' => 'Kegiatan Baru'])
+        ->assertRedirect()->assertSessionHas('sukses');
+    expect($program->fresh())->nama->toBe('Program Baru')->urutan->toBe(7)
+        ->and($kegiatan->fresh()->nama)->toBe('Kegiatan Baru');
+
+    $logP = AuditLog::where('auditable_type', Program::class)->where('auditable_id', $program->id)->where('action', 'updated')->firstOrFail();
+    expect($logP->new_values['nama'])->toBe('Program Baru')->and($logP->old_values)->toHaveKey('nama');
+    expect(AuditLog::where('auditable_type', Kegiatan::class)->where('auditable_id', $kegiatan->id)->where('action', 'updated')->count())->toBe(1);
+
+    // Operator tidak boleh, walau punya konfirmasi sandi
+    $this->actingAs(User::factory()->operator()->create())->withSession($this->konfirmasi)
+        ->put(route('anggaran.program.update', $program), ['kode' => $program->kode, 'nama' => 'X'])->assertForbidden();
+
+    // tahun terkunci → 423
+    $this->tahun->update(['status' => StatusTahun::Terkunci]);
+    $this->actingAs($this->admin)->withSession($this->konfirmasi)
+        ->put(route('anggaran.program.update', $program), ['kode' => $program->kode, 'nama' => 'Y'])->assertStatus(423);
+    $this->actingAs($this->admin)->withSession($this->konfirmasi)
+        ->put(route('anggaran.kegiatan.update', $kegiatan), ['kode' => $kegiatan->kode, 'nama' => 'Y'])->assertStatus(423);
+    expect($program->fresh()->nama)->toBe('Program Baru');
 });

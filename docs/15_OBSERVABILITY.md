@@ -11,7 +11,7 @@
 Apa yang dilog: 403/423/429 (`warning`/`info`), 500 (`error` + trace), ekspor gagal, kunci/buka tahun, login gagal, reset sandi. **Jangan** log sandi, isi lampiran, atau token.
 
 ## Audit bisnis
-Terpisah dari log teknis: tabel `audit_logs` (docs/07) — siapa/kapan/apa untuk semua model ✎. Dilihat Admin di layar Audit Log (docs/26).
+Terpisah dari log teknis: tabel `audit_logs` (docs/07) — siapa/kapan/apa untuk semua model ✎ (trait `Auditable`: created/updated/deleted/restored). Aksi khusus dicatat eksplisit oleh Service: `login`, `logout`, `lock_tahun`, `unlock_tahun`, `reset_password` (perubahan sandi TIDAK dicatat sebagai `updated`); seeder mencatat dengan `user_id` null. Dilihat Admin di layar Audit Log (docs/26).
 
 ## Metrik & monitoring
 `[TERBUKA]` pasca-MVP. MVP cukup: `php artisan about` + smoke test docs/25 + uptime ping eksternal (opsional) ke `/login`.

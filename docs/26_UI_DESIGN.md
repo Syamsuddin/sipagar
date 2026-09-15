@@ -12,6 +12,8 @@
 | `--danger` / `--danger-dim` | `#ff5c5c` / `rgba(255,92,92,.12)` | realisasi, hapus, error, badge merah |
 | `--warning` / `--warning-dim` | `#ffb347` / `rgba(255,179,71,.12)` | sisa, edit, badge kuning |
 | teal | `#00b4d8` / `rgba(0,180,216,.12)` | serapan, toast-info |
+| Toast latar | `.toast-success #0d2a1a` · `.toast-error #2a0d0d` · `.toast-info #0d1a2a` (persis prototipe) | latar toast |
+| Palet PDF (`print.css`, pengecualian tema) | teks `#111`, garis `#444`/`#e4e4e4`, latar th `#eee`, subtotal `#f5f5f5`, total `#f0f0f0`, muted `#555` | hanya `layouts/pdf` |
 | `--border` / `--border-light` | `#1e3029` / `#2a4038` | garis, grid latar, scrollbar |
 | Font body | `'Plus Jakarta Sans', sans-serif` (300–900) | semua teks |
 | Font display | `'Space Grotesk', monospace` (400–700) | brand, `.big-number` (angka rupiah/%) |
@@ -20,7 +22,7 @@
 | Latar | `.bg-mesh` (3 radial-gradient hijau) + `.bg-grid` (60 px, opacity .15, mask radial) fixed di belakang `.content-wrap` | setiap halaman |
 | Animasi | `authPop`, `modalPop`, `fadeIn`, `toastIn/Out`, `panelIn`, `pulseRing`, `lockShake`, `particleFloat`; semua dimatikan pada `prefers-reduced-motion` | |
 | Palet grafik (urut) | `#00e68a #00b4d8 #ffb347 #ff5c5c #a78bfa #f472b6 #34d399 #fbbf24 #60a5fa #fb923c #f87171 #4ade80 #38bdf8 #c084fc #facc15`; bar realisasi `rgba(255,92,92,.x)` border `#ff5c5c`, bar pagu `rgba(0,230,138,.x)` border `#00e68a`; teks/grid `--fg-muted`/`--border` | Chart.js |
-| Badge sumber dana | `.sd-apbd .sd-apbn .sd-dt .sd-ban .sd-blud .sd-tpp .sd-dau .sd-dak .sd-dbhp .sd-lainnya` (warna sesuai prototipe; disimpan di `sumber_dana.css_class`) | |
+| Badge sumber dana | `.sd-apbd .sd-apbn .sd-dt .sd-ban .sd-blud .sd-tpp .sd-dau .sd-dak .sd-dbhp .sd-lainnya` (warna sesuai prototipe, mis. `.sd-dak #60a5fa`, `.sd-dbhp #f87171`, `.sd-lainnya #94a3b8`; disimpan di `sumber_dana.css_class`) | |
 
 ## Komponen kanonik (kelas prototipe → komponen Blade di `resources/views/components/`)
 | Komponen | Kelas prototipe | Catatan |

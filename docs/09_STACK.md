@@ -10,7 +10,7 @@
 | JS | Alpine.js | ^3.14 | tab, modal, toast, dropdown |
 | Grafik | Chart.js | ^4.4 | |
 | Ikon | Font Awesome Free | 6.5 (`@fortawesome/fontawesome-free`) | via Vite, bukan CDN |
-| Font | Plus Jakarta Sans, Space Grotesk | Google Fonts `@import` di `app.css` | `[ASUMSI]` server punya akses internet klien; fallback `sans-serif`/`monospace` |
+| Font | Plus Jakarta Sans, Space Grotesk | Google Fonts `@import` di `app.css` | **Keputusan 2026-09-15:** klien dianggap selalu online — satu-satunya pengecualian docs/20 #6 (CSP docs/21 mengizinkan `fonts.googleapis.com`/`fonts.gstatic.com`); fallback `sans-serif`/`monospace` bila offline. Self-host woff2 via Vite = opsi bila intranet tertutup |
 | Bundler | Vite | bawaan Laravel 12 | |
 | Excel | maatwebsite/excel | ^3.1 | |
 | PDF | barryvdh/laravel-dompdf | ^3.0 | layout cetak terang |

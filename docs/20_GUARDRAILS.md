@@ -7,7 +7,7 @@ Daftar **JANGAN** keras. Keamanan detail → docs/21; kebijakan perubahan → do
 3. JANGAN menulis rumus serapan/deviasi/status di luar `SerapanCalculator`.
 4. JANGAN menyimpan nilai turunan (sisa, serapan, status) di tabel.
 5. JANGAN menambah paket Composer/NPM, komponen UI, warna, atau font baru tanpa alasan tertulis (docs/09, docs/26).
-6. JANGAN memakai CDN untuk aset runtime.
+6. JANGAN memakai CDN untuk aset runtime (satu-satunya pengecualian tertulis: Google Fonts `@import` — docs/09).
 7. JANGAN `forceDelete`, `migrate:fresh`, `db:wipe`, atau `TRUNCATE` di luar lokal.
 8. JANGAN melonggarkan tes agar hijau (docs/18).
 9. JANGAN mengubah keputusan yang disengaja (docs/08 tabel keputusan, docs/26 desain) tanpa konfirmasi.

@@ -11,9 +11,9 @@
         <x-slot:aksi>
             <div class="flex items-center gap-3 flex-wrap">
                 @if ($terkunci)<x-badge color="red">Terkunci</x-badge>@elseif ($tahun)<x-badge :color="$tahun->status->warnaBadge()">{{ $tahun->status->label() }}</x-badge>@endif
-                <form method="GET" action="{{ route('anggaran.index') }}" class="flex items-center gap-2">
+                <form x-data method="GET" action="{{ route('anggaran.index') }}" class="flex items-center gap-2">
                     <label class="form-label !mb-0" for="tahun">Tahun:</label>
-                    <select class="form-input !w-[130px] !py-2 !px-3" id="tahun" name="tahun" onchange="this.form.submit()">
+                    <select class="form-input !w-[130px] !py-2 !px-3" id="tahun" name="tahun" @change="$el.form.submit()">
                         @forelse ($daftarTahun as $t)
                             <option value="{{ $t->tahun }}" @selected($tahun && $t->id === $tahun->id)>{{ $t->tahun }}</option>
                         @empty

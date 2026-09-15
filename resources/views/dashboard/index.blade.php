@@ -3,14 +3,14 @@
     <x-card class="mb-5">
         <div class="flex items-center justify-between flex-wrap gap-3">
             <div class="font-bold text-[0.95rem] flex items-center gap-2"><i class="fa-solid fa-filter text-[var(--accent)] text-[0.85rem]"></i>Filter Dashboard</div>
-            <form method="GET" action="{{ route('dashboard') }}" class="flex items-center gap-3 flex-wrap">
+            <form x-data method="GET" action="{{ route('dashboard') }}" class="flex items-center gap-3 flex-wrap">
                 <div class="flex items-center gap-2"><label class="form-label !mb-0" for="tahun">Tahun:</label>
-                    <select class="form-input !w-[130px] !py-2 !px-3" id="tahun" name="tahun" onchange="this.form.submit()">
+                    <select class="form-input !w-[130px] !py-2 !px-3" id="tahun" name="tahun" @change="$el.form.submit()">
                         @foreach ($daftarTahun as $ta)<option value="{{ $ta->tahun }}" @selected($tahunTerpilih === $ta->tahun)>{{ $ta->tahun }}</option>@endforeach
                         <option value="semua" @selected($tahunTerpilih === 'semua')>Semua</option>
                     </select></div>
                 <div class="flex items-center gap-2"><label class="form-label !mb-0" for="bidang">Bidang:</label>
-                    <select class="form-input !w-[220px] !py-2 !px-3" id="bidang" name="bidang" onchange="this.form.submit()">
+                    <select class="form-input !w-[220px] !py-2 !px-3" id="bidang" name="bidang" @change="$el.form.submit()">
                         <option value="">Semua</option>
                         @foreach ($daftarBidang as $b)<option value="{{ $b->id }}" @selected($bidangTerpilih === $b->id)>{{ $b->nama }}</option>@endforeach
                     </select></div>
