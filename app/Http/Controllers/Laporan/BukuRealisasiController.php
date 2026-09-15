@@ -16,7 +16,7 @@ class BukuRealisasiController extends LaporanController
     public function index(FilterLaporanRequest $request): View|Response
     {
         $f = $request->filter();
-        $periode = $f ? $f->dari->toDateString().'_'.$f->sampai->toDateString() : '';
+        $periode = $f ? $f->periodeRentang() : '';
 
         if ($f && $request->export() === 'xlsx') {
             return $this->unduhXlsx(new BukuRealisasiExport($this->query->semua($f)), $this->namaBerkas('buku-realisasi', $f, $periode, 'xlsx'));

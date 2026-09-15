@@ -1,12 +1,12 @@
 <x-layout.app title="Laporan Rekap">
-    @include('laporan._filter', ['kolom' => ['tahun', 'triwulan'], 'ikon' => 'fa-layer-group', 'judul' => 'Rekap Sumber Dana & Bidang'])
+    @include('laporan._filter', ['kolom' => ['tahun', 'triwulan', 'tanggal'], 'ikon' => 'fa-layer-group', 'judul' => 'Rekap Sumber Dana & Bidang'])
     @if (! $filter)
         <x-card><x-empty-state icon="fa-calendar" text="Belum ada tahun anggaran." /></x-card>
     @else
         @php $t = $hasil['total']; @endphp
         <div class="stat-grid grid grid-cols-4 gap-4 mb-7">
             <x-stat-card color="green" icon="fa-coins" label="Total Pagu" :value="rupiah_singkat($t['pagu'])" :sub="$t['jumlah_sub'].' sub kegiatan'" />
-            <x-stat-card color="red" icon="fa-arrow-trend-down" label="Realisasi s.d. TW{{ $filter->triwulan }}" :value="rupiah_singkat($t['realisasi'])" />
+            <x-stat-card color="red" icon="fa-arrow-trend-down" label="Realisasi {{ $filter->labelRentang() }}" :value="rupiah_singkat($t['realisasi'])" />
             <x-stat-card color="yellow" icon="fa-wallet" label="Sisa" :value="rupiah_singkat($t['sisa'])" />
             <x-stat-card color="teal" icon="fa-gauge-high" label="Serapan" :value="$t['serapan'].'%'"><x-progress :value="$t['serapan']" /></x-stat-card>
         </div>

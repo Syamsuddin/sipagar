@@ -1,5 +1,5 @@
 <x-layout.app title="Buku Realisasi">
-    @include('laporan._filter', ['kolom' => ['tahun', 'tanggal', 'bidang', 'sub_kegiatan'], 'ikon' => 'fa-book', 'judul' => 'Buku Realisasi'])
+    @include('laporan._filter', ['kolom' => ['tahun', 'triwulan', 'tanggal', 'bidang', 'sub_kegiatan'], 'ikon' => 'fa-book', 'judul' => 'Buku Realisasi'])
     <x-card title="Rincian Transaksi {{ $filter?->tahun->tahun }}" icon="fa-book">
         <x-slot:aksi>@if ($hasil)<x-badge color="red">{{ $hasil['jumlah'] }} transaksi</x-badge>@endif</x-slot:aksi>
         @if (! $filter)

@@ -44,9 +44,9 @@ test('xlsx: Excel::fake + kelas & jumlah baris; angka int = angka Query (docs/13
         return count($sumber->array()) === $rekap['sumber_dana']->count() + 1 && end($b)[4] === $rekap['total']['pagu'] && $rekap['total']['pagu'] === 3_520_000_000;
     });
 
-    $this->actingAs($this->admin)->get(route('laporan.buku.index', ['export' => 'xlsx']))->assertOk();
-    $buku = app(BukuRealisasiQuery::class)->semua(LaporanFilter::dari(['tahun' => 2025]));
-    Excel::assertDownloaded('sipagar_buku-realisasi_2025_2025-01-01_2025-12-31.xlsx', function (BukuRealisasiExport $e) use ($buku) {
+    $this->actingAs($this->admin)->get(route('laporan.buku.index', ['triwulan' => 4, 'export' => 'xlsx']))->assertOk();
+    $buku = app(BukuRealisasiQuery::class)->semua(LaporanFilter::dari(['tahun' => 2025, 'triwulan' => 4]));
+    Excel::assertDownloaded('sipagar_buku-realisasi_2025_TW4.xlsx', function (BukuRealisasiExport $e) use ($buku) {
         $rows = $e->array();
         $total = end($rows);
 

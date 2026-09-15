@@ -6,7 +6,7 @@ use App\Models\SubKegiatan;
 use App\Services\SerapanCalculator;
 use Illuminate\Support\Collection;
 
-/** F09: rekap per Sumber Dana & per Bidang s.d. akhir TW n; serapan agregat dari Σ (docs/04). */
+/** F09: rekap per Sumber Dana & per Bidang pada rentang tanggal (preset TW); serapan agregat dari Σ (docs/04). */
 class RekapQuery
 {
     public function __construct(private readonly SerapanCalculator $k) {}
@@ -16,10 +16,8 @@ class RekapQuery
      */
     public function jalankan(LaporanFilter $f): array
     {
-        $akhir = $this->k->akhirTriwulan($f->tahun->tahun, $f->triwulan);
-
         $sub = SubKegiatan::query()->with(['bidang', 'sumberDana'])
-            ->withSum(['realisasiKeuangan as realisasi_sd_tw' => fn ($q) => $q->whereDate('tanggal', '<=', $akhir)], 'jumlah')
+            ->withSum(['realisasiKeuangan as realisasi_sd_tw' => fn ($q) => $q->whereBetween('tanggal', [$f->dari->toDateString(), $f->sampai->toDateString()])], 'jumlah')
             ->whereHas('kegiatan.program', fn ($q) => $q->where('tahun_anggaran_id', $f->tahun->id))
             ->get();
 

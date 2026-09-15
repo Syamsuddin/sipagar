@@ -13,7 +13,7 @@
             @endif
             @if (in_array('triwulan', $kolom))
                 <div class="flex items-center gap-2"><label class="form-label !mb-0" for="triwulan">s.d. TW:</label>
-                    <select class="form-input !w-[90px] !py-2 !px-3" id="triwulan" name="triwulan" onchange="this.form.submit()">
+                    <select class="form-input !w-[90px] !py-2 !px-3" id="triwulan" name="triwulan" onchange="const d = this.form.dari, s = this.form.sampai; if (d) d.value = ''; if (s) s.value = ''; this.form.submit()">
                         @foreach ([1, 2, 3, 4] as $tw)<option value="{{ $tw }}" @selected($filter && $filter->triwulan === $tw)>{{ $tw }}</option>@endforeach
                     </select></div>
             @endif

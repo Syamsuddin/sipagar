@@ -38,9 +38,17 @@ test('rekap per sumber dana & bidang: Σ per kelompok = Σ total; serapan agrega
         ->and($hasil['sumber_dana']->sum('realisasi'))->toBe($hasil['total']['realisasi'])
         ->and($hasil['sumber_dana']->firstWhere('kode', 'APBD II'))->toMatchArray(['pagu' => 900, 'realisasi' => 300, 'serapan' => 33]);
 
-    // s.d. TW2: realisasi Agustus belum masuk
+    // preset TW2 = 1 Jan–30 Jun: realisasi Agustus belum masuk
     $tw2 = app(RekapQuery::class)->jalankan(LaporanFilter::dari(['tahun' => 2025, 'triwulan' => 2]));
     expect($tw2['total']['realisasi'])->toBe(100)->and($tw2['bidang']->firstWhere('kode', 'B')['status']->value)->toBe('aman');
+
+    // rentang tanggal eksplisit menang atas TW (keputusan pemilik S4)
+    $agu = LaporanFilter::dari(['tahun' => 2025, 'triwulan' => 2, 'dari' => '2025-08-01', 'sampai' => '2025-08-31']);
+    expect($agu->tanggalEksplisit)->toBeTrue()->and($agu->periodeRentang())->toBe('2025-08-01_2025-08-31')
+        ->and(app(RekapQuery::class)->jalankan($agu)['total']['realisasi'])->toBe(300);
+    // nilai preset yang dikirim ulang form tetap dianggap TW
+    $ulang = LaporanFilter::dari(['tahun' => 2025, 'triwulan' => 2, 'dari' => '2025-01-01', 'sampai' => '2025-06-30']);
+    expect($ulang->tanggalEksplisit)->toBeFalse()->and($ulang->periodeRentang())->toBe('TW2');
 });
 
 test('layar web dua tabel + unduh xlsx/pdf', function () {
@@ -48,6 +56,8 @@ test('layar web dua tabel + unduh xlsx/pdf', function () {
         ->assertSee('Per Sumber Dana')->assertSee('Per Bidang')->assertSee('data-table', false);
 
     $this->actingAs($this->admin)->get(route('laporan.rekap.index', ['triwulan' => 4, 'export' => 'xlsx']))->assertOk()->assertDownload('sipagar_rekap_2025_TW4.xlsx');
+    $this->actingAs($this->admin)->get(route('laporan.rekap.index', ['dari' => '2025-08-01', 'sampai' => '2025-08-31', 'export' => 'xlsx']))->assertOk()->assertDownload('sipagar_rekap_2025_2025-08-01_2025-08-31.xlsx');
+    $this->actingAs($this->admin)->get(route('laporan.rekap.index'))->assertOk()->assertSee('name="dari"', false)->assertSee('name="triwulan"', false);
     $pdf = $this->actingAs($this->admin)->get(route('laporan.rekap.index', ['triwulan' => 4, 'export' => 'pdf']))->assertOk()->assertHeader('content-type', 'application/pdf');
     expect(strlen($pdf->getContent()))->toBeGreaterThan(1024);
 });

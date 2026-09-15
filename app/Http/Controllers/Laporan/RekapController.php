@@ -18,10 +18,10 @@ class RekapController extends LaporanController
         $hasil = $f ? $this->query->jalankan($f) : null;
 
         if ($f && $hasil && $request->export() === 'xlsx') {
-            return $this->unduhXlsx(new RekapExport($hasil), $this->namaBerkas('rekap', $f, $f->periodeTw(), 'xlsx'));
+            return $this->unduhXlsx(new RekapExport($hasil), $this->namaBerkas('rekap', $f, $f->periodeRentang(), 'xlsx'));
         }
         if ($f && $hasil && $request->export() === 'pdf') {
-            return $this->unduhPdf('pdf.rekap', ['hasil' => $hasil], $this->namaBerkas('rekap', $f, $f->periodeTw(), 'pdf'));
+            return $this->unduhPdf('pdf.rekap', ['hasil' => $hasil], $this->namaBerkas('rekap', $f, $f->periodeRentang(), 'pdf'));
         }
 
         return view('laporan.rekap.index', $this->dataFilter($f) + ['hasil' => $hasil]);

@@ -12,9 +12,9 @@
     {
       "mulai": "2026-09-15T08:20:32+08:00",
       "selesai": null,
-      "step": 29,
-      "detik": 4408,
-      "tok_est": 339260
+      "step": 30,
+      "detik": 4483,
+      "tok_est": 351793
     }
   ],
   "step_berjalan": null,
@@ -1091,13 +1091,75 @@
         "Audit Log layar + trait Auditable, kunci/buka tahun (modal sandi), deploy.sh, rilis → S5"
       ],
       "selesai": "2026-09-15T10:59:33+08:00"
+    },
+    {
+      "fitur": "S4b-keputusan-filter (TW+rentang tanggal Rekap/Buku)",
+      "rute": "Fitur baru (vertical slice)",
+      "mulai": "2026-09-15T11:26:57+08:00",
+      "rencana": [
+        "app/Queries/LaporanFilter.php",
+        "app/Queries/RekapQuery.php",
+        "app/Queries/BukuRealisasiQuery.php",
+        "app/Http/Controllers/Laporan/RekapController.php",
+        "app/Http/Controllers/Laporan/BukuRealisasiController.php",
+        "resources/views/laporan/rekap/index.blade.php",
+        "resources/views/laporan/buku/index.blade.php",
+        "resources/views/pdf/rekap.blade.php",
+        "app/Exports/RekapSumberDanaExport.php",
+        "app/Exports/RekapBidangExport.php",
+        "tests/Feature/LaporanRekapTest.php",
+        "tests/Feature/LaporanBukuRealisasiTest.php",
+        "tests/Feature/LaporanExportTest.php",
+        "docs/26_UI_DESIGN.md",
+        "docs/_archive/23-F09.md",
+        "docs/_archive/23-F10.md"
+      ],
+      "total_step": 0,
+      "step": [
+        {
+          "no": 1,
+          "nama": "3/7 Query: rentang = preset TW, tanggal eksplisit menang",
+          "mulai": "2026-09-15T11:26:57+08:00",
+          "selesai": "2026-09-15T11:28:11+08:00",
+          "detik": 75,
+          "tok_est": 12533,
+          "muat": [
+            "app/Queries/LaporanFilter.php",
+            "app/Queries/RekapQuery.php",
+            "app/Http/Controllers/Laporan/RekapController.php",
+            "app/Http/Controllers/Laporan/BukuRealisasiController.php",
+            "resources/views/laporan/rekap/index.blade.php",
+            "resources/views/laporan/buku/index.blade.php",
+            "resources/views/laporan/_filter.blade.php",
+            "resources/views/pdf/rekap.blade.php",
+            "tests/Feature/LaporanRekapTest.php",
+            "tests/Feature/LaporanBukuRealisasiTest.php",
+            "tests/Feature/LaporanExportTest.php",
+            "docs/26_UI_DESIGN.md"
+          ]
+        }
+      ],
+      "detik": 75,
+      "tok_est": 12533,
+      "deviasi": [
+        "resources/views/laporan/_filter.blade.php disentuh di luar rencana (TW mengosongkan tanggal saat diganti)"
+      ],
+      "asumsi": [
+        "Tanggal dianggap eksplisit hanya bila berbeda dari preset TW (form mengirim ulang nilai preset)",
+        "Monev tetap per-TW (target per TW), Tren per-tahun — tidak diberi rentang tanggal"
+      ],
+      "dokumen_diperbarui": [
+        "docs/26 (filter Rekap/Buku)",
+        "docs/_archive/23-F09.md, 23-F10.md (catatan keputusan)"
+      ],
+      "selesai": "2026-09-15T11:28:11+08:00"
     }
   ],
   "akumulasi": {
-    "detik": 4408,
-    "tok_est": 339260,
+    "detik": 4483,
+    "tok_est": 351793,
     "tok_terukur": 0,
-    "step": 29,
-    "fitur": 5
+    "step": 30,
+    "fitur": 6
   }
 }

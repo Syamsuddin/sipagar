@@ -1,5 +1,5 @@
 @php $f = $hasil['filter']; $t = $hasil['total']; @endphp
-<x-layout.pdf :judul="'Rekapitulasi Anggaran per Sumber Dana dan per Bidang'" :subjudul="'Tahun Anggaran '.$f->tahun->tahun.' · s.d. Triwulan '.$f->triwulan" :pengaturan="$pengaturan" :printCss="$printCss" :dicetak="$dicetak">
+<x-layout.pdf :judul="'Rekapitulasi Anggaran per Sumber Dana dan per Bidang'" :subjudul="'Tahun Anggaran '.$f->tahun->tahun.' · realisasi '.$f->labelRentang()" :pengaturan="$pengaturan" :printCss="$printCss" :dicetak="$dicetak">
     @foreach (['sumber_dana' => 'Per Sumber Dana', 'bidang' => 'Per Bidang'] as $kunci => $judulTabel)
         <h3 style="font-size:10pt;margin:10px 0 4px;">{{ $judulTabel }}</h3>
         <table class="data">
