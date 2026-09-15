@@ -9,6 +9,7 @@ use Illuminate\Validation\ValidationException;
 
 /**
  * P6 docs/06: tambah, ubah, aktif/nonaktif, reset sandi. Hapus = nonaktifkan.
+ * created/updated dicatat otomatis oleh trait Auditable; reset_password dicatat eksplisit.
  */
 class PenggunaService
 {
@@ -28,8 +29,6 @@ class PenggunaService
             'is_active' => true,
         ]);
 
-        $this->audit->catat('created', $user, null, $user->only(['name', 'username', 'role', 'bidang_id']));
-
         return $user;
     }
 
@@ -38,15 +37,12 @@ class PenggunaService
     {
         $this->pastikanBidangOperator($data);
 
-        $lama = $user->only(['name', 'username', 'role', 'bidang_id']);
         $user->fill([
             'name' => $data['name'],
             'username' => mb_strtolower($data['username']),
             'role' => $data['role'],
             'bidang_id' => $data['role'] === Role::Operator->value ? $data['bidang_id'] : null,
         ])->save();
-
-        $this->audit->catat('updated', $user, $lama, $user->only(['name', 'username', 'role', 'bidang_id']));
 
         return $user;
     }
@@ -62,14 +58,12 @@ class PenggunaService
             DB::table('sessions')->where('user_id', $user->id)->delete();
         }
 
-        $this->audit->catat('updated', $user, ['is_active' => ! $aktif], ['is_active' => $aktif]);
-
         return $user;
     }
 
     public function resetSandi(User $user, string $sandiBaru): User
     {
-        $user->update(['password' => $sandiBaru]);
+        User::tanpaAudit(fn () => $user->update(['password' => $sandiBaru]));
         DB::table('sessions')->where('user_id', $user->id)->delete();
 
         $this->audit->catat('reset_password', $user);

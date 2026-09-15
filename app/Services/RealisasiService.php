@@ -13,13 +13,13 @@ use Illuminate\Support\Facades\Storage;
 
 /**
  * P3 docs/06. Sisa pagu dicek ulang di transaksi (docs/21) walau FormRequest sudah memvalidasi.
- * Lampiran: disk `private`, nama `lampiran/{tahun}/{id}.{ext}` (docs/07, docs/21).
+ * Lampiran: disk `private`, nama `lampiran/{tahun}/{id}.{ext}` (docs/07, docs/21). Audit otomatis lewat trait Auditable.
  */
 class RealisasiService
 {
     public const DISK_LAMPIRAN = 'private';
 
-    public function __construct(private readonly AuditService $audit, private readonly SerapanCalculator $kalkulator) {}
+    public function __construct(private readonly SerapanCalculator $kalkulator) {}
 
     /** @param array{tanggal: string, jumlah: int, uraian: string, no_sp2d?: string|null} $data */
     public function catat(SubKegiatan $sk, array $data, User $oleh, ?UploadedFile $lampiran = null): RealisasiKeuangan
@@ -45,8 +45,6 @@ class RealisasiService
                 $r->update(['lampiran_path' => $this->simpanLampiran($r, $lampiran)]);
             }
 
-            $this->audit->catat('created', $r, null, $r->only(['sub_kegiatan_id', 'tanggal', 'jumlah', 'uraian', 'no_sp2d', 'lampiran_path']));
-
             return $r;
         });
     }
@@ -63,8 +61,6 @@ class RealisasiService
                 throw new MelebihiSisaPaguException($sisaTanpaIni);
             }
 
-            $kolom = ['tanggal', 'jumlah', 'uraian', 'no_sp2d', 'lampiran_path'];
-            $lama = $r->only($kolom);
             $r->fill([
                 'tanggal' => $data['tanggal'],
                 'jumlah' => (int) $data['jumlah'],
@@ -78,8 +74,6 @@ class RealisasiService
             }
             $r->save();
 
-            $this->audit->catat('updated', $r, $lama, $r->only($kolom));
-
             return $r;
         });
     }
@@ -90,7 +84,6 @@ class RealisasiService
         $this->pastikanTerbuka($r->subKegiatan);
 
         $r->delete();
-        $this->audit->catat('deleted', $r, $r->only(['sub_kegiatan_id', 'tanggal', 'jumlah', 'uraian']));
     }
 
     /**
@@ -103,18 +96,14 @@ class RealisasiService
         $this->pastikanTerbuka($sk);
 
         DB::transaction(function () use ($sk, $persenPerBulan, $oleh) {
-            $lama = $this->kalkulator->fisikPerBulan($sk);
-
             foreach ($persenPerBulan as $bulan => $persen) {
                 if ($persen === null || $persen === '') {
-                    $sk->realisasiFisik()->where('bulan', $bulan)->delete();
+                    $sk->realisasiFisik()->where('bulan', $bulan)->get()->each->delete();
 
                     continue;
                 }
                 $sk->realisasiFisik()->updateOrCreate(['bulan' => (int) $bulan], ['persen' => round((float) $persen, 2), 'updated_by' => $oleh->id]);
             }
-
-            $this->audit->catat('updated', $sk, ['fisik' => $lama], ['fisik' => $this->kalkulator->fisikPerBulan($sk)]);
         });
     }
 

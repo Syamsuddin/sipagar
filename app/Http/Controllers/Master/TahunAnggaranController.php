@@ -9,6 +9,7 @@ use App\Models\TahunAnggaran;
 use App\Services\TahunAnggaranService;
 use Illuminate\Contracts\View\View;
 use Illuminate\Http\RedirectResponse;
+use Illuminate\Http\Request;
 
 class TahunAnggaranController extends Controller
 {
@@ -33,5 +34,22 @@ class TahunAnggaranController extends Controller
         $this->service->aktifkan($tahunAnggaran);
 
         return redirect()->route('master.tahun-anggaran.index')->with('sukses', "Tahun anggaran {$tahunAnggaran->tahun} diaktifkan");
+    }
+
+    /** P5: kunci — route dilindungi konfirmasi-sandi (modal sandi, docs/22). */
+    public function kunci(Request $request, TahunAnggaran $tahunAnggaran): RedirectResponse
+    {
+        $this->authorize('kunci', $tahunAnggaran);
+        $this->service->kunci($tahunAnggaran, $request->user());
+
+        return redirect()->route('master.tahun-anggaran.index')->with('sukses', "Tahun anggaran {$tahunAnggaran->tahun} dikunci");
+    }
+
+    public function buka(Request $request, TahunAnggaran $tahunAnggaran): RedirectResponse
+    {
+        $this->authorize('kunci', $tahunAnggaran);
+        $this->service->buka($tahunAnggaran, $request->user());
+
+        return redirect()->route('master.tahun-anggaran.index')->with('info', "Kunci tahun anggaran {$tahunAnggaran->tahun} dibuka (status draft)");
     }
 }

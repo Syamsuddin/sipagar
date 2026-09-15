@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use App\Models\Concerns\Auditable;
 use App\Models\Concerns\ScopedByBidang;
 use Database\Factories\SubKegiatanFactory;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
@@ -13,7 +14,7 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 class SubKegiatan extends Model
 {
     /** @use HasFactory<SubKegiatanFactory> */
-    use HasFactory, ScopedByBidang, SoftDeletes;
+    use Auditable, HasFactory, ScopedByBidang, SoftDeletes;
 
     protected $table = 'sub_kegiatan';
 

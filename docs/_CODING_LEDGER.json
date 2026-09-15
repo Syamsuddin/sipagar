@@ -12,9 +12,9 @@
     {
       "mulai": "2026-09-15T08:20:32+08:00",
       "selesai": null,
-      "step": 30,
-      "detik": 4483,
-      "tok_est": 351793
+      "step": 34,
+      "detik": 4943,
+      "tok_est": 383882
     }
   ],
   "step_berjalan": null,
@@ -1153,13 +1153,169 @@
         "docs/_archive/23-F09.md, 23-F10.md (catatan keputusan)"
       ],
       "selesai": "2026-09-15T11:28:11+08:00"
+    },
+    {
+      "fitur": "S5-audit-kunci-rilis (F12)",
+      "rute": "Fitur baru (vertical slice)",
+      "mulai": "2026-09-15T11:31:01+08:00",
+      "rencana": [
+        "app/Models/Concerns/Auditable.php",
+        "app/Models/User.php",
+        "app/Models/Bidang.php",
+        "app/Models/SumberDana.php",
+        "app/Models/TahunAnggaran.php",
+        "app/Models/Program.php",
+        "app/Models/Kegiatan.php",
+        "app/Models/SubKegiatan.php",
+        "app/Models/TargetTriwulan.php",
+        "app/Models/RealisasiKeuangan.php",
+        "app/Models/RealisasiFisik.php",
+        "app/Models/AuditLog.php",
+        "app/Services/AuditService.php",
+        "app/Services/PenggunaService.php",
+        "app/Services/AnggaranService.php",
+        "app/Services/TargetService.php",
+        "app/Services/RealisasiService.php",
+        "app/Services/TahunAnggaranService.php",
+        "app/Http/Middleware/AssignRequestId.php",
+        "app/Http/Controllers/AuditLogController.php",
+        "app/Http/Controllers/Master/TahunAnggaranController.php",
+        "app/Policies/TahunAnggaranPolicy.php",
+        "app/View/Components/Layout/App.php",
+        "bootstrap/app.php",
+        "routes/web.php",
+        "resources/views/audit-log/index.blade.php",
+        "resources/views/master/tahun-anggaran/index.blade.php",
+        "resources/views/errors/500.blade.php",
+        "deploy.sh",
+        "CHANGELOG.md",
+        "tests/Feature/AuditLogTest.php",
+        "tests/Feature/TahunAnggaranLockTest.php",
+        "tests/Feature/TargetTriwulanTest.php",
+        "tests/Feature/RealisasiFisikTest.php",
+        "tests/Feature/PenggunaTest.php",
+        "tests/Feature/AnggaranTest.php",
+        "docs/03_ROADMAP.md",
+        "docs/12_PROJECT_STRUCTURE.md",
+        "docs/23_ACCEPTANCE_CRITERIA.md",
+        "docs/_MANIFEST.json"
+      ],
+      "total_step": 0,
+      "step": [
+        {
+          "no": 1,
+          "nama": "2/7 Trait Auditable pada model ✎ + refactor service",
+          "mulai": "2026-09-15T11:31:02+08:00",
+          "selesai": "2026-09-15T11:32:27+08:00",
+          "detik": 86,
+          "tok_est": 9316,
+          "muat": [
+            "app/Models/Concerns/Auditable.php",
+            "app/Models/*.php",
+            "app/Services/PenggunaService.php",
+            "app/Services/AnggaranService.php",
+            "app/Services/TargetService.php",
+            "app/Services/RealisasiService.php",
+            "app/Services/TahunAnggaranService.php",
+            "tests/Feature/TargetTriwulanTest.php",
+            "tests/Feature/RealisasiFisikTest.php",
+            "docs/22_CHANGE_POLICY.md",
+            "docs/25_RELEASE_CHECKLIST.md",
+            "docs/15_OBSERVABILITY.md"
+          ]
+        },
+        {
+          "no": 2,
+          "nama": "4/7 Endpoint kunci/buka tahun, Audit Log, AssignRequestId",
+          "mulai": "2026-09-15T11:32:28+08:00",
+          "selesai": "2026-09-15T11:33:38+08:00",
+          "detik": 71,
+          "tok_est": 4472,
+          "muat": [
+            "app/Http/Middleware/AssignRequestId.php",
+            "app/Http/Controllers/AuditLogController.php",
+            "app/Http/Controllers/Master/TahunAnggaranController.php",
+            "routes/web.php",
+            "bootstrap/app.php",
+            "resources/views/errors/500.blade.php"
+          ]
+        },
+        {
+          "no": 3,
+          "nama": "5/7 UI kunci/buka + Audit Log + deploy.sh + CHANGELOG",
+          "mulai": "2026-09-15T11:33:38+08:00",
+          "selesai": "2026-09-15T11:35:25+08:00",
+          "detik": 107,
+          "tok_est": 4281,
+          "muat": [
+            "resources/views/master/tahun-anggaran/index.blade.php",
+            "resources/views/audit-log/index.blade.php",
+            "deploy.sh",
+            "CHANGELOG.md"
+          ]
+        },
+        {
+          "no": 4,
+          "nama": "6/7 Tes AuditLog + TahunAnggaranLock",
+          "mulai": "2026-09-15T11:35:25+08:00",
+          "selesai": "2026-09-15T11:38:40+08:00",
+          "detik": 196,
+          "tok_est": 14020,
+          "muat": [
+            "tests/Feature/AuditLogTest.php",
+            "tests/Feature/TahunAnggaranLockTest.php",
+            "config/app.php",
+            "docs/23_ACCEPTANCE_CRITERIA.md",
+            "docs/03_ROADMAP.md",
+            "docs/12_PROJECT_STRUCTURE.md",
+            "docs/26_UI_DESIGN.md",
+            "docs/_MANIFEST.json"
+          ]
+        }
+      ],
+      "detik": 460,
+      "tok_est": 32089,
+      "deviasi": [
+        "config/app.php: timezone => env('APP_TIMEZONE') — bawaan Laravel 12 mengunci UTC, bertentangan docs/10",
+        "Audit target/fisik kini per baris (TargetTriwulan/RealisasiFisik ✎) menggantikan audit ringkasan di SubKegiatan (S2/S3) — tes disesuaikan",
+        "AssignRequestId & SecurityHeaders tidak ada di pohon 12 tetapi diwajibkan 15/21 — 12 diperbarui"
+      ],
+      "warn_dilewati": [
+        "gerbang.sh tak bisa dijalankan (bash 3.2) — manual",
+        "docs/25 langkah 2–11 (merge/tag/backup/deploy/smoke produksi) TIDAK dijalankan — gerbang manusia; deploy.sh disiapkan, belum pernah dieksekusi di server"
+      ],
+      "asumsi": [
+        "Buka kunci tahun → status draft (P5 tidak menyebut); aktifkan ulang tunduk aturan satu tahun aktif",
+        "Seeder menghasilkan audit dengan user_id null (docs/07 'aksi sistem/seeder')",
+        "Reset sandi: perubahan password tidak diaudit sebagai updated (tanpaAudit), hanya reset_password",
+        "Audit Log menampilkan perubahan sebagai daftar kunci lama → baru; model difilter lewat class_basename",
+        "deploy.sh mengikuti pola SIMURU + docs/25: maintenance, backup wajib 'Dump completed', gagal migrasi → petunjuk §R, smoke /login 200 & ERROR log tidak bertambah"
+      ],
+      "dokumen_diperbarui": [
+        "docs/23 (F12 diarsipkan — seluruh MVP terarsip)",
+        "docs/03_ROADMAP.md (S5 kode selesai, rilis menunggu)",
+        "docs/12 (Auditable, AssignRequestId/SecurityHeaders, deploy.sh, CHANGELOG)",
+        "docs/26 (Tahun kunci/buka, Audit Log)",
+        "docs/_MANIFEST.json"
+      ],
+      "landmine_tersentuh": [
+        "Tombol @click di luar cakupan x-data tidak diproses Alpine — beri x-data pada tombol/pembungkus",
+        "created_at tidak fillable di AuditLog (benar); tes yang butuh waktu buatan pakai forceCreate",
+        "Laravel 12 config/app.php timezone tidak membaca env — periksa saat upgrade"
+      ],
+      "ditunda": [
+        "Rilis produksi v1.0.0 (docs/25 langkah 2–11) → menunggu keputusan pemilik",
+        "Metrik/monitoring & audit aksesibilitas [TERBUKA] pasca-MVP",
+        "F14–F16 pasca-MVP"
+      ],
+      "selesai": "2026-09-15T11:38:40+08:00"
     }
   ],
   "akumulasi": {
-    "detik": 4483,
-    "tok_est": 351793,
+    "detik": 4943,
+    "tok_est": 383882,
     "tok_terukur": 0,
-    "step": 30,
-    "fitur": 6
+    "step": 34,
+    "fitur": 7
   }
 }

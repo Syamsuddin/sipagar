@@ -29,7 +29,10 @@ test('upsert 12 bulan: bulan kosong dilewati/dihapus, terisi disimpan; audit ter
     $this->actingAs($this->operatorA)->put(route('realisasi.fisik.update', $this->skA), ['fisik' => [1 => 10, 3 => '', 6 => 45, 7 => 50]])->assertRedirect();
     expect(RealisasiFisik::where('sub_kegiatan_id', $this->skA->id)->pluck('persen', 'bulan')->map(fn ($v) => (float) $v)->all())
         ->toBe([1 => 10.0, 6 => 45.0, 7 => 50.0])
-        ->and(AuditLog::where('auditable_id', $this->skA->id)->where('action', 'updated')->count())->toBe(2);
+        // audit per baris (RealisasiFisik ✎): created 1,3,6 lalu 7; updated 6; deleted 3
+        ->and(AuditLog::where('auditable_type', RealisasiFisik::class)->where('action', 'created')->count())->toBe(4)
+        ->and(AuditLog::where('auditable_type', RealisasiFisik::class)->where('action', 'updated')->count())->toBe(1)
+        ->and(AuditLog::where('auditable_type', RealisasiFisik::class)->where('action', 'deleted')->count())->toBe(1);
 });
 
 test('menurun dari bulan terisi sebelumnya → 422 menyebut bulan; > 100 → 422', function () {

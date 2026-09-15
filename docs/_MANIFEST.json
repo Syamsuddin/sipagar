@@ -464,7 +464,7 @@
       "S2": "selesai 2026-09-15",
       "S3": "selesai 2026-09-15",
       "S4": "selesai 2026-09-15",
-      "S5": "belum"
+      "S5": "kode selesai 2026-09-15; rilis produksi menunggu gerbang manusia (docs/25)"
     },
     "installed": {
       "laravel/framework": "12.69.2",

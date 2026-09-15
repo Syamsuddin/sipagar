@@ -12,10 +12,11 @@ use Illuminate\Validation\ValidationException;
 
 /**
  * P1 docs/06: struktur Program → Kegiatan → Sub Kegiatan. Kunci tahun dicek ulang di sini (docs/21).
+ * Audit created/updated/deleted otomatis lewat trait Auditable.
  */
 class AnggaranService
 {
-    public function __construct(private readonly AuditService $audit, private readonly SerapanCalculator $kalkulator) {}
+    public function __construct(private readonly SerapanCalculator $kalkulator) {}
 
     // ---- Program --------------------------------------------------------------
 
@@ -25,7 +26,6 @@ class AnggaranService
         $this->pastikanTerbuka($ta);
 
         $program = $ta->program()->create($data);
-        $this->audit->catat('created', $program, null, $program->only(['kode', 'nama', 'tahun_anggaran_id']));
 
         return $program;
     }
@@ -35,9 +35,7 @@ class AnggaranService
     {
         $this->pastikanTerbuka($program->tahunAnggaran);
 
-        $lama = $program->only(['kode', 'nama', 'urutan']);
         $program->update($data);
-        $this->audit->catat('updated', $program, $lama, $program->only(['kode', 'nama', 'urutan']));
 
         return $program;
     }
@@ -51,7 +49,6 @@ class AnggaranService
         }
 
         $program->delete();
-        $this->audit->catat('deleted', $program, $program->only(['kode', 'nama']));
     }
 
     // ---- Kegiatan -------------------------------------------------------------
@@ -62,7 +59,6 @@ class AnggaranService
         $this->pastikanTerbuka($program->tahunAnggaran);
 
         $kegiatan = $program->kegiatan()->create($data);
-        $this->audit->catat('created', $kegiatan, null, $kegiatan->only(['kode', 'nama', 'program_id']));
 
         return $kegiatan;
     }
@@ -72,9 +68,7 @@ class AnggaranService
     {
         $this->pastikanTerbuka($kegiatan->tahunAnggaran());
 
-        $lama = $kegiatan->only(['kode', 'nama', 'urutan']);
         $kegiatan->update($data);
-        $this->audit->catat('updated', $kegiatan, $lama, $kegiatan->only(['kode', 'nama', 'urutan']));
 
         return $kegiatan;
     }
@@ -88,7 +82,6 @@ class AnggaranService
         }
 
         $kegiatan->delete();
-        $this->audit->catat('deleted', $kegiatan, $kegiatan->only(['kode', 'nama']));
     }
 
     // ---- Sub Kegiatan ---------------------------------------------------------
@@ -99,7 +92,6 @@ class AnggaranService
         $this->pastikanTerbuka($kegiatan->tahunAnggaran());
 
         $sk = $kegiatan->subKegiatan()->create($data);
-        $this->audit->catat('created', $sk, null, $sk->only(['kode', 'nama', 'pagu', 'bidang_id', 'sumber_dana_id', 'pptk']));
 
         return $sk;
     }
@@ -119,10 +111,7 @@ class AnggaranService
                 throw ValidationException::withMessages(['pagu' => 'Pagu tidak boleh kurang dari realisasi '.rupiah($realisasi)]);
             }
 
-            $kolom = ['kode', 'nama', 'pagu', 'bidang_id', 'sumber_dana_id', 'pptk', 'urutan'];
-            $lama = $sk->only($kolom);
             $sk->update($data);
-            $this->audit->catat('updated', $sk, $lama, $sk->only($kolom));
 
             return $sk;
         });
@@ -138,7 +127,6 @@ class AnggaranService
         }
 
         $sk->delete();
-        $this->audit->catat('deleted', $sk, $sk->only(['kode', 'nama', 'pagu']));
     }
 
     private function pastikanTerbuka(TahunAnggaran $ta): void

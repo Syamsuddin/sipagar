@@ -3,6 +3,7 @@
 use App\Http\Controllers\Anggaran\KegiatanController;
 use App\Http\Controllers\Anggaran\ProgramController;
 use App\Http\Controllers\Anggaran\SubKegiatanController;
+use App\Http\Controllers\AuditLogController;
 use App\Http\Controllers\Auth\KonfirmasiSandiController;
 use App\Http\Controllers\Auth\LoginController;
 use App\Http\Controllers\DashboardController;
@@ -91,6 +92,8 @@ Route::middleware(['auth', 'role'])->group(function () {
         Route::post('/pengguna/{pengguna}/reset-sandi', [PenggunaController::class, 'resetSandi'])
             ->middleware('konfirmasi-sandi')->name('pengguna.reset-sandi');
 
+        Route::get('/audit-log', [AuditLogController::class, 'index'])->name('audit-log.index');
+
         Route::prefix('master')->name('master.')->group(function () {
             Route::get('/bidang', [BidangController::class, 'index'])->name('bidang.index');
             Route::post('/bidang', [BidangController::class, 'store'])->name('bidang.store');
@@ -103,6 +106,9 @@ Route::middleware(['auth', 'role'])->group(function () {
             Route::get('/tahun-anggaran', [TahunAnggaranController::class, 'index'])->name('tahun-anggaran.index');
             Route::post('/tahun-anggaran', [TahunAnggaranController::class, 'store'])->name('tahun-anggaran.store');
             Route::put('/tahun-anggaran/{tahun_anggaran}', [TahunAnggaranController::class, 'update'])->name('tahun-anggaran.update');
+            // Kunci/buka tahun: irreversibel (docs/22) → konfirmasi sandi
+            Route::post('/tahun-anggaran/{tahun_anggaran}/kunci', [TahunAnggaranController::class, 'kunci'])->middleware('konfirmasi-sandi')->name('tahun-anggaran.kunci');
+            Route::post('/tahun-anggaran/{tahun_anggaran}/buka', [TahunAnggaranController::class, 'buka'])->middleware('konfirmasi-sandi')->name('tahun-anggaran.buka');
 
             Route::get('/pengaturan', [PengaturanController::class, 'index'])->name('pengaturan.index');
             Route::put('/pengaturan', [PengaturanController::class, 'update'])->name('pengaturan.update');

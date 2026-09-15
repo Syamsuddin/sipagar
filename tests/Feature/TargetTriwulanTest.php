@@ -43,7 +43,10 @@ test('Operator bidangnya menyimpan 4 baris sekaligus (upsert) + audit', function
     $this->actingAs($this->operatorA)->put(route('target.update', $this->skA), payloadTarget([30_000_000, 50_000_000, 80_000_000, 100_000_000]))->assertRedirect();
     expect(TargetTriwulan::where('sub_kegiatan_id', $this->skA->id)->count())->toBe(4)
         ->and(TargetTriwulan::where('sub_kegiatan_id', $this->skA->id)->where('triwulan', 1)->value('target_keuangan'))->toBe(30_000_000)
-        ->and(AuditLog::where('auditable_type', SubKegiatan::class)->where('auditable_id', $this->skA->id)->where('action', 'updated')->count())->toBe(2);
+        // audit per baris (TargetTriwulan ✎): 4 created saat pertama, 1 updated (TW1 berubah) saat kedua
+        ->and(AuditLog::where('auditable_type', TargetTriwulan::class)->where('action', 'created')->count())->toBe(4)
+        ->and(AuditLog::where('auditable_type', TargetTriwulan::class)->where('action', 'updated')->count())->toBe(1)
+        ->and(AuditLog::where('auditable_type', TargetTriwulan::class)->where('action', 'updated')->first()->new_values)->toMatchArray(['target_keuangan' => 30_000_000]);
 });
 
 test('tidak monoton → 422 menyebut TW yang salah', function () {

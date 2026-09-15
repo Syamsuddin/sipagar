@@ -3,6 +3,7 @@
 namespace App\Models;
 
 use App\Enums\StatusTahun;
+use App\Models\Concerns\Auditable;
 use Database\Factories\TahunAnggaranFactory;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
@@ -13,7 +14,7 @@ use Illuminate\Database\Eloquent\Relations\HasMany;
 class TahunAnggaran extends Model
 {
     /** @use HasFactory<TahunAnggaranFactory> */
-    use HasFactory;
+    use Auditable, HasFactory;
 
     protected $table = 'tahun_anggaran';
 

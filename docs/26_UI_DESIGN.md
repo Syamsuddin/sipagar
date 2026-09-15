@@ -55,9 +55,9 @@ Tab-nav (urut kiri→kanan; tampil sesuai peran): **Dashboard** `fa-chart-pie` �
 | Realisasi › Keuangan | `/realisasi/keuangan?sub_kegiatan=&edit=` | semua baca; tulis admin, operator (bidang) | pola form(400) + daftar; select sub kegiatan menampilkan "Sisa: Rp …" aksen/danger seperti prototipe |
 | Realisasi › Fisik | `/realisasi/fisik/{subKegiatan}` | semua baca; tulis admin, operator (bidang) | 4 stat-card TW (fisik s.d. bulan 3n, deviasi vs target) + grid 12 bulan input % (kosong = bulan dihapus) |
 | Laporan › Monev / Rekap / Buku / Tren | `/laporan/{monev|rekap|buku-realisasi|tren}` (+`?export=xlsx|pdf`, filter `tahun, triwulan, bidang, sumber_dana, sub_kegiatan, dari, sampai, halaman`) | semua | card filter (`laporan/_filter`, baris flex seperti filter "Sisa Anggaran" prototipe, auto-submit) → tombol `btn-secondary` Unduh Excel/PDF → tabel/grafik; Rekap & Buku memakai filter **TW + rentang tanggal** (TW = preset 1 Jan–akhir TW; tanggal eksplisit menang; nama berkas TWn atau `<dari>_<sampai>`); Rekap = 4 stat-card + 2 tabel; Tren = grafik garis (realisasi, target putus-putus, tahun lalu) + tabel 12 bulan; Buku paginasi 50 |
-| Master › Bidang / Sumber Dana / Tahun / Pengaturan | `/master/{bidang|sumber-dana|tahun-anggaran|pengaturan}` | admin | form + daftar; Tahun: tombol Kunci/Buka → modal sandi |
+| Master › Bidang / Sumber Dana / Tahun / Pengaturan | `/master/{bidang|sumber-dana|tahun-anggaran|pengaturan}` | admin | form + daftar; Tahun: tombol Kunci (`btn-danger`) / Buka (`btn-edit`) → `x-modal-konfirmasi-sandi` id `kunci-tahun`; buka → draft |
 | Pengguna | `/pengguna` | admin | form + daftar; aksi aktif/nonaktif, reset sandi (modal sandi) |
-| Audit Log | `/audit-log` | admin | filter + tabel, paginasi 50 |
+| Audit Log | `/audit-log?user=&aksi=&model=&dari=&sampai=` | admin | card filter + tabel (waktu, pengguna, aksi badge, objek, perubahan k: lama → baru, IP), paginasi 50 |
 | Profil / Sandi | modal `ubah-password` dari header (`POST /profil/sandi`) | semua | modal prototipe (sandi lama, baru + strength bar, konfirmasi) |
 | Lampiran | `GET /realisasi/lampiran/{id}` | semua | file |
 | 403/404/500/423 | `resources/views/errors/*` | — | `x-layout.app` + `x-empty-state` ikon `fa-lock`/`fa-ghost`/`fa-triangle-exclamation` |

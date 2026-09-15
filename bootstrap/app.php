@@ -2,6 +2,7 @@
 
 use App\Exceptions\MelebihiSisaPaguException;
 use App\Exceptions\TahunTerkunciException;
+use App\Http\Middleware\AssignRequestId;
 use App\Http\Middleware\EnsureRole;
 use App\Http\Middleware\EnsureTahunTerbuka;
 use App\Http\Middleware\KonfirmasiSandi;
@@ -19,7 +20,7 @@ return Application::configure(basePath: dirname(__DIR__))
         health: '/up',
     )
     ->withMiddleware(function (Middleware $middleware): void {
-        $middleware->web(append: [SecurityHeaders::class]);
+        $middleware->web(append: [AssignRequestId::class, SecurityHeaders::class]);
         $middleware->alias([
             'role' => EnsureRole::class,
             'konfirmasi-sandi' => KonfirmasiSandi::class,

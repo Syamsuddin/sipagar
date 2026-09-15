@@ -1,16 +1,8 @@
 # 23 — Kriteria Terima per Fitur
 
-Terarsip (selesai): F01–F11, F13 → `docs/_archive/23-F0x.md`.
+Terarsip (selesai): F01–F13 (seluruh MVP). Kriteria UI umum tetap berlaku untuk perubahan berikutnya. → `docs/_archive/23-F0x.md`.
 
 Selesai = semua kriteria fitur di bawah **+** docs/24. Pola UI (states, breakpoint, komponen) → docs/26; setiap layar data wajib memenuhi "Kriteria UI umum" di akhir dokumen. Perintah → docs/11.
-
-## F12 — Audit, soft delete, kunci tahun
-- Setiap create/update/delete/restore model ✎ (docs/07) menghasilkan baris `audit_logs` dengan `old_values`/`new_values` tanpa `password`.
-- Kunci tahun: modal sandi → status `terkunci`, `locked_at/by`; tulis apa pun pada tahun itu → 423; buka kunci dicatat.
-- Layar Audit Log: filter user, aksi, model, rentang tanggal; hanya Admin.
-```
-php artisan test tests/Feature/AuditLogTest.php tests/Feature/TahunAnggaranLockTest.php → passed
-```
 
 ## Kriteria UI umum (semua layar; detail docs/26)
 - Layar dibangun hanya dari komponen `x-*` docs/26; tidak ada inline style baru selain nilai dinamis (lebar progress).

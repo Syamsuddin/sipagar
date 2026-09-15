@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use App\Models\Concerns\Auditable;
 use Database\Factories\SumberDanaFactory;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
@@ -9,7 +10,7 @@ use Illuminate\Database\Eloquent\Model;
 class SumberDana extends Model
 {
     /** @use HasFactory<SumberDanaFactory> */
-    use HasFactory;
+    use Auditable, HasFactory;
 
     protected $table = 'sumber_dana';
 

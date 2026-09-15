@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use App\Models\Concerns\Auditable;
 use Database\Factories\RealisasiFisikFactory;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
@@ -10,7 +11,7 @@ use Illuminate\Database\Eloquent\Relations\BelongsTo;
 class RealisasiFisik extends Model
 {
     /** @use HasFactory<RealisasiFisikFactory> */
-    use HasFactory;
+    use Auditable, HasFactory;
 
     protected $table = 'realisasi_fisik';
 

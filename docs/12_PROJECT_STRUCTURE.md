@@ -18,10 +18,10 @@ app/
       Laporan/{Laporan,MonevTriwulan,Rekap,BukuRealisasi,TrenSerapan}Controller.php   # LaporanController = dasar unduh xlsx/pdf
       Master/{Bidang,SumberDana,TahunAnggaran,Pengaturan}Controller.php
       {Pengguna,AuditLog,Profil}Controller.php
-    Middleware/{EnsureRole,EnsureTahunTerbuka,KonfirmasiSandi}.php   # `role` tanpa argumen = user aktif apa pun (grup auth)
+    Middleware/{AssignRequestId,EnsureRole,EnsureTahunTerbuka,KonfirmasiSandi,SecurityHeaders}.php   # `role` tanpa argumen = user aktif apa pun (grup auth); AssignRequestId = X-Request-Id + Log::shareContext (docs/15)
     Requests/<Modul>/{Store,Update}<Model>Request.php
   Models/{User,Bidang,SumberDana,TahunAnggaran,Program,Kegiatan,SubKegiatan,TargetTriwulan,RealisasiKeuangan,RealisasiFisik,AuditLog,Setting}.php
-  Models/Concerns/{Auditable,ScopedByBidang}.php
+  Models/Concerns/{Auditable,ScopedByBidang}.php   # Auditable: created/updated/deleted/restored → audit_logs; tanpaAudit() utk aksi khusus Service
   Policies/{SubKegiatan,TargetTriwulan,RealisasiKeuangan,RealisasiFisik,User,TahunAnggaran}Policy.php
   Queries/{LaporanFilter,DashboardQuery,MonevTriwulanQuery,RekapQuery,BukuRealisasiQuery,TrenSerapanQuery}.php   # LaporanFilter = filter bersama (default tahun aktif, TW berjalan)
   Services/{SerapanCalculator,AnggaranService,TargetService,RealisasiService,TahunAnggaranService,PenggunaService,AuditService}.php
@@ -42,14 +42,15 @@ resources/
     dashboard/index.blade.php
     anggaran/…  target/…  realisasi/{keuangan,fisik}/…  laporan/{monev,rekap,buku,tren}/…
     master/{bidang,sumber-dana,tahun-anggaran,pengaturan}/…
-    pengguna/…  audit-log/…  profil/…
+    pengguna/index.blade.php  audit-log/index.blade.php  profil/(modal di layout)
     pdf/{monev,rekap,buku,tren}.blade.php
 routes/web.php
 tests/
   Feature/<Modul>Test.php                        # docs/13
   Unit/SerapanCalculatorTest.php
   Unit/RupiahHelperTest.php
-deploy.sh
+deploy.sh                                        # docs/25 langkah 3–10, jalankan sbg user deploy
+CHANGELOG.md                                     # docs/25 langkah 11
 ```
 
 ## Konvensi penamaan
